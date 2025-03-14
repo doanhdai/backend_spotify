@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <h2>Register</h2>
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="password_confirm">Confirm Password</label>
+            <input type="password" id="password_confirm" name="password_confirm" required>
+        </div>
+        <div class="form-group">
+            <label for="bio">Bio (Optional)</label>
+            <input type="text" id="bio" name="bio">
+        </div>
+        <button type="submit">Register</button>
+    </form>
+    <div class="error" id="registerError"></div>
+    <div class="success" id="registerSuccess"></div>
+
+    {% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('#registerForm').on('submit', function(e) {
+                e.preventDefault();
+                const data = {
+                    username: $('#username').val().trim(),
+                    email: $('#email').val().trim(),
+                    password: $('#password').val(),
+                    password_confirm: $('#password_confirm').val(),
+                    bio: $('#bio').val().trim(),
+                };
+
+                // Kiểm tra dữ liệu trước khi gửi
+                if (!data.username || !data.email || !data.password || !data.password_confirm) {
+                    showMessage('#registerError', 'Vui lòng điền đầy đủ các trường bắt buộc.', true);
+                    return;
+                }
+
+                $.ajax({
+                    url: '/api/users/register/',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        showMessage('#registerSuccess', 'Đăng ký thành công! Bạn có thể đăng nhập.', false);
+                        $('#registerForm')[0].reset();
+                        localStorage.setItem('access_token', response.access);
+                        localStorage.setItem('refresh_token', response.refresh);
+                    },
+                    error: function(xhr) {
+                        const errorMsg = xhr.responseJSON ? JSON.stringify(xhr.responseJSON) : 'Lỗi khi đăng ký.';
+                        showMessage('#registerError', errorMsg, true);
+                    }
+                });
+            });
+        });
+    </script>
+    {% endblock %}
+{% endblock %}

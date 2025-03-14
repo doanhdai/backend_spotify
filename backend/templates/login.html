@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block title %}Login{% endblock %} {% block content
+%}
+<h2>Login</h2>
+<form id="loginForm">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required />
+  </div>
+  <button type="submit">Login</button>
+</form>
+<div class="error" id="loginError"></div>
+<div class="success" id="loginSuccess"></div>
+
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $("#loginForm").on("submit", function (e) {
+      e.preventDefault();
+      const data = {
+        email: $("#email").val(),
+        password: $("#password").val(),
+      };
+
+      $.ajax({
+        url: "/api/users/login/",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (response) {
+          showMessage("#loginSuccess", "Đăng nhập thành công!", false);
+          $("#loginForm")[0].reset();
+          localStorage.setItem("access_token", response.access);
+          localStorage.setItem("refresh_token", response.refresh);
+          // Chuyển hướng  đến HomeHome
+          window.location.href = "/music/songs/";
+        },
+        error: function (xhr) {
+          const errorMsg = xhr.responseJSON
+            ? xhr.responseJSON.error || "Lỗi khi đăng nhập."
+            : "Lỗi không xác định.";
+          showMessage("#loginError", errorMsg, true);
+        },
+      });
+    });
+  });
+</script>
+{% endblock %} {% endblock %}
