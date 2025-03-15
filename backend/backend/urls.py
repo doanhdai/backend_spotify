@@ -21,13 +21,15 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('users.urls')),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/music/', include('music.urls')),  # Kiểm tra dòng này
     path('register/', TemplateView.as_view(template_name='register.html'), name='register_page'),
     path('login/', TemplateView.as_view(template_name='login.html'), name='login_page'),
-]
+    path('api/songs/', include('songs.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

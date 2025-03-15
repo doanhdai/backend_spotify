@@ -1,0 +1,10 @@
+find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
+python manage.py makemigrations
+python manage.py migrate
+
+	
+API Secret: 	JSl0EaB2Ps6qjLnRFzM8OkjpqtU
+
+API KEY: 488139219838738 
+
+CLOUDNAME: dxpn9dub0

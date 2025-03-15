@@ -11,7 +11,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ('name', 'email', 'password', 'password_confirm')
 
-
     def validate(self, data):
         if data['password'] != data['password_confirm']:
             raise serializers.ValidationError({"password": "Mật khẩu xác nhận không khớp."})
@@ -22,9 +21,9 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop('password_confirm')
         user = User.objects.create_user(
-            name=validated_data['name'],
             email=validated_data['email'],
             password=validated_data['password'],
+            name=validated_data['name'],
         )
         return user
 

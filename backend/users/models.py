@@ -12,9 +12,11 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Tên phải được cung cấp')
         
         email = self.normalize_email(email)
+        extra_fields.setdefault('status', 1)
+        extra_fields.setdefault('ma_quyen', 0)
         user = self.model(
             email=email,
-            username=email,  # Gán username = email để tránh giá trị rỗng
+            username=email, 
             name=name,
             **extra_fields
         )
@@ -29,7 +31,9 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-
+        extra_fields.setdefault('status', 1)
+        extra_fields.setdefault('ma_quyen', 0)
+        
         if extra_fields.get('is_staff') is not True:
             raise ValueError('Superuser phải có is_staff=True.')
         if extra_fields.get('is_superuser') is not True:
@@ -41,7 +45,9 @@ class User(AbstractUser):
     username = models.EmailField(unique=True, max_length=254)
     email = models.EmailField(unique=True)  # Override email để thêm unique=True
     name = models.CharField(max_length=150, unique=True)
-
+    status = models.IntegerField(default=1)  # Trạng thái mặc định là 1
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    ma_quyen = models.IntegerField(default=0)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 

@@ -22,6 +22,9 @@ class RegisterView(generics.CreateAPIView):
                 'id': user.id,
                 'name': user.name,
                 'email': user.email,
+                'status': user.status,
+                'ma_quyen': user.ma_quyen,
+                'avatar': user.avatar.url if user.avatar else None,  # Trả về URL nếu có avatar, nếu không thì None
             }
         }, status=status.HTTP_201_CREATED)
 
@@ -43,5 +46,8 @@ class LoginView(generics.GenericAPIView):
                 'id': user.id,
                 'name': user.name,
                 'email': user.email,
+                'status': user.status,
+                'ma_quyen': user.ma_quyen,
+                'avatar': user.avatar.url if user.avatar else None,  # Trả về URL nếu có avatar, nếu không thì None
             }
         }, status=status.HTTP_200_OK)
