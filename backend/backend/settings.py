@@ -43,9 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'cloudinary_storage',
-    'cloudinary',
     'corsheaders',
+    'storages',
     'rest_framework_simplejwt',
     'songs',
 ]
@@ -112,12 +111,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# Cấu hình Cloudinary
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dxpn9dub0',
-    'API_KEY': '488139219838738',
-    'API_SECRET': 'JSl0EaB2Ps6qjLnRFzM8OkjpqtU',
-}
+
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'
 
@@ -146,12 +140,34 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files
-STATIC_URL = 'static/'
 
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+
+# AWS S3 Settings
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''  
+AWS_STORAGE_BUCKET_NAME = 'spotify-media'  
+AWS_S3_REGION_NAME = 'us-east-1'  
+AWS_S3_FILE_OVERWRITE = False  
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+# Sử dụng django-storages để lưu trữ file trên S3
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Đường dẫn media (tùy chọn)
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+MEDIA_ROOT = 'media/'
+
+
+# Cấu hình URL cho file tĩnh (static files)
+STATIC_URL = '/static/'  # Đường dẫn cục bộ cho file tĩnh khi chạy dev server
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # Sử dụng S3 cho file tĩnh (tùy chọn)
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Thư mục chứa file tĩnh (nếu có)
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Thư mục tập hợp file tĩnh khi deploy
+
+
+
+
+
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

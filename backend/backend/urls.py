@@ -32,4 +32,8 @@ urlpatterns = [
     path('register/', TemplateView.as_view(template_name='register.html'), name='register_page'),
     path('login/', TemplateView.as_view(template_name='login.html'), name='login_page'),
     path('api/songs/', include('songs.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

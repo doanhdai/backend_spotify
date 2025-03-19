@@ -42,7 +42,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, name, **extra_fields)
 
 class User(AbstractUser):
-    username = models.EmailField(unique=True, max_length=254)
+    username = models.EmailField( max_length=254)
     email = models.EmailField(unique=True)  # Override email để thêm unique=True
     name = models.CharField(max_length=150, unique=True)
     status = models.IntegerField(default=1)  # Trạng thái mặc định là 1
