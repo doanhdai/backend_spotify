@@ -1,9 +1,12 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from .models import PlaylistSong, Song, Album, Playlist
-from .serializers import PlaylistSerializer, SongSerializer, AlbumSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
+
+from .models import FavoriteSong, PlaylistSong, Song, Album, Playlist, TheLoai
+from .serializers import FavoriteSongSerializer, PlaylistSerializer, SongSerializer, AlbumSerializer, TheLoaiSerializer
 from django.db import transaction
+from django.db.models import Q
 import logging
 
 logger = logging.getLogger(__name__)
@@ -69,25 +72,43 @@ class PlaySongView(generics.RetrieveAPIView):
 class GetSongDetailView(generics.RetrieveAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     lookup_field = 'id'
 
     def retrieve(self, request, *args, **kwargs):
         song = self.get_object()
         serializer = self.get_serializer(song)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
 class ListAllSongsView(generics.ListAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+
+
+
+class SearchSongsView(generics.ListAPIView):
+    serializer_class = SongSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        keyword = self.request.query_params.get('keyword', None)
+        if keyword:
+            # Tìm kiếm không phân biệt hoa thường
+            return Song.objects.filter(Q(ten_bai_hat__icontains=keyword))
+        return Song.objects.all()  # Nếu không có keyword, trả về tất cả bài hát
+
+
 
 class ListArtistSongsView(generics.ListAPIView):
     serializer_class = SongSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
         return Song.objects.filter(ma_user_id=user_id)
+
 
 class CreateAlbumView(generics.CreateAPIView):
     queryset = Album.objects.all()
@@ -177,6 +198,13 @@ class AddSongsToAlbumView(generics.UpdateAPIView):
         except Exception as e:
             return Response({"detail": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+class GetAllPlaylistsView(generics.ListAPIView):
+    serializer_class = PlaylistSerializer
+    permission_classes = [IsAuthenticated]  # Yêu cầu người dùng phải đăng nhập
+
+    def get_queryset(self):
+        return Playlist.objects.filter(ma_user=self.request.user)
+
 class ListSongsInAlbumView(generics.ListAPIView):
     serializer_class = SongSerializer
     permission_classes = [IsAuthenticated]
@@ -197,19 +225,44 @@ class ListSongsInAlbumView(generics.ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
     
+    
+class SearchAlbumsView(generics.ListAPIView):
+    serializer_class = AlbumSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        keyword = self.request.query_params.get('keyword', None)
+        if keyword:
+            return Album.objects.filter(Q(ten_album__icontains=keyword))
+        return Album.objects.all()
+    
+    
+    
+    
+    
+    
 class CreatePlaylistView(generics.CreateAPIView):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
     permission_classes = [IsAuthenticated]
     
     def create(self, request, *args, **kwargs):
-        logger.info(f"Request data: {request.data}") # Log request data
-        logger.info(f"Request FILES: {request.FILES}") # Log request files
+        # logger.info(f"Request data: {request.data}") # Log request data
+        # logger.info(f"Request FILES: {request.FILES}") # Log request files
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             self.perform_create(serializer)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetSongsInPlaylistView(generics.ListAPIView):
+    serializer_class = SongSerializer
+    permission_classes = [IsAuthenticated] 
+
+    def get_queryset(self):
+        ma_playlist = self.kwargs['ma_playlist']
+        return Song.objects.filter(playlist_songs__ma_playlist__ma_playlist=ma_playlist)
 
 # Xóa playlist
 class DeletePlaylistView(generics.DestroyAPIView):
@@ -299,3 +352,90 @@ class RemoveSongFromPlaylistView(generics.DestroyAPIView):
             return Response({"detail": "Đã xóa bài hát khỏi playlist."}, status=status.HTTP_200_OK)
         except PlaylistSong.DoesNotExist:
             return Response({"detail": "Bài hát không tồn tại trong playlist."}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+class GetAllGenresView(generics.ListAPIView):
+    queryset = TheLoai.objects.filter(status=True)
+    serializer_class = TheLoaiSerializer
+    permission_classes = [AllowAny]
+
+# Tạo thể loại mới
+class CreateGenreView(generics.CreateAPIView):
+    queryset = TheLoai.objects.all()
+    serializer_class = TheLoaiSerializer
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        logger.info(f"Request data: {request.data}")
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            self.perform_create(serializer)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        logger.error(f"Serializer errors: {serializer.errors}")
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Sửa thể loại
+class UpdateGenreView(generics.UpdateAPIView):
+    queryset = TheLoai.objects.all()
+    serializer_class = TheLoaiSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        logger.info(f"Request data: {request.data}")
+        partial = kwargs.pop('partial', True)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        if serializer.is_valid():
+            self.perform_update(serializer)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        logger.error(f"Serializer errors: {serializer.errors}")
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Lấy tất cả bài hát thuộc thể loại
+class GetSongsByGenreView(generics.ListAPIView):
+    serializer_class = SongSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        genre_id = self.kwargs['genre_id']
+        return Song.objects.filter(ma_the_loai_id=genre_id)
+    
+    
+class AddFavoriteSongView(generics.CreateAPIView):
+    serializer_class = FavoriteSongSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Kiểm tra xem bài hát đã có trong danh sách yêu thích chưa
+        ma_bai_hat = serializer.validated_data['ma_bai_hat']
+        if FavoriteSong.objects.filter(ma_user=request.user, ma_bai_hat=ma_bai_hat).exists():
+            return Response({"detail": "Bài hát đã có trong danh sách yêu thích."}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer.save()
+        return Response({"detail": "Đã thêm bài hát vào danh sách yêu thích."}, status=status.HTTP_201_CREATED)
+
+class RemoveFavoriteSongView(generics.DestroyAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, song_id, *args, **kwargs):
+        # Tìm bản ghi trong danh sách yêu thích của người dùng
+        favorite_song = FavoriteSong.objects.filter(ma_user=request.user, ma_bai_hat__id=song_id).first()
+        if not favorite_song:
+            return Response({"detail": "Bài hát không có trong danh sách yêu thích."}, status=status.HTTP_404_NOT_FOUND)
+
+        favorite_song.delete()
+        return Response({"detail": "Đã xóa bài hát khỏi danh sách yêu thích."}, status=status.HTTP_204_NO_CONTENT)
+    
+    
+class GetFavoriteSongsView(generics.ListAPIView):
+    serializer_class = SongSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Lấy danh sách bài hát yêu thích của người dùng hiện tại (dựa trên token)
+        return Song.objects.filter(favorited_by__ma_user=self.request.user)

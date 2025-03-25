@@ -27,11 +27,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/users/', include('users.urls')),
-    path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('register/', TemplateView.as_view(template_name='register.html'), name='register_page'),
-    path('login/', TemplateView.as_view(template_name='login.html'), name='login_page'),
-    path('api/songs/', include('songs.urls')),
+    path('api/v1/users/', include('users.urls')),
+    path('api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/songs/', include('songs.urls')),
 ]
 
 if settings.DEBUG:

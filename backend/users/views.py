@@ -1,8 +1,9 @@
+# users/views.py
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import RegisterSerializer, LoginSerializer
+from .serializers import ArtistSerializer, RegisterSerializer, LoginSerializer
 from .models import User
 
 class RegisterView(generics.CreateAPIView):
@@ -23,8 +24,11 @@ class RegisterView(generics.CreateAPIView):
                 'name': user.name,
                 'email': user.email,
                 'status': user.status,
-                'ma_quyen': user.ma_quyen,
-                'avatar': user.avatar.url if user.avatar else None,  # Trả về URL nếu có avatar, nếu không thì None
+                'ma_quyen': {
+                    'ma_quyen': user.ma_quyen.ma_quyen,
+                    'ten_quyen': user.ma_quyen.ten_quyen
+                } if user.ma_quyen else None,  # Sửa từ ma_quyen_id thành ma_quyen
+                'avatar': user.avatar.url if user.avatar else None,
             }
         }, status=status.HTTP_201_CREATED)
 
@@ -47,7 +51,17 @@ class LoginView(generics.GenericAPIView):
                 'name': user.name,
                 'email': user.email,
                 'status': user.status,
-                'ma_quyen': user.ma_quyen,
-                'avatar': user.avatar.url if user.avatar else None,  # Trả về URL nếu có avatar, nếu không thì None
+                'ma_quyen': {
+                    'ma_quyen': user.ma_quyen.ma_quyen,
+                    'ten_quyen': user.ma_quyen.ten_quyen
+                } if user.ma_quyen else None,
+                'avatar': user.avatar.url if user.avatar else None,
             }
         }, status=status.HTTP_200_OK)
+
+class GetAllArtistsView(generics.ListAPIView):
+    serializer_class = ArtistSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return User.objects.filter(ma_quyen=2) 

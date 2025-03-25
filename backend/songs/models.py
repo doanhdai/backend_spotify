@@ -12,12 +12,22 @@ class Album(models.Model):
 
     def __str__(self):
         return self.ten_album
+    
+class TheLoai(models.Model):
+    id = models.AutoField(primary_key=True)
+    ten_the_loai = models.CharField(max_length=100, unique=True)
+    status = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.ten_the_loai
+    
+    
 class Song(models.Model):
     id = models.AutoField(primary_key=True)
     ten_bai_hat = models.CharField(max_length=200)
     ma_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='songs')
     ma_album = models.ForeignKey(Album, on_delete=models.SET_NULL, blank=True, null=True, related_name='songs')
+    ma_the_loai = models.ForeignKey(TheLoai, on_delete=models.SET_NULL, blank=True, null=True, related_name='songs')
     trang_thai = models.IntegerField(default=1)
     hinh_anh = models.ImageField(upload_to='songs/images/', blank=True, null=True) 
     audio = models.FileField(upload_to='songs/audio/', blank=True, null=True)
@@ -47,3 +57,13 @@ class PlaylistSong(models.Model):
     
     def __str__(self):
         return f"{self.ma_playlist} - {self.ma_bai_hat}"
+    
+class FavoriteSong(models.Model):
+    ma_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favorite_songs')
+    ma_bai_hat = models.ForeignKey(Song, on_delete=models.CASCADE, related_name='favorited_by')
+
+    class Meta:
+        unique_together = ('ma_user', 'ma_bai_hat')
+
+    def __str__(self):
+        return f"{self.ma_user} - {self.ma_bai_hat}"

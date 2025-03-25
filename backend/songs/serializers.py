@@ -1,17 +1,24 @@
 from rest_framework import serializers
-from .models import Song, Album, Playlist
+from .models import FavoriteSong, Song, Album, Playlist, TheLoai
 from users.models import User
 from users.serializers import RegisterSerializer
 
+
+class TheLoaiSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TheLoai
+        fields = ['id', 'ten_the_loai','status']
+        
 class SongSerializer(serializers.ModelSerializer):
     ma_user = RegisterSerializer(read_only=True)
     ma_album = serializers.PrimaryKeyRelatedField(queryset=Album.objects.all(), required=False, allow_null=True)
+    ma_the_loai = TheLoaiSerializer(read_only=True)
     hinh_anh = serializers.SerializerMethodField()
     audio = serializers.SerializerMethodField()
 
     class Meta:
         model = Song
-        fields = ['id', 'ten_bai_hat', 'ma_user', 'ma_album', 'trang_thai', 'hinh_anh', 'audio', 'luot_nghe', 'ngay_phat_hanh']
+        fields = ['id', 'ten_bai_hat', 'ma_user', 'ma_album', 'ma_the_loai', 'trang_thai', 'hinh_anh', 'audio', 'luot_nghe', 'ngay_phat_hanh']
         read_only_fields = ['ma_user', 'luot_nghe', 'ngay_phat_hanh']
 
     def get_hinh_anh(self, obj):
@@ -130,3 +137,21 @@ class PlaylistSerializer(serializers.ModelSerializer):
             instance.hinh_anh = request.FILES['hinh_anh']
         instance.save()
         return instance
+    
+    
+    
+class FavoriteSongSerializer(serializers.ModelSerializer):
+    ma_bai_hat = serializers.PrimaryKeyRelatedField(queryset=Song.objects.all())
+    ma_user = RegisterSerializer(read_only=True)
+
+    class Meta:
+        model = FavoriteSong
+        fields = ['ma_user', 'ma_bai_hat']
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            validated_data['ma_user'] = request.user
+        return super().create(validated_data)
+    
+    
