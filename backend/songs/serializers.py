@@ -1,4 +1,6 @@
 from rest_framework import serializers
+
+from backend import settings
 from .models import FavoriteSong, Song, Album, Playlist, TheLoai
 from users.models import User
 from users.serializers import RegisterSerializer
@@ -19,7 +21,7 @@ class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = ['id', 'ten_bai_hat', 'ma_user', 'ma_album', 'ma_the_loai', 'trang_thai', 'hinh_anh', 'audio', 'luot_nghe', 'ngay_phat_hanh']
-        read_only_fields = ['ma_user', 'luot_nghe', 'ngay_phat_hanh']
+        read_only_fields = ['ma_user', 'ngay_phat_hanh']
 
     def get_hinh_anh(self, obj):
         if obj.hinh_anh:
@@ -92,23 +94,27 @@ class AlbumSerializer(serializers.ModelSerializer):
 class PlaylistSerializer(serializers.ModelSerializer):
     ma_user = RegisterSerializer(read_only=True)
     hinh_anh = serializers.SerializerMethodField()
-    songs = SongSerializer(many=True, read_only=True, source='playlist_songs.ma_bai_hat') # Lấy ra danh sách bài hát trong playlist
+    songs = SongSerializer(many=True, read_only=True, source='playlist_songs.ma_bai_hat')
 
     class Meta:
         model = Playlist
         fields = ['ma_playlist', 'ten_playlist', 'ma_user', 'ngay_tao', 'hinh_anh', 'songs']
-        read_only_fields = ['ma_playlist', 'ngay_tao']
+        read_only_fields = ['ma_playlist', 'ten_playlist', 'ngay_tao']
 
     def get_hinh_anh(self, obj):
         if obj.hinh_anh:
-            return obj.hinh_anh.url
-        return None
+            try:
+                return obj.hinh_anh.url
+            except Exception:
+                return settings.DEFAULT_PLAYLIST_IMAGE_URL
+        return settings.DEFAULT_PLAYLIST_IMAGE_URL
 
     def create(self, validated_data):
         request = self.context.get('request')
         if request and hasattr(request, 'user'):
             validated_data['ma_user'] = request.user
 
+        # Tạo mã playlist tự động
         last_playlist = Playlist.objects.last()
         if last_playlist:
             last_playlist_number = int(last_playlist.ma_playlist.replace('PLAYLIST', ''))
@@ -120,14 +126,21 @@ class PlaylistSerializer(serializers.ModelSerializer):
         while Playlist.objects.filter(ma_playlist=ma_playlist).exists():
             new_playlist += 1
             ma_playlist = f'PLAYLIST{new_playlist:03d}'
-            
-        validated_data['ma_playlist'] = ma_playlist
-        playlist = super().create(validated_data)
         
+        validated_data['ma_playlist'] = ma_playlist
+
+        # Tự động đặt tên playlist
+        user_playlists_count = Playlist.objects.filter(ma_user=request.user).count()
+        validated_data['ten_playlist'] = f"Danh sách Phát của tôi #{user_playlists_count + 1}"
+
+        # Tạo playlist
+        playlist = super().create(validated_data)
+
+        # Nếu có ảnh được cung cấp, lưu ảnh lên S3
         if 'hinh_anh' in request.FILES:
             playlist.hinh_anh = request.FILES['hinh_anh']
             playlist.save()
-        
+
         return playlist
 
     def update(self, instance, validated_data):
