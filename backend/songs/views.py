@@ -333,7 +333,7 @@ class RemoveSongFromPlaylistView(generics.DestroyAPIView):
         ma_playlist = request.data.get('ma_playlist')
         ma_bai_hat = request.data.get('ma_bai_hat')
         if not ma_playlist or not ma_bai_hat:
-            return Response({"detail": "Vui lòng cung cấp ma_playlist và song_id."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Vui lòng cung cấp ma_playlist và ma_bai_hat."}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
             playlist = Playlist.objects.get(ma_playlist=ma_playlist)
