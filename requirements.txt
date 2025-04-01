@@ -10,3 +10,6 @@ psycopg2-binary
 python-dotenv
 cloudinary
 pillow
+channels 
+channels-redis
+drf-nested-routers
