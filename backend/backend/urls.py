@@ -30,6 +30,7 @@ urlpatterns = [
     path('api/v1/users/', include('users.urls')),
     path('api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/songs/', include('songs.urls')),
+    path('api/v1/premium/', include('premium.urls')),
 ]
 
 if settings.DEBUG:

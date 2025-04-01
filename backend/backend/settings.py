@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'songs',
+    'premium',
 ]
 
 MIDDLEWARE = [
@@ -144,8 +145,8 @@ USE_TZ = True
 
 
 # AWS S3 Settings
-AWS_ACCESS_KEY_ID = '488139219838738'
-AWS_SECRET_ACCESS_KEY = 'JSl0EaB2Ps6qjLnRFzM8OkjpqtU'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
 AWS_STORAGE_BUCKET_NAME = 'spotify-media'  
 AWS_S3_REGION_NAME = 'us-east-1'  
 AWS_S3_FILE_OVERWRITE = False  
@@ -164,7 +165,7 @@ STATIC_URL = '/static/'  # Đường dẫn cục bộ cho file tĩnh khi chạy 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # Sử dụng S3 cho file tĩnh (tùy chọn)
 STATICFILES_DIRS = [BASE_DIR / 'static']  # Thư mục chứa file tĩnh (nếu có)
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Thư mục tập hợp file tĩnh khi deploy
-
+DEFAULT_PLAYLIST_IMAGE_URL = f'https://spotify-media.s3.us-east-1.amazonaws.com/image/img_playlist.png'
 
 
 
