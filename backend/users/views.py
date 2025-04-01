@@ -1,9 +1,9 @@
 # users/views.py
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import ArtistSerializer, RegisterSerializer, LoginSerializer
+from .serializers import ArtistSerializer, RegisterSerializer, LoginSerializer, UserSerializer
 from .models import User
 
 class RegisterView(generics.CreateAPIView):
@@ -59,9 +59,19 @@ class LoginView(generics.GenericAPIView):
             }
         }, status=status.HTTP_200_OK)
 
+
+class GetAllUsersView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return User.objects.all()
+
+
 class GetAllArtistsView(generics.ListAPIView):
     serializer_class = ArtistSerializer
     permission_classes = [AllowAny]
 
     def get_queryset(self):
         return User.objects.filter(ma_quyen=2) 
+    
