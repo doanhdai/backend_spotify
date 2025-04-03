@@ -71,3 +71,8 @@ class ArtistSerializer(serializers.ModelSerializer):
         if obj.avatar:
             return obj.avatar.url
         return None
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'email', 'avatar']
