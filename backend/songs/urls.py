@@ -18,7 +18,9 @@ from .views import  AddFavoriteSongView, AddSongToPlaylistView,\
                     AddSongsToAlbumView,\
                     UpdateGenreView,\
                     UpdatePlaylistView,\
-                    UpdateSongView
+                    UpdateSongView,\
+                    GetAlbumDetailView,\
+                    GetAllAlbumsView
 
 urlpatterns = [
     path('create/', CreateSongView.as_view(), name='create-song'), # Tạo bài hát
@@ -30,7 +32,9 @@ urlpatterns = [
     
     path('search/', SearchSongsView.as_view(), name='search-songs'), # Tìm kiếm bài hát http://localhost:8000/api/v1/songs/search/?keyword=bai hat
     path('album/create/', CreateAlbumView.as_view(), name='create-album'),  # Tạo album
+    path('album/all/', GetAllAlbumsView.as_view(), name='get-all-albums'),  # Lấy danh sách tất cả album
     path('album/<str:ma_album>/', UpdateAlbumView.as_view(), name='update-album'), # Cập nhật album
+    path('album/<str:ma_album>/detail/', GetAlbumDetailView.as_view(), name='album-detail'), # Chi tiết album
     path('album/<str:ma_album>/add-songs/', AddSongsToAlbumView.as_view(), name='add-songs-to-album'), # Thêm bài hát vào album
     path('album/<str:ma_album>/songs/', ListSongsInAlbumView.as_view(), name='list-songs-in-album'), # Danh sách bài hát trong album
     path('album/search/', SearchAlbumsView.as_view(), name='search-album'), # Tìm kiếm album

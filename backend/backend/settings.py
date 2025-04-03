@@ -164,7 +164,7 @@ STATIC_URL = '/static/'  # Đường dẫn cục bộ cho file tĩnh khi chạy 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # Sử dụng S3 cho file tĩnh (tùy chọn)
 STATICFILES_DIRS = [BASE_DIR / 'static']  # Thư mục chứa file tĩnh (nếu có)
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Thư mục tập hợp file tĩnh khi deploy
-
+DEFAULT_PLAYLIST_IMAGE_URL = f'https://spotify-media.s3.us-east-1.amazonaws.com/image/img_playlist.png'
 
 
 

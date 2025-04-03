@@ -258,12 +258,40 @@ class CreatePlaylistView(generics.CreateAPIView):
 
 class GetSongsInPlaylistView(generics.ListAPIView):
     serializer_class = SongSerializer
-    permission_classes = [IsAuthenticated] 
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         ma_playlist = self.kwargs['ma_playlist']
         return Song.objects.filter(playlist_songs__ma_playlist__ma_playlist=ma_playlist)
 
+    def list(self, request, *args, **kwargs):
+        # Lấy playlist
+        ma_playlist = self.kwargs['ma_playlist']
+        try:
+            playlist = Playlist.objects.get(ma_playlist=ma_playlist)
+        except Playlist.DoesNotExist:
+            return Response({"detail": "Playlist không tồn tại."}, status=status.HTTP_404_NOT_FOUND)
+
+        # Serialize thông tin playlist
+        playlist_serializer = PlaylistSerializer(playlist, context={'request': request})
+
+        # Lấy danh sách bài hát
+        queryset = self.get_queryset()
+        song_serializer = self.get_serializer(queryset, many=True)
+
+        # Tạo response tùy chỉnh
+        response_data = {
+            "playlist": {
+                "ma_playlist": playlist_serializer.data['ma_playlist'],
+                "ten_playlist": playlist_serializer.data['ten_playlist'],
+                "ma_user": playlist_serializer.data['ma_user'],
+                "ngay_tao": playlist_serializer.data['ngay_tao'],
+                "hinh_anh": playlist_serializer.data['hinh_anh']
+            },
+            "songs": song_serializer.data
+        }
+
+        return Response(response_data, status=status.HTTP_200_OK)
 # Xóa playlist
 class DeletePlaylistView(generics.DestroyAPIView):
     queryset = Playlist.objects.all()
@@ -439,3 +467,34 @@ class GetFavoriteSongsView(generics.ListAPIView):
     def get_queryset(self):
         # Lấy danh sách bài hát yêu thích của người dùng hiện tại (dựa trên token)
         return Song.objects.filter(favorited_by__ma_user=self.request.user)
+
+class GetAlbumDetailView(generics.RetrieveAPIView):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+    permission_classes = [AllowAny]
+    lookup_field = 'ma_album'
+
+    def retrieve(self, request, *args, **kwargs):
+        album = self.get_object()
+        serializer = self.get_serializer(album)
+        
+        # Lấy danh sách bài hát trong album
+        songs = Song.objects.filter(ma_album=album)
+        song_serializer = SongSerializer(songs, many=True)
+        
+        response_data = {
+            "album": serializer.data,
+            "songs": song_serializer.data
+        }
+        
+        return Response(response_data, status=status.HTTP_200_OK)
+
+class GetAllAlbumsView(generics.ListAPIView):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+    permission_classes = [AllowAny]
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
