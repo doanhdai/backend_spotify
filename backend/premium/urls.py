@@ -1,8 +1,10 @@
 from django.urls import path
-from .views import GetAllPremiumView
+from .views import PremiumListView, PremiumCreateView, PremiumUpdateView, PremiumDeleteView, PremiumDetailView
 
 urlpatterns = [
-    path('list', GetAllPremiumView.as_view(), name='get-all-premium'),
-    # path('register', GetAllRegister.as_view(), name='get-all-register'),
+    path('list/', PremiumListView.as_view(), name='premium-list'),
+    path('create/', PremiumCreateView.as_view(), name='premium-create'),
+    path('update/<str:ma_premium>/', PremiumUpdateView.as_view(), name='premium-update'),
+    path('delete/<str:ma_premium>/', PremiumDeleteView.as_view(), name='premium-delete'),
+    path('register/<str:ma_premium>/', PremiumDetailView.as_view(), name='premium-detail'),
 ]
- 
