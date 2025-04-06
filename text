@@ -2,13 +2,15 @@ find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 python manage.py makemigrations
 python manage.py migrate
 
+pip install -r requirements.txt
 
-----API Secret: 	JSl0EaB2Ps6qjLnRFzM8OkjpqtU
+API Secret: 	JSl0EaB2Ps6qjLnRFzM8OkjpqtU
 
-------API KEY: 488139219838738
+API KEY: 488139219838738 
 
+python manage.py runserver
 
 sử dụng cái dưới này:
 Access key: REMOVED
 
-Secret access key: REMOVED
+Secret access key: lgMz7otD3sk089tpB
