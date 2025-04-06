@@ -35,8 +35,6 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
-    'channels',
     'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,6 +49,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'songs',
     'chatAI',
+    'premium',
     'chat',
 ]
 
@@ -166,7 +165,7 @@ MEDIA_ROOT = 'media/'
 # Cấu hình URL cho file tĩnh (static files)
 STATIC_URL = '/static/'  # Đường dẫn cục bộ cho file tĩnh khi chạy dev server
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # Sử dụng S3 cho file tĩnh (tùy chọn)
-# STATICFILES_DIRS = [BASE_DIR / 'static']  # Thư mục chứa file tĩnh (nếu có)
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Thư mục chứa file tĩnh (nếu có)
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Thư mục tập hợp file tĩnh khi deploy
 DEFAULT_PLAYLIST_IMAGE_URL = f'https://spotify-media.s3.us-east-1.amazonaws.com/image/img_playlist.png'
 
@@ -182,69 +181,7 @@ CORS_ALLOWED_ORIGINS = [
     
 ]
 
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
-# Add CORS settings for WebSocket
-CORS_ALLOW_ALL_ORIGINS = True  # For development only
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
-
-# Add WebSocket specific CORS settings
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
-# Add logging configuration
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'INFO',
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'channels': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
-
 AUTH_USER_MODEL = 'users.User'
-
-# Channels configuration
-ASGI_APPLICATION = 'backend.asgi.application'
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('172.25.232.67', 6379)],  # IP của máy ảo
-        },
-    },
-}
-

@@ -55,5 +55,6 @@ urlpatterns = [
     path('favorites/', AddFavoriteSongView.as_view(), name='add_favorite_song'), 
     path('favorites/<int:song_id>/', RemoveFavoriteSongView.as_view(), name='remove_favorite_song'),
     path('favorites/list/', GetFavoriteSongsView.as_view(), name='get_favorite_songs'),
+
 ]
  

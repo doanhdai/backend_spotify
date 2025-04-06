@@ -31,6 +31,7 @@ urlpatterns = [
     path('api/v1/songs/', include('songs.urls')),
     path('api/v1/', include('chat.urls')),
     path('api/v1/', include('chatAI.urls')),
+    path('api/v1/premium/', include('premium.urls')),
 ]
 
 if settings.DEBUG:

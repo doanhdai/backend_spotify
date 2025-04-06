@@ -9,8 +9,9 @@ from users.serializers import RegisterSerializer
 class TheLoaiSerializer(serializers.ModelSerializer):
     class Meta:
         model = TheLoai
-        fields = ['id', 'ten_the_loai','status']
-        
+        fields = ['id', 'ten_the_loai', 'status']
+
+
 class SongSerializer(serializers.ModelSerializer):
     ma_user = RegisterSerializer(read_only=True)
     ma_album = serializers.PrimaryKeyRelatedField(queryset=Album.objects.all(), required=False, allow_null=True)
@@ -20,12 +21,13 @@ class SongSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Song
-        fields = ['id', 'ten_bai_hat', 'ma_user', 'ma_album', 'ma_the_loai', 'trang_thai', 'hinh_anh', 'audio', 'luot_nghe', 'ngay_phat_hanh']
+        fields = ['id', 'ten_bai_hat', 'ma_user', 'ma_album', 'ma_the_loai', 'trang_thai', 'hinh_anh', 'audio',
+                  'luot_nghe', 'ngay_phat_hanh']
         read_only_fields = ['ma_user', 'ngay_phat_hanh']
 
     def get_hinh_anh(self, obj):
         if obj.hinh_anh:
-            return obj.hinh_anh.url 
+            return obj.hinh_anh.url
         return None
 
     def get_audio(self, obj):
@@ -47,10 +49,11 @@ class SongSerializer(serializers.ModelSerializer):
         if 'hinh_anh' in request.FILES:
             instance.hinh_anh = request.FILES['hinh_anh']
         if 'audio' in request.FILES:
-            instance.audio = request.FILES['audio'] 
+            instance.audio = request.FILES['audio']
         instance.save()
         return instance
-    
+
+
 class AlbumSerializer(serializers.ModelSerializer):
     ma_user = RegisterSerializer(read_only=True)
     hinh_anh = serializers.SerializerMethodField()
@@ -87,10 +90,8 @@ class AlbumSerializer(serializers.ModelSerializer):
             instance.hinh_anh = self.context['request'].FILES['hinh_anh']
         instance.save()
         return instance
-    
-    
-    
-    
+
+
 class PlaylistSerializer(serializers.ModelSerializer):
     ma_user = RegisterSerializer(read_only=True)
     hinh_anh = serializers.SerializerMethodField()
@@ -121,12 +122,12 @@ class PlaylistSerializer(serializers.ModelSerializer):
             new_playlist = last_playlist_number + 1
         else:
             new_playlist = 1
-            
+
         ma_playlist = f'PLAYLIST{new_playlist:03d}'
         while Playlist.objects.filter(ma_playlist=ma_playlist).exists():
             new_playlist += 1
             ma_playlist = f'PLAYLIST{new_playlist:03d}'
-        
+
         validated_data['ma_playlist'] = ma_playlist
 
         # Tự động đặt tên playlist
@@ -150,9 +151,8 @@ class PlaylistSerializer(serializers.ModelSerializer):
             instance.hinh_anh = request.FILES['hinh_anh']
         instance.save()
         return instance
-    
-    
-    
+
+
 class FavoriteSongSerializer(serializers.ModelSerializer):
     ma_bai_hat = serializers.PrimaryKeyRelatedField(queryset=Song.objects.all())
     ma_user = RegisterSerializer(read_only=True)
@@ -166,5 +166,4 @@ class FavoriteSongSerializer(serializers.ModelSerializer):
         if request and hasattr(request, 'user'):
             validated_data['ma_user'] = request.user
         return super().create(validated_data)
-    
-    
+
