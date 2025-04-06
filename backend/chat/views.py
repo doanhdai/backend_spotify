@@ -81,3 +81,38 @@ class MessageViewSet(viewsets.ModelViewSet):
             conversation=conversation,
             sender=self.request.user
         )
+
+    @action(detail=True, methods=['post'])
+    def mark_as_read(self, request, conversation_pk=None, pk=None):
+        try:
+            message = self.get_object()
+            if message.receiver == request.user and not message.is_read:
+                message.is_read = True
+                message.save()
+                return Response({'status': 'success'})
+            return Response({'status': 'message already read or not authorized'}, status=400)
+        except Exception as e:
+            return Response({'status': 'error', 'message': str(e)}, status=400)
+
+    @action(detail=False, methods=['post'])
+    def mark_all_as_read(self, request, conversation_pk=None):
+        try:
+            # Lấy tất cả tin nhắn chưa đọc trong cuộc hội thoại
+            messages = Message.objects.filter(
+                conversation_id=conversation_pk,
+                receiver=request.user,
+                is_read=False
+            )
+            
+            # Cập nhật tất cả tin nhắn thành đã đọc
+            messages.update(is_read=True)
+            
+            return Response({
+                'status': 'success',
+                'message': f'Đã đánh dấu {messages.count()} tin nhắn là đã đọc'
+            })
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': str(e)
+            }, status=400)
