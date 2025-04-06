@@ -107,8 +107,8 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=6),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=12),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'AUTH_HEADER_TYPES': ('Bearer',),
@@ -149,22 +149,32 @@ AWS_SECRET_ACCESS_KEY = ''
 AWS_STORAGE_BUCKET_NAME = 'spotify-media'
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_S3_FILE_OVERWRITE = False
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
+AWS_DEFAULT_ACL = None
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+
+
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_VERIFY = False
+AWS_S3_ADDRESSING_STYLE = "virtual"
 
 # Sử dụng django-storages để lưu trữ file trên S3
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-# Đường dẫn media (tùy chọn)
+# Đường dẫn media
 MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 MEDIA_ROOT = 'media/'
 
 
 # Cấu hình URL cho file tĩnh (static files)
-STATIC_URL = '/static/'  # Đường dẫn cục bộ cho file tĩnh khi chạy dev server
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'  # Sử dụng S3 cho file tĩnh (tùy chọn)
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Thư mục chứa file tĩnh (nếu có)
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Thư mục tập hợp file tĩnh khi deploy
-DEFAULT_PLAYLIST_IMAGE_URL = f'https://spotify-media.s3.us-east-1.amazonaws.com/image/img_playlist.png'
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+DEFAULT_PLAYLIST_IMAGE_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/image/img_playlist.png'
 
 
 
@@ -180,4 +190,70 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
+# Add CORS settings for WebSocket
+CORS_ALLOW_ALL_ORIGINS = True  # For development only
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# Add WebSocket specific CORS settings
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+# Add logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'channels': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
 AUTH_USER_MODEL = 'users.User'
+
+# Channels configuration
+ASGI_APPLICATION = 'backend.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('172.25.232.67', 6379)], 
+        },
+    },
+}
+
+# Add channel timeout settings
+CHANNEL_LAYER_TIMEOUT = 60  # Timeout in seconds
+CHANNEL_LAYER_MAX_RETRIES = 3  # Maximum number of retries
