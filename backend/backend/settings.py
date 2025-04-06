@@ -143,8 +143,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-
 # AWS S3 Settings
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
