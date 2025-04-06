@@ -2,9 +2,13 @@ find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 python manage.py makemigrations
 python manage.py migrate
 
-	
-API Secret: 	JSl0EaB2Ps6qjLnRFzM8OkjpqtU
 
-API KEY: 488139219838738 
+----API Secret: 	JSl0EaB2Ps6qjLnRFzM8OkjpqtU
 
-CLOUDNAME: dxpn9dub0
+------API KEY: 488139219838738
+
+
+sử dụng cái dưới này:
+Access key: REMOVED
+
+Secret access key: REMOVED

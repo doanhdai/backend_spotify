@@ -8,5 +8,4 @@ pytz
 mysqlclient
 psycopg2-binary
 python-dotenv
-cloudinary
 pillow
