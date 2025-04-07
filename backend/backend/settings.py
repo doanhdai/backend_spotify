@@ -14,11 +14,13 @@ from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
 from os import environ  
+import urllib3
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/

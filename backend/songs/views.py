@@ -23,6 +23,8 @@ class CreateSongView(generics.CreateAPIView):
             song.hinh_anh = self.request.FILES['hinh_anh']
         if 'audio' in self.request.FILES:
             song.audio = self.request.FILES['audio']
+        if 'video' in self.request.FILES:
+            song.video = self.request.FILES['video']
         song.save()
 
     def create(self, request, *args, **kwargs):
@@ -499,5 +501,25 @@ class GetAllAlbumsView(generics.ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-# class PostNewSong(generics.CreateAPIView):
-#     qu
+class GetArtistAlbumsView(generics.ListAPIView):
+    serializer_class = AlbumSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return Album.objects.filter(ma_user_id=user_id, trang_thai=1)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            return Response({
+                "detail": "Không tìm thấy album nào của nghệ sĩ này.",
+                "albums": []
+            }, status=status.HTTP_200_OK)
+            
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            "detail": "Lấy danh sách album thành công.",
+            "albums": serializer.data
+        }, status=status.HTTP_200_OK)
+

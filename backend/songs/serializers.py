@@ -18,11 +18,12 @@ class SongSerializer(serializers.ModelSerializer):
     ma_the_loai = TheLoaiSerializer(read_only=True)
     hinh_anh = serializers.SerializerMethodField()
     audio = serializers.SerializerMethodField()
+    video = serializers.SerializerMethodField()
 
     class Meta:
         model = Song
         fields = ['id', 'ten_bai_hat', 'ma_user', 'ma_album', 'ma_the_loai', 'trang_thai', 'hinh_anh', 'audio',
-                  'luot_nghe', 'ngay_phat_hanh']
+                  'video', 'luot_nghe', 'ngay_phat_hanh']
         read_only_fields = ['ma_user', 'ngay_phat_hanh']
 
     def get_hinh_anh(self, obj):
@@ -33,6 +34,11 @@ class SongSerializer(serializers.ModelSerializer):
     def get_audio(self, obj):
         if obj.audio:
             return obj.audio.url
+        return None
+
+    def get_video(self, obj):
+        if obj.video:
+            return obj.video.url
         return None
 
     def create(self, validated_data):
@@ -50,6 +56,8 @@ class SongSerializer(serializers.ModelSerializer):
             instance.hinh_anh = request.FILES['hinh_anh']
         if 'audio' in request.FILES:
             instance.audio = request.FILES['audio']
+        if 'video' in request.FILES:
+            instance.video = request.FILES['video']
         instance.save()
         return instance
 

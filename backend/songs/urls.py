@@ -20,7 +20,7 @@ from .views import  AddFavoriteSongView, AddSongToPlaylistView,\
                     UpdatePlaylistView,\
                     UpdateSongView,\
                     GetAlbumDetailView,\
-                    GetAllAlbumsView
+                    GetAllAlbumsView, GetArtistAlbumsView
 
 urlpatterns = [
     path('create/', CreateSongView.as_view(), name='create-song'), # Tạo bài hát
@@ -38,6 +38,7 @@ urlpatterns = [
     path('album/<str:ma_album>/add-songs/', AddSongsToAlbumView.as_view(), name='add-songs-to-album'), # Thêm bài hát vào album
     path('album/<str:ma_album>/songs/', ListSongsInAlbumView.as_view(), name='list-songs-in-album'), # Danh sách bài hát trong album
     path('album/search/', SearchAlbumsView.as_view(), name='search-album'), # Tìm kiếm album
+    path('album/artist/<int:user_id>/', GetArtistAlbumsView.as_view(), name='artist-albums'), # Lấy danh sách album của một tác giả
     
     path('playlists/get-all/', GetAllPlaylistsView.as_view(), name='get-all-playlists'), # Lấy danh sách playlist
     path('playlists/<str:ma_playlist>/songs/', GetSongsInPlaylistView.as_view(), name='get_songs_in_playlist'), # Lấy danh sách bài hát trong playlist
@@ -55,6 +56,8 @@ urlpatterns = [
     path('favorites/', AddFavoriteSongView.as_view(), name='add_favorite_song'), 
     path('favorites/<int:song_id>/', RemoveFavoriteSongView.as_view(), name='remove_favorite_song'),
     path('favorites/list/', GetFavoriteSongsView.as_view(), name='get_favorite_songs'),
+
+    
 
 ]
  

@@ -30,6 +30,7 @@ class Song(models.Model):
     ma_the_loai = models.ForeignKey(TheLoai, on_delete=models.SET_NULL, blank=True, null=True, related_name='songs')
     trang_thai = models.IntegerField(default=1)
     hinh_anh = models.ImageField(upload_to='songs/images/', blank=True, null=True) 
+    video = models.FileField(upload_to='songs/video/', blank=True, null=True)
     audio = models.FileField(upload_to='songs/audio/', blank=True, null=True)
     luot_nghe = models.IntegerField(default=0)
     ngay_phat_hanh = models.DateTimeField(default=timezone.now)
