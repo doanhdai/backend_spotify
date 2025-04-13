@@ -1,0 +1,50 @@
+# version: '3.8'
+
+# services:
+#   web:
+#     build: .
+#     command: daphne -b 0.0.0.0 -p 8000 backend.asgi:application
+#     volumes:
+#       - .:/app
+#     ports:
+#       - "8000:8000"
+#     environment:
+#       - DEBUG=1
+#       - DATABASE_URL=mysql://root:@db:3306/spotify_db
+#       - REDIS_URL=redis://redis:6379/0
+#       - PYTHONPATH=/app
+#     depends_on:
+#       - db
+#       - redis
+#     networks:
+#       - app_network
+
+#   db:
+#     image: mysql:8.0
+#     environment:
+#       - MYSQL_DATABASE=spotify_db
+#       - MYSQL_ROOT_PASSWORD=
+#       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+#     ports:
+#       - "3307:3306"
+#     volumes:
+#       - mysql_data:/var/lib/mysql
+#     networks:
+#       - app_network
+
+#   redis:
+#     image: redis:7.2-alpine
+#     ports:
+#       - "6379:6379"
+#     volumes:
+#       - redis_data:/data
+#     networks:
+#       - app_network
+
+# volumes:
+#   mysql_data:
+#   redis_data:
+
+# networks:
+#   app_network:
+#     driver: bridge
