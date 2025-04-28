@@ -1,0 +1,41 @@
+{
+    "search": {
+        "title": "Search",
+        "categories": {
+            "all": "All",
+            "songs": "Songs",
+            "artists": "Artists",
+            "albums": "Albums"
+        },
+        "topResult": "Top Result",
+        "songs": "Songs",
+        "artists": "Artists",
+        "albums": "Albums",
+        "song": "Song",
+        "artist": "Artist",
+        "album": "Album",
+        "unknownAlbum": "Unknown Album",
+        "play": "Play",
+        "add": "Add",
+        "more": "More"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "noResults": "No results found"
+    },
+    "home": {
+        "all": "All",
+        "music": "Music",
+        "podcasts": "Podcasts",
+        "likedSongs": "Liked Songs",
+        "popularSongs": "Popular Songs",
+        "showAll": "Show All",
+        "favoriteArtists": "Your Favorite Artists",
+        "popularArtists": "Popular Artists",
+        "popularAlbums": "Popular Albums",
+        "popularRadio": "Popular Radio",
+        "forYou": "Made for {name}",
+        "topMusicCollection": "Your Top Music Collection"
+    }
+}

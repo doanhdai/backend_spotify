@@ -1,0 +1,156 @@
+{
+    "header": {
+        "input": "what do you want to broadcast today",
+        "premium": "Explore premium",
+        "download": "Download the app",
+
+        "title": "Account",
+        "profile": "Profile",
+        "updatePremium": "Upgrade to Premium",
+        "setting": "Settings",
+        "logout": "Logout",
+        "login": "Login",
+        "register": "Register",
+        "inputsearch": "Enter song name..."
+    },
+
+    "preview": {
+        "title": "Preview Spotify",
+        "premium": {
+            "description": "Upgrade to Premium to listen to unlimited songs with occasional ads. No credit card required.",
+            "button": "Explore premium"
+        },
+        "free": {
+            "description": "Sign up to listen to unlimited songs and podcasts with occasional ads. No credit card required.",
+            "button": "Sign up for free"
+        }
+    },
+    "controls": {
+        "shuffle": "Enable shuffle feature",
+        "previous": "Previous",
+        "next": "Next",
+        "play": "Play",
+        "pause": "Pause",
+        "loop": "Loop"
+    },
+    "queue": {
+        "view": "View playback mode",
+        "lyrics": "Song lyrics",
+        "queue": "Queue",
+        "connect": "Connect to a device"
+    },
+
+    "library": "Library",
+    "tooltips": {
+        "createPlaylist": "Create playlist or folder",
+        "seeMore": "See more"
+    },
+    "buttons": {
+        "playlists": "Playlists",
+        "albums": "Albums",
+        "recent": "Recent",
+        "createPlaylist": "Create playlist",
+        "browsePodcasts": "Browse podcasts"
+    },
+    "playlist": {
+        "category": "Playlist •"
+    },
+    "createPlaylistSection": {
+        "title": "Create your first playlist",
+        "subtitle": "It's easy! We'll help you"
+    },
+    "podcastSection": {
+        "title": "Let's find some podcasts to follow",
+        "subtitle": "We'll keep you updated on new episodes"
+    },
+    "footer": {
+        "legal": "Legal",
+        "safetyCenter": "Safety & Privacy Center",
+        "privacyPolicy": "Privacy Policy",
+        "cookies": "Cookies",
+        "aboutAds": "About Ads",
+        "accessibility": "Accessibility"
+    },
+    "footer": {
+        "company": "Company",
+        "about": "About",
+        "jobs": "Jobs",
+        "forTheRecord": "For the Record",
+        "community": "Community",
+        "forArtists": "For Artists",
+        "developers": "Developers",
+        "advertising": "Advertising",
+        "investors": "Investors",
+        "vendors": "Vendors",
+        "usefulLinks": "Useful Links",
+        "support": "Support",
+        "freeApp": "Free Mobile App",
+        "spotifyPlans": "Spotify Plans",
+        "premiumIndividual": "Premium Individual",
+        "premiumStudent": "Premium Student",
+        "spotifyFree": "Spotify Free",
+        "legal": "Legal",
+        "safetyCenter": "Safety & Privacy Center",
+        "privacyPolicy": "Privacy Policy",
+        "cookies": "Cookies",
+        "aboutAds": "About Ads",
+        "accessibility": "Accessibility"
+    },
+    "search": {
+        "title": "Search",
+        "all": "All",
+        "songs": "Songs",
+        "artists": "Artists",
+        "albums": "Albums",
+
+        "topResult": "Top Result",
+        "songs": "Songs",
+        "artists": "Artists",
+        "albums": "Albums",
+        "song": "Song",
+        "artist": "Artist",
+        "album": "Album",
+        "unknownAlbum": "Unknown Album",
+        "play": "Play",
+        "add": "Add",
+        "more": "More",
+
+        "loading": "Loading...",
+        "error": "Error",
+        "noResults": "No results found"
+    },
+
+    "search": {
+        "title": "Search",
+
+        "all": "All",
+        "songs": "Songs",
+        "artists": "Artists",
+        "albums": "Albums"
+    },
+
+    "common": {
+        "album": "Album",
+        "unknownAlbum": "Unknown Album",
+        "play": "Play",
+        "add": "Add",
+        "more": "More",
+        "loading": "Loading...",
+        "error": "Error",
+        "noResults": "No results found"
+    },
+    "home": {
+        "all": "All",
+        "music": "Music",
+        "podcasts": "Podcasts",
+        "likedSongs": "Liked Songs",
+        "popularSongs": "Popular Songs",
+        "showAll": "Show All",
+        "favoriteArtists": "Your Favorite Artists",
+        "popularArtists": "Popular Artists",
+        "popularAlbums": "Popular Albums",
+        "popularRadio": "Popular Radio",
+        "forYou": "Made for {name}",
+        "topMusicCollection": "Your Top Music Collection"
+    }
+}

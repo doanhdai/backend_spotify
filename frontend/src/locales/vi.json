@@ -1,0 +1,41 @@
+{
+    "search": {
+        "title": "Tìm kiếm",
+        "categories": {
+            "all": "Tất cả",
+            "songs": "Bài hát",
+            "artists": "Nghệ sĩ",
+            "albums": "Album"
+        },
+        "topResult": "Kết quả hàng đầu",
+        "songs": "Bài hát",
+        "artists": "Nghệ sĩ",
+        "albums": "Album",
+        "song": "Bài hát",
+        "artist": "Nghệ sĩ",
+        "album": "Album",
+        "unknownAlbum": "Album không xác định",
+        "play": "Phát",
+        "add": "Thêm",
+        "more": "Thêm"
+    },
+    "common": {
+        "loading": "Đang tải...",
+        "error": "Lỗi",
+        "noResults": "Không tìm thấy kết quả"
+    },
+    "home": {
+        "all": "Tất cả",
+        "music": "Âm nhạc",
+        "podcasts": "Podcast",
+        "likedSongs": "Bài hát đã thích",
+        "popularSongs": "Bài hát thịnh hành",
+        "showAll": "Hiện tất cả",
+        "favoriteArtists": "Nghệ sĩ yêu thích của bạn",
+        "popularArtists": "Nghệ sĩ phổ biến",
+        "popularAlbums": "Album phổ biến",
+        "popularRadio": "Radio phổ biến",
+        "forYou": "Dành cho {name}",
+        "topMusicCollection": "Tuyển tập nhạc hàng đầu của bạn"
+    }
+}

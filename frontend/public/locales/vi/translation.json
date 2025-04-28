@@ -1,0 +1,161 @@
+{
+    "header": {
+        "input": "Hôm nay bạn muốn phát sóng gì",
+        "premium": " Khám phá Premium",
+        "download": "Cài đặt ứng dụng",
+        "title": "Tài khoản",
+        "profile": "Hồ sơ",
+        "updatePremiun": "Nâng cấp Premium",
+        "setting": "Cài đặt",
+        "logout": "Đăng xuất",
+        "login": "Đăng nhập",
+        "register": "Đăng ký",
+        "inputsearch": "Nhập tên bài hát..."
+    },
+
+    "preview": {
+        "title": "Xem trước Spotify",
+        "premium": {
+            "description": "Đăng ký Premium để nghe không giới hạn các bài hát với quảng cáo không thường xuyên.",
+            "button": "Khám Phá premium"
+        },
+        "free": {
+            "description": "Đăng ký để nghe không giới hạn các bài hát và podcast với quảng cáo không thường xuyên. Không cần thẻ tín dụng.",
+            "button": "Đăng ký miễn phí"
+        }
+    },
+    "controls": {
+        "shuffle": "Bật tính năng Trộn bài",
+        "previous": "Trước",
+        "next": "Tiếp",
+        "play": "Phát",
+        "pause": "Tạm dừng",
+        "loop": "Lặp lại"
+    },
+    "queue": {
+        "view": "Chế độ xem Đang phát",
+        "lyrics": "Lời bài hát",
+        "queue": "Danh sách chờ",
+        "connect": "Kết nối với một thiết bị"
+    },
+
+    "library": "Thư viện",
+    "tooltips": {
+        "createPlaylist": "Tạo danh sách phát hoặc thư mục",
+        "seeMore": "Xem thêm"
+    },
+    "buttons": {
+        "playlists": "Danh sách phát",
+        "albums": "Album",
+        "recent": "Gần đây",
+        "createPlaylist": "Tạo danh sách phát",
+        "browsePodcasts": "Duyệt xem podcast"
+    },
+    "playlist": {
+        "category": "Danh mục phát •"
+    },
+    "createPlaylistSection": {
+        "title": "Tạo danh sách phát đầu tiên của bạn",
+        "subtitle": "Rất dễ! Chúng tôi sẽ giúp bạn"
+    },
+    "podcastSection": {
+        "title": "Hãy cùng tìm và theo dõi một số podcast",
+        "subtitle": "Chúng tôi sẽ cập nhật cho bạn thông tin về các tập mới"
+    },
+    "footer": {
+        "legal": "Pháp lý",
+        "safetyCenter": "Trung tâm an toàn và quyền riêng tư",
+        "privacyPolicy": "Chính sách quyền riêng tư",
+        "cookies": "Cookie",
+        "aboutAds": "Giới thiệu Quảng cáo",
+        "accessibility": "Hỗ trợ tiếp cận"
+    },
+
+    "footer": {
+        "company": "Công ty",
+        "about": "Giới thiệu",
+        "jobs": "Việc làm",
+        "forTheRecord": "For the Record",
+        "community": "Cộng đồng",
+        "forArtists": "Dành cho các Nghệ sĩ",
+        "developers": "Nhà phát triển",
+        "advertising": "Quảng cáo",
+        "investors": "Nhà đầu tư",
+        "vendors": "Nhà cung cấp",
+        "usefulLinks": "Liên kết hữu ích",
+        "support": "Hỗ trợ",
+        "freeApp": "Ứng dụng Di động Miễn phí",
+        "spotifyPlans": "Các gói của Spotify",
+        "premiumIndividual": "Premium Individual",
+        "premiumStudent": "Premium Student",
+        "spotifyFree": "Spotify Free",
+        "legal": "Pháp lý",
+        "safetyCenter": "Trung tâm an toàn và quyền riêng tư",
+        "privacyPolicy": "Chính sách quyền riêng tư",
+        "cookies": "Cookie",
+        "aboutAds": "Giới thiệu Quảng cáo",
+        "accessibility": "Hỗ trợ tiếp cận"
+    },
+
+    "search": {
+        "title": "Tìm kiếm",
+        "all": "Tất cả",
+        "songs": "Bài hát",
+        "artists": "Nghệ sĩ",
+        "albums": "Album",
+        "topResult": "Kết quả hàng đầu",
+        "songs": "Bài hát",
+        "artists": "Nghệ sĩ",
+        "albums": "Album",
+        "song": "Bài hát",
+        "artist": "Nghệ sĩ",
+        "album": "Album",
+        "unknownAlbum": "Album không xác định",
+        "play": "Phát",
+        "add": "Thêm",
+        "more": "Thêm",
+        "loading": "Đang tải...",
+        "error": "Lỗi",
+        "noResults": "Không tìm thấy kết quả"
+    },
+
+    "search": {
+        "title": "Tìm kiếm",
+
+        "all": "Tất cả",
+        "songs": "Bài hát",
+        "artists": "Nghệ sĩ",
+        "albums": "Album",
+
+        "topResult": "Kết quả hàng đầu",
+        "songs": "Bài hát",
+        "artists": "Nghệ sĩ",
+        "albums": "Album",
+        "song": "Bài hát",
+        "artist": "Nghệ sĩ",
+        "album": "Album",
+        "unknownAlbum": "Album không xác định",
+        "play": "Phát",
+        "add": "Thêm",
+        "more": "Thêm"
+    },
+    "common": {
+        "loading": "Đang tải...",
+        "error": "Lỗi",
+        "noResults": "Không tìm thấy kết quả"
+    },
+    "home": {
+        "all": "Tất cả",
+        "music": "Âm nhạc",
+        "podcasts": "Podcast",
+        "likedSongs": "Bài hát đã thích",
+        "popularSongs": "Bài hát thịnh hành",
+        "showAll": "Hiện tất cả",
+        "favoriteArtists": "Nghệ sĩ yêu thích của bạn",
+        "popularArtists": "Nghệ sĩ phổ biến",
+        "popularAlbums": "Album phổ biến",
+        "popularRadio": "Radio phổ biến",
+        "forYou": "Dành cho {name}",
+        "topMusicCollection": "Tuyển tập nhạc hàng đầu của bạn"
+    }
+}
