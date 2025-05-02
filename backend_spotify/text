@@ -2,6 +2,8 @@ find . -path "*/migrations/*.py" -not -name "__init__.py" -delete
 python manage.py makemigrations
 python manage.py migrate
 
+python D:\Web\PTPM_MNM_spotify\backend_spotify\backend\zalopay\callback_service.py
+
 pip install -r requirements.txt
 
 

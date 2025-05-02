@@ -17,7 +17,6 @@ const routes = {
     premium_payment_success: '/premium-payment-success',
     premium_register: '/premium/register',
     payment_result: '/payment/result',
-    premium_register: '/premium/register',
     detailSong: '/song',
     mvSong: '/video',
 

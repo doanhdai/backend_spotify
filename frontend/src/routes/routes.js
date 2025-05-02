@@ -29,6 +29,8 @@ import DisplayLikeSong from '@/components/DisplayLikeSong';
 import DisplayDetaiSong from '@/components/DisplayDetailSong';
 import DisplayPremium from '@/pages/Premium';
 import DisplayPremiumRegister from '@/pages/PremiumRegister';
+import PaymentResult from '@/pages/PaymentResult/PaymentResult';
+
 import MvSong from '@/components/VideoPage';
 /**
  * Admin routes
@@ -57,6 +59,7 @@ import DisplayArtistTurnOver from '@/pages/ArtistManager/Statistic/Turnover';
 import ChatPage from '@/pages/Chat';
 import Category from '@/pages/Search/Catelogy';
 import SeachSongAlbumArt from '@/pages/Search/SeachSongAlbumArt';
+import PaymentSuccess from '@/components/PremiumRegister/PaymentSuccess/PaymentSuccess';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
@@ -75,10 +78,13 @@ const publicRoutes = [
     { path: config.routes.concerts + '/:id', component: DisplayConcert },
     { path: config.routes.user + '/:id', component: Profile },
     { path: config.routes.detailSong + '/:id', component: DisplayDetaiSong },
+    { path: config.routes.detailSong + '/:id', component: DisplayDetaiSong },
     { path: config.routes.mvSong + '/:id', component: MvSong },
     // { path: config.routes.searchSongAlbumArt, component: SearchSongAlbumArt },
     { path: config.routes.premium, component: DisplayPremium },
+    { path: config.routes.premium_payment_success, component: PaymentSuccess },
     { path: config.routes.premium_register + '/:id', component: DisplayPremiumRegister },
+    { path: config.routes.payment_result, component: PaymentResult, layout: NoLayout },
 
     { path: config.routes.admin_dashboard, component: Dashboard, layout: AdminLayout },
     { path: config.routes.admin_user, component: DisplayAdminUser, layout: AdminLayout },

@@ -33,13 +33,7 @@ function Header() {
 
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
-<<<<<<< HEAD
-<<<<<<< HEAD
     let is_premium = localStorage.getItem('is_premium');
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
@@ -102,8 +96,6 @@ function Header() {
                 <div className={`flex items-center gap-5 ${isLoggedIn ? '' : 'w-[446px] justify-end'}`}>
                     {isLoggedIn ? (
                         <>
-<<<<<<< HEAD
-<<<<<<< HEAD
                             {is_premium === 'false' && (
                                 <button
                                     className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]"
@@ -112,16 +104,6 @@ function Header() {
                                     {t('header.premium')}
                                 </button>
                             )}
-=======
-                            <button className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]">
-                                {t('header.premium')}
-                            </button>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                            <button className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]">
-                                {t('header.premium')}
-                            </button>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                             <button
                                 // onClick={() => {
                                 //     navigate("/chat");
@@ -158,24 +140,12 @@ function Header() {
                                                         <span>{t('header.profile')}</span>
                                                     </button>
                                                 </Link>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                 <button className="flex items-center justify-between w-full py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:bg-[#ffffff1a]">
                                                     <span>{t('header.updatePremium')}</span>
                                                     <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
                                                 </button>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                 <button className="flex items-center justify-between w-full py-3 pl-3 pr-2 rounded-[4px] border-b-[1px] rounded-b-[1px] cursor-pointer hover:bg-[#ffffff1a]">
                                                     <span>{t('header.setting')}</span>
                                                 </button>

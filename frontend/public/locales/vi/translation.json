@@ -121,12 +121,10 @@
 
     "search": {
         "title": "Tìm kiếm",
-
         "all": "Tất cả",
         "songs": "Bài hát",
         "artists": "Nghệ sĩ",
         "albums": "Album",
-
         "topResult": "Kết quả hàng đầu",
         "songs": "Bài hát",
         "artists": "Nghệ sĩ",
@@ -157,5 +155,29 @@
         "popularRadio": "Radio phổ biến",
         "forYou": "Dành cho {name}",
         "topMusicCollection": "Tuyển tập nhạc hàng đầu của bạn"
+    },
+    "detailSong": {
+        "title": "Bài hát",
+        "artist": "Nghệ sĩ",
+        "like": "Yêu thích",
+        "listen": "Nghe",
+        "add": "Thêm",
+        "addToPlaylist": "Thêm vào danh sách phát",
+        "addToLibrary": "Thêm vào thư viện",
+        "addToQueue": "Thêm vào danh sách chờ",
+        "addToQueue": "Thêm vào danh sách chờ"
+    },
+    "likeSong": {
+        "playlist": "Playlist",
+        "title": "Bài hát đã thích",
+        "desc": "Bài hát đã thích của bạn",
+        "addToLibrary": "Thêm vào thư viện",
+        "removeFromLibrary": "Xóa khỏi thư viện",
+        "addToFolder": "Thêm vào thư mục",
+        "otherOptions": "Các tùy chọn khác",
+        "viewAs": "Xem dưới dạng",
+        "shorten": "Rút gọn",
+        "list": "Danh sách",
+        "noSongsInLibrary": "Không có bài hát nào trong danh sách yêu thích"
     }
 }

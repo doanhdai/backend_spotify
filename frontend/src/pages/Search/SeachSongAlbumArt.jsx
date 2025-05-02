@@ -53,6 +53,8 @@ const SearchSongAlbumArt = () => {
 
             let res = await searchSongsByName(searchQuery);
 
+            console.log(res);
+
             if (res && res.data) {
                 let resData = res.data;
 
@@ -80,7 +82,8 @@ const SearchSongAlbumArt = () => {
                             audio: song.audio,
                             listens: song.luot_nghe,
                             releaseDate: song.ngay_phat_hanh,
-                            duration, // Thêm thời gian bài hát
+                            duration,
+                            id_artist: song.ma_user?.id, // Thêm thời gian bài hát
                         };
                     }),
                 );
