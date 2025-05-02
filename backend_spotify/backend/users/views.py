@@ -51,6 +51,8 @@ class LoginView(generics.GenericAPIView):
                 'name': user.name,
                 'email': user.email,
                 'status': user.status,
+                'is_premium': user.is_premium,
+                'premium_expire_at': user.premium_expire_at,
                 'ma_quyen': {
                     'ma_quyen': user.ma_quyen.ma_quyen,
                     'ten_quyen': user.ma_quyen.ten_quyen

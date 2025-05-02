@@ -55,7 +55,6 @@ function Home() {
         try {
             const response = await getAlbum();
             setAlbum(response.data);
-            console.log(response.data);
         } catch (error) {
             console.log('Lỗi khi tải dữ liệu album!');
             console.error(error);
@@ -222,6 +221,7 @@ function Home() {
                                     image={item.hinh_anh}
                                     name={item.ten_bai_hat}
                                     artist={item.ma_user.name}
+                                    premium={item.is_premium}
                                 />
                             ))}
                         </div>

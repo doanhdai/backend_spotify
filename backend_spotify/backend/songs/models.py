@@ -34,6 +34,7 @@ class Song(models.Model):
     audio = models.FileField(upload_to='songs/audio/', blank=True, null=True)
     luot_nghe = models.IntegerField(default=0)
     ngay_phat_hanh = models.DateTimeField(default=timezone.now)
+    is_premium = models.BooleanField(default=False)  # Đánh dấu bài hát chỉ dành cho người dùng premium
 
     def __str__(self):
         return self.ten_bai_hat

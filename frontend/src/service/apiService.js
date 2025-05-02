@@ -14,13 +14,12 @@ export const refreshToken = async (refreshToken) => {
     return response.data;
 };
 
-
 /*******************************
  *          GET API
  *******************************/
 
 // GET LIST OF USERS
-export const getAllUser = async () => apiClient.get('/users/getAll/'); 
+export const getAllUser = async () => apiClient.get('/users/getAll/');
 
 // GET LIST OF ARTISTS
 export const getAll = async () => apiClient.get('/users/artist/getAll/');
@@ -51,37 +50,36 @@ export const getArtistAlbum = async (idArtist) => apiClient.get(`/songs/artist/$
 export const searchSongsByName = async (query) => apiClient.get(`/songs/search/?keyword=${query}`);
 
 // GET LIST OF ALBUM
-export const getAlbum = async () => apiClient.get('/songs/album/all/')
+export const getAlbum = async () => apiClient.get('/songs/album/all/');
 
 // GET ALBUM DETAILS
-export const getAlbumById = async (idAlbum) => apiClient.get(`/songs/album/${idAlbum}/detail/`)
+export const getAlbumById = async (idAlbum) => apiClient.get(`/songs/album/${idAlbum}/detail/`);
 
 // GET LIST OF GENRES
-export const getGenres = async () => apiClient.get('/songs/genres/list/')
+export const getGenres = async () => apiClient.get('/songs/genres/list/');
 export const getCategory = async () => apiClient.get('/songs/genres/list/');
 
 // GET LIST OF PREMIUM
-export const getAllPremium = async () => apiClient.get('/premium/list/')
+export const getAllPremium = async () => apiClient.get('/premium/list/');
 
 // GET LIST OF CHATS IN A CONVERSATION
-export const getChat = async (conversation_id) => apiClient.get(`/conversations/${conversation_id}/messages/`) 
+export const getChat = async (conversation_id) => apiClient.get(`/conversations/${conversation_id}/messages/`);
 
 // GET CHAT AI
 export const getChatAI = async (message) => apiClient.post('/chat/', { message }); // get chat ai
 
 // GET LIST OF CONVERSATIONS
-export const getAllConversation = async () => apiClient.get('/conversations/')
+export const getAllConversation = async () => apiClient.get('/conversations/');
 
 //GET PREMIUM DETAIL
-export const getPremiumDetail = async (idPremium) => apiClient.get(`/premium/register/${idPremium}/`)
-
+export const getPremiumDetail = async (idPremium) => apiClient.get(`/premium/register/${idPremium}/`);
 
 /*******************************
  *          POST API
  *******************************/
 
 // POST SONG FROM ARTIST
-export const postArtistSong = async (data) => apiClient.post('/songs/create/', data)
+export const postArtistSong = async (data) => apiClient.post('/songs/create/', data);
 
 // POST SONG TO PLAYLIST
 export const addSongToPlaylist = async (data) => apiClient.post(`/songs/playlists/add-song/`, data);
@@ -90,23 +88,22 @@ export const addSongToPlaylist = async (data) => apiClient.post(`/songs/playlist
 export const addLikeSong = async (data) => apiClient.post(`/songs/favorites/`, data);
 
 // POST ALBUM FROM ARTIST
-export const postArtistAlbum = async (data) => apiClient.post('/songs/album/create/', data) 
+export const postArtistAlbum = async (data) => apiClient.post('/songs/album/create/', data);
 
 // POST PLAYLIST FROM ARTIST
-export const postArtistPlaylist = async () => apiClient.post('/playlist/') 
+export const postArtistPlaylist = async () => apiClient.post('/playlist/');
 
 // POST PLAYLIST
 export const createNewPlaylist = async () => apiClient.post('/songs/playlists/create/');
 
 // POST CONVERSATION
-export const createConversation = async (data) => apiClient.post('/conversations/create-chat/', data) 
-
+export const createConversation = async (data) => apiClient.post('/conversations/create-chat/', data);
 
 /*******************************
  *          DELETE API
  *******************************/
 
-// DELETE PLAYLIST 
+// DELETE PLAYLIST
 export const deletePlaylist = async (id) => apiClient.delete(`/songs/playlists/delete/${id}/`);
 
 // DELETE FAVORITE SONG
@@ -121,14 +118,13 @@ export const removeSongFromPlaylist = async (data) => apiClient.delete(`/songs/p
 
 export const putSongToAlbum = async (idAlbum) => apiClient.put(`/album/${idAlbum}/add-songs/`);
 
-
-
-
 // PUT GROUP CHAT
 export const createGroupChat = async (data) => apiClient.post(`/conversations/create-group/`, data);
 
-export const remove_participant = async (data, id_participant) => apiClient.post(`/conversations/${id_participant}/remove-participants/`, data);
+export const remove_participant = async (data, id_participant) =>
+    apiClient.post(`/conversations/${id_participant}/remove-participants/`, data);
 
-export const add_participant = async (data, id_participant) => apiClient.post(`/conversations/${id_participant}/add-participants/`, data);
+export const add_participant = async (data, id_participant) =>
+    apiClient.post(`/conversations/${id_participant}/add-participants/`, data);
 
 export const leaveGroupChat = async (conversationId) => apiClient.post(`/conversations/${conversationId}/leave-group/`);

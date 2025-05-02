@@ -2,6 +2,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
+
 
 class PhanQuyen(models.Model):
     ma_quyen = models.AutoField(primary_key=True) 
@@ -55,6 +57,8 @@ class User(AbstractUser):
     status = models.IntegerField(default=1)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     ma_quyen = models.ForeignKey(PhanQuyen, on_delete=models.CASCADE, related_name='users')
+    is_premium = models.BooleanField(default=False)  # Cho biết người dùng có đang sử dụng gói premium không
+    premium_expire_at = models.DateField(null=True, blank=True)  # Ngày hết hạn premium
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
@@ -66,3 +70,16 @@ class User(AbstractUser):
 
     def get_username(self):
         return self.email
+    
+    def has_active_premium(self):
+        """
+        Kiểm tra xem người dùng có đang sử dụng gói premium hợp lệ không
+        """
+        if not self.is_premium:
+            return False
+        
+        if not self.premium_expire_at:
+            return False
+        
+        # Kiểm tra xem ngày hết hạn có còn trong tương lai không
+        return self.premium_expire_at > timezone.now().date()

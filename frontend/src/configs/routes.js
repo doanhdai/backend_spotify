@@ -14,6 +14,9 @@ const routes = {
     likedSongs: '/likedSongs',
     settings: '/settings',
     premium: '/premium',
+    premium_payment_success: '/premium-payment-success',
+    premium_register: '/premium/register',
+    payment_result: '/payment/result',
     premium_register: '/premium/register',
     detailSong: '/song',
     mvSong: '/video',
@@ -36,11 +39,10 @@ const routes = {
     artist_create_song: '/artist/create/song',
     artist_listens: '/artist/listens',
     artist_turnover: '/artist/turn_over',
-    
+
     chat: '/chat',
     category: '/category',
     searchSongAlbumArt: '/searchSongAlbumArt',
-
 };
 
 export default routes;

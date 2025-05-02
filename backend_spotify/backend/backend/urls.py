@@ -32,6 +32,8 @@ urlpatterns = [
     path('api/v1/', include('chat.urls')),
     path('api/v1/', include('chatAI.urls')),
     path('api/v1/premium/', include('premium.urls')),
+    path('api/v1/zalopay/', include('zalopay.urls')),
+    path('api/v1/n8n/', include('n8n.urls')),
 ]
 
 if settings.DEBUG:

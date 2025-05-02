@@ -303,37 +303,37 @@ function Chat() {
         return Array.from(new Map(normalized.map((msg) => [`${msg.content}-${msg.timestamp}`, msg])).values());
     }, [messages]);
 
-const filteredConversations = useMemo(() => {
-    console.log('searchQuery:', searchQuery); // Log giá trị searchQuery
+    const filteredConversations = useMemo(() => {
+        console.log('searchQuery:', searchQuery); // Log giá trị searchQuery
 
-    const combined = conversations
-        .map((conv) => ({
-            ...conv,
-            type: conv.type_conversation === 'group' ? 'group_chat' : 'conversation',
-        }))
-        .filter((conv) => {
-            // Nếu searchQuery rỗng, giữ lại tất cả cuộc hội thoại
-            if (!searchQuery.trim()) return true;
+        const combined = conversations
+            .map((conv) => ({
+                ...conv,
+                type: conv.type_conversation === 'group' ? 'group_chat' : 'conversation',
+            }))
+            .filter((conv) => {
+                // Nếu searchQuery rỗng, giữ lại tất cả cuộc hội thoại
+                if (!searchQuery.trim()) return true;
 
-            // Lọc theo tên nhóm cho GroupChat
-            if (conv.type_conversation === 'group') {
-                return conv.name?.toLowerCase().includes(searchQuery.toLowerCase());
-            }
+                // Lọc theo tên nhóm cho GroupChat
+                if (conv.type_conversation === 'group') {
+                    return conv.name?.toLowerCase().includes(searchQuery.toLowerCase());
+                }
 
-            // Lọc theo tên người tham gia cho PrivateChat
-            return conv.participants.some(
-                (p) => p.id !== parseInt(id_user) && p.name?.toLowerCase().includes(searchQuery.toLowerCase()),
-            );
+                // Lọc theo tên người tham gia cho PrivateChat
+                return conv.participants.some(
+                    (p) => p.id !== parseInt(id_user) && p.name?.toLowerCase().includes(searchQuery.toLowerCase()),
+                );
+            });
+
+        console.log('Filtered conversations:', combined);
+
+        return combined.sort((a, b) => {
+            const aTime = a.last_message?.timestamp ? new Date(a.last_message.timestamp).getTime() : 0;
+            const bTime = b.last_message?.timestamp ? new Date(b.last_message.timestamp).getTime() : 0;
+            return bTime - aTime; // Sắp xếp giảm dần (mới nhất lên đầu)
         });
-
-    console.log('Filtered conversations:', combined);
-
-    return combined.sort((a, b) => {
-        const aTime = a.last_message?.timestamp ? new Date(a.last_message.timestamp).getTime() : 0;
-        const bTime = b.last_message?.timestamp ? new Date(b.last_message.timestamp).getTime() : 0;
-        return bTime - aTime; // Sắp xếp giảm dần (mới nhất lên đầu)
-    });
-}, [conversations, searchQuery, id_user]);
+    }, [conversations, searchQuery, id_user]);
 
     const formatTimestamp = (dateString) => {
         const date = new Date(dateString);

@@ -8,10 +8,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setPlayStatus, setVolume, playWithId, seekTo, previous, next } from '@/redux/Reducer/playerSlice';
 import { GoMute, GoUnmute } from 'react-icons/go';
 import { useTranslation } from 'react-i18next';
+<<<<<<< HEAD
+<<<<<<< HEAD
+import { toast } from 'react-toastify';
+=======
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
 
 function Player() {
     const dispatch = useDispatch();
     const { t } = useTranslation();
+<<<<<<< HEAD
+<<<<<<< HEAD
+    let is_premium = localStorage.getItem('is_premium');
+    console.log(is_premium);
+=======
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const {
         track,
@@ -100,8 +115,25 @@ function Player() {
     };
 
     const playVideo = () => {
+<<<<<<< HEAD
+<<<<<<< HEAD
+        if (track.is_premium === false && track.video === null) {
+            return;
+        } else {
+            if (track?.video && is_premium === 'true') {
+                navigate(`/video/${track.id}`); // Điều hướng đến trang video
+            } else {
+                toast.warning('Bạn cần đăng ký tài khoản Premium để xem video');
+                navigate(config.routes.premium);
+            }
+=======
         if (track?.video) {
             navigate(`/video/${track.id}`); // Điều hướng đến trang video
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+        if (track?.video) {
+            navigate(`/video/${track.id}`); // Điều hướng đến trang video
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
         }
     };
 
@@ -197,7 +229,17 @@ function Player() {
 
                     <div className="hidden lg:flex items-center gap-4 opacity-75">
                         <div onClick={playVideo} className="cursor-pointer">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                            <Tippy content="Xem video">
+                                <img className="w-4 hover:scale-105" src={assets.plays_icon} alt="Playing View" />
+                            </Tippy>
+=======
                             <img className="w-4 hover:scale-105" src={assets.plays_icon} alt="Playing View" />
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+                            <img className="w-4 hover:scale-105" src={assets.plays_icon} alt="Playing View" />
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                         </div>
                         <Tippy content={t('queue.lyrics')}>
                             <img className="w-4 cursor-pointer hover:scale-105" src={assets.mic_icon} alt="Lyrics" />

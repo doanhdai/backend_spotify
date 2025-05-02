@@ -22,7 +22,6 @@ const VideoPage = () => {
                 setLoading(true);
                 const response = await getAllSongs();
                 const songs = response.data;
-
                 const videoSongs = songs.filter((song) => song.video);
                 dispatch(setCurrentPlaylist(videoSongs));
             } catch (err) {

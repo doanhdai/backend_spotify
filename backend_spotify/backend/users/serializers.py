@@ -14,12 +14,13 @@ class RegisterSerializer(serializers.ModelSerializer):
     password_confirm = serializers.CharField(write_only=True)
     ma_quyen = PhanQuyenSerializer(read_only=True)
     avatar = serializers.SerializerMethodField()
+    
     # ma_quyen_id = serializers.PrimaryKeyRelatedField(queryset=PhanQuyen.objects.all(), source='ma_quyen', write_only=True, required=False)
 
     class Meta:
         model = User
         # fields = ('name', 'email', 'password', 'password_confirm', 'ma_quyen', 'ma_quyen_id')
-        fields = ('name', 'email', 'password', 'password_confirm', 'ma_quyen', 'avatar')
+        fields = ('name', 'email', 'password', 'password_confirm', 'ma_quyen', 'avatar','id')
     def get_avatar(self, obj):  # Thêm phương thức get_avatar
         if obj.avatar:
             return obj.avatar.url
