@@ -29,7 +29,7 @@ class PremiumSerializer(serializers.ModelSerializer):
         # Tránh việc tìm kiếm lại đối tượng thủ công, sử dụng phương thức mặc định của serializer
         instance.ten_premium = validated_data.get('ten_premium', instance.ten_premium)
         instance.thoi_han = validated_data.get('thoi_han', instance.thoi_han)
-        instance.gia_ban = validated_data.get('gia_ban', instance.gia_ban)
+        instance.gia = validated_data.get('gia', instance.gia)
         instance.mo_ta = validated_data.get('mo_ta', instance.mo_ta)
         instance.trang_thai = validated_data.get('trang_thai', instance.trang_thai)
 

@@ -15,7 +15,6 @@ const PlayerProvider = ({ children }) => {
     useEffect(() => {
         dispatch(fetchAllSongs());
     }, [dispatch]);
-    
     useEffect(() => {
         if (status === 'succeeded') {
             const savedState = JSON.parse(localStorage.getItem('musicPlayerState'));

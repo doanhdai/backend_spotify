@@ -26,7 +26,7 @@ const authSlice = createSlice({
                 state.isLoggedIn = true;
                 state.token = token;
             }
-        }
+        },
     },
 });
 

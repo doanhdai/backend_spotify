@@ -22,16 +22,17 @@ function Search() {
 
     useEffect(() => {
         if (searchTerm.trim() === '') {
-            if (location.pathname !== '/') {
-                return;
+            if (location.pathname === '/search') {
+                navigate('/');
             }
-        } else {
-            const delaySearch = setTimeout(() => {
-                navigate(`/search?keyword=${encodeURIComponent(searchTerm.trim())}`);
-            }, 50);
-
-            return () => clearTimeout(delaySearch);
+            return;
         }
+
+        const delaySearch = setTimeout(() => {
+            navigate(`/search?keyword=${encodeURIComponent(searchTerm.trim())}`);
+        }, 200);
+
+        return () => clearTimeout(delaySearch);
     }, [searchTerm, navigate, location.pathname]);
 
     const handleChange = (e) => {
@@ -40,7 +41,7 @@ function Search() {
 
     const handleClearSearch = () => {
         setSearchTerm('');
-        navigate('/'); // Xóa input và reset về trang chủ
+        navigate('/');
     };
 
     const handleBrowseClick = () => {

@@ -146,7 +146,15 @@ const Sidebar = () => {
                     <>
                         <div className="p-3 pt-2 flex items-center mx-1 text-[14px] gap-2 text-b">
                             <button className="bg-[#2a2a2a] text-white px-4 py-1.5 rounded-2xl cursor-pointer font-semibold hover:bg-[#333333] transition-colors duration-200">
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                {t('buttons.playlists')}
+=======
                                 Danh sách phát
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+                                Danh sách phát
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                             </button>
                             <button className="bg-[#2a2a2a] text-white px-4 py-1.5 rounded-2xl cursor-pointer font-semibold hover:bg-[#333333] transition-colors duration-200">
                                 Album
@@ -204,7 +212,15 @@ const Sidebar = () => {
                                     onClick={() => handleDeletePlaylist(contextMenu.playlistId)}
                                 >
                                     <FontAwesomeIcon icon={faTrash} />
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                    <span>{t('buttons.delete')}</span>
+=======
                                     <span>Xóa playlist</span>
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+                                    <span>Xóa playlist</span>
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                 </button>
                             </div>
                         )}
@@ -226,14 +242,30 @@ const Sidebar = () => {
                                             className="text-[14px] text-black bg-white px-4 py-1 rounded-full font-bold hover:scale-105 hover:bg-[#f0f0f0]"
                                             onClick={handleCreatePlaylist}
                                         >
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                            {t('buttons.createPlaylist')}
+=======
                                             Tạo danh sách phát
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+                                            Tạo danh sách phát
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                         </button>
                                     ) : (
                                         <button
                                             className="text-[14px] text-black bg-white px-4 py-1 rounded-full font-bold hover:scale-105 hover:bg-[#f0f0f0]"
                                             onClick={() => navigate('/login')}
                                         >
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                            {t('buttons.createPlaylist')}
+=======
                                             Tạo danh sách phát
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
+=======
+                                            Tạo danh sách phát
+>>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                         </button>
                                     )}
                                 </div>

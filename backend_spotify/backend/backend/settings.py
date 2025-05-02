@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'songs',
     'premium',
     'chat',
+    'zalopay',
+    'n8n'
 ]
 
 MIDDLEWARE = [
@@ -106,6 +108,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
 }
 
 SIMPLE_JWT = {
@@ -148,15 +151,14 @@ USE_TZ = True
 # AWS S3 Settings
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
-AWS_STORAGE_BUCKET_NAME = 'spotify-media'
+AWS_STORAGE_BUCKET_NAME = ''
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_S3_FILE_OVERWRITE = False
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com'
 AWS_DEFAULT_ACL = None
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
-}
-
+}   
 
 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
@@ -188,7 +190,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',
+]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
@@ -216,6 +220,21 @@ CORS_ALLOW_METHODS = [
     'PUT',
 ]
 
+# Frontend URL for payment redirects
+FRONTEND_URL = 'http://localhost:5173'
+
+# Backend URL for payment redirects
+BACKEND_URL = 'http://localhost:8000'
+
+# ZaloPay configuration
+ZALOPAY_APP_ID = environ.get('ZALOPAY_APP_ID', '2553')
+ZALOPAY_KEY1 = environ.get('ZALOPAY_KEY1', 'PcY4iZIKFCIdgZvA6ueMcMHHUbRLYjPL')
+ZALOPAY_KEY2 = environ.get('ZALOPAY_KEY2', 'kLtgPl8HHhfvMuDHPwKfgfsY4Ydm9eIz')
+ZALOPAY_ENDPOINT = environ.get('ZALOPAY_ENDPOINT', 'https://sb-openapi.zalopay.vn/v2/create')
+
+# Service token for internal service authentication
+SERVICE_TOKEN = environ.get('SERVICE_TOKEN', 'spotify-internal-service-token-2024')
+DJANGO_SETTINGS_MODULE =("spotify-internal-service-token-2024")
 # Add logging configuration
 LOGGING = {
     'version': 1,

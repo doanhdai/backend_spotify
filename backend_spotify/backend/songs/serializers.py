@@ -23,7 +23,7 @@ class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Song
         fields = ['id', 'ten_bai_hat', 'ma_user', 'ma_album', 'ma_the_loai', 'trang_thai', 'hinh_anh', 'audio',
-                  'video', 'luot_nghe', 'ngay_phat_hanh']
+                  'video', 'luot_nghe', 'ngay_phat_hanh','is_premium']
         read_only_fields = ['ma_user', 'ngay_phat_hanh']
 
     def get_hinh_anh(self, obj):
