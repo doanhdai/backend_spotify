@@ -21,13 +21,7 @@ import TippyHeadless from '@tippyjs/react/headless';
 import { getFavoriteSongs, getAllPlaylist, removeLikeSong, addSongToPlaylist } from '@/service/apiService';
 import { setCurrentPlaylist, playWithId, setPlayStatus } from '@/redux/Reducer/playerSlice';
 import Footer from '@/layouts/components/Footer';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { useTranslation } from 'react-i18next';
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
 
 function DisplayLikeSong() {
     const dispatch = useDispatch();
@@ -42,13 +36,7 @@ function DisplayLikeSong() {
     const [menuSongId, setMenuSongId] = useState(null);
     const displaySongLikeRef = useRef();
     const location = useLocation();
-<<<<<<< HEAD
-<<<<<<< HEAD
     const { t } = useTranslation();
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
     const isSongLike = location.pathname.includes('likedSongs');
     const navigate = useNavigate();
 
@@ -86,15 +74,7 @@ function DisplayLikeSong() {
             await removeLikeSong(songId);
             setSongLikesData(songLikesData.filter((song) => song.id !== songId));
         } catch (error) {
-<<<<<<< HEAD
-<<<<<<< HEAD
             console.error('Failed to remove song from favorites:', error);
-=======
-            console.error('Failed to remove song from favoritesssssssssssssssssssssssssss:', error);
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-            console.error('Failed to remove song from favoritesssssssssssssssssssssssssss:', error);
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
         }
     };
 
@@ -134,21 +114,9 @@ function DisplayLikeSong() {
             <div className="px-6 mt-4 mb-9 flex flex-col md:flex-row md:items-end gap-8">
                 <img className="w-48 rounded" src={assets.liked_songs} alt="" />
                 <div>
-<<<<<<< HEAD
-<<<<<<< HEAD
                     <p className="text-white mb-2">{t('likeSong.playlist')}</p>
                     <h2 className="text-white text-5xl font-extrabold mb-4 md:text-6xl tracking-tight">
                         {t('likeSong.title')}
-=======
-                    <p className="text-white mb-2">Playlist</p>
-                    <h2 className="text-white text-5xl font-extrabold mb-4 md:text-6xl tracking-tight">
-                        Bài hát yêu thích.
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                    <p className="text-white mb-2">Playlist</p>
-                    <h2 className="text-white text-5xl font-extrabold mb-4 md:text-6xl tracking-tight">
-                        Bài hát yêu thích.
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                     </h2>
                     <h4 className="text-[#b3b3b3] font-medium">{songLikesData.desc}</h4>
                     <p className="text-[#b3b3b3] mt-1 font-medium text-[14px]">
@@ -193,8 +161,6 @@ function DisplayLikeSong() {
                                             <div className="min-w-[296px] h-[130px]">
                                                 <button className="flex items-center gap-4 w-full text-[#b3b3b3] py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:text-white hover:bg-[#ffffff1a]">
                                                     <FontAwesomeIcon icon={faCirclePlus} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                     <span>{t('likeSong.addToLibrary')}</span>
                                                 </button>
                                                 <button className="flex items-center gap-4 w-full text-[#b3b3b3] py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:text-white hover:bg-[#ffffff1a]">
@@ -208,26 +174,6 @@ function DisplayLikeSong() {
                                             </div>
                                         ) : (
                                             <span>{t('likeSong.otherOptions')}</span>
-=======
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-                                                    <span>Thêm vào thư viện</span>
-                                                </button>
-                                                <button className="flex items-center gap-4 w-full text-[#b3b3b3] py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:text-white hover:bg-[#ffffff1a]">
-                                                    <FontAwesomeIcon icon={faCircleXmark} />
-                                                    <span>Loại bỏ khỏi hồ sơ sở thích của bạn</span>
-                                                </button>
-                                                <button className="flex items-center gap-4 w-full text-[#b3b3b3] py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:text-white hover:bg-[#ffffff1a]">
-                                                    <FontAwesomeIcon icon={faFolder} />
-                                                    <span>Thêm vào thư mục</span>
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <span>Các tùy chọn khác cho {songLikesData.name}</span>
-<<<<<<< HEAD
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                         )}
                                     </div>
                                 )}
@@ -258,15 +204,7 @@ function DisplayLikeSong() {
                                         <ul>
                                             <li>
                                                 <span className="p-3 text-[#b3b3b3] text-[11px] font-bold">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                     {t('likeSong.viewAs')}
-=======
-                                                    Xem dưới dạng
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                    Xem dưới dạng
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                 </span>
                                             </li>
                                             <li>
@@ -280,17 +218,9 @@ function DisplayLikeSong() {
                                                                 icon={faBars}
                                                                 className="mr-3 text-[#1fcc5d]"
                                                             />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                             <span className="text-[14px] text-[#1fcc5d]">
                                                                 {t('likeSong.shorten')}
                                                             </span>
-=======
-                                                            <span className="text-[14px] text-[#1fcc5d]">Rút gọn</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                            <span className="text-[14px] text-[#1fcc5d]">Rút gọn</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                             <FontAwesomeIcon
                                                                 icon={faCheck}
                                                                 className="ml-10 text-[#1fcc5d]"
@@ -299,15 +229,7 @@ function DisplayLikeSong() {
                                                     ) : (
                                                         <>
                                                             <FontAwesomeIcon icon={faBars} className="mr-3" />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                             <span className="text-[14px]">{t('likeSong.shorten')}</span>
-=======
-                                                            <span className="text-[14px]">Rút gọn</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                            <span className="text-[14px]">Rút gọn</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                         </>
                                                     )}
                                                 </button>
@@ -320,15 +242,7 @@ function DisplayLikeSong() {
                                                     {shortType ? (
                                                         <>
                                                             <FontAwesomeIcon icon={faList} className="mr-3" />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                             <span className="text-[14px]">{t('likeSong.list')}</span>
-=======
-                                                            <span className="text-[14px]">Danh sách</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                            <span className="text-[14px]">Danh sách</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                         </>
                                                     ) : (
                                                         <>
@@ -337,15 +251,7 @@ function DisplayLikeSong() {
                                                                 className="mr-3 text-[#1fcc5d]"
                                                             />
                                                             <span className="text-[14px] text-[#1fcc5d]">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                                 {t('likeSong.list')}
-=======
-                                                                Danh sách
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                                Danh sách
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                             </span>
                                                             <FontAwesomeIcon
                                                                 icon={faCheck}
@@ -360,15 +266,7 @@ function DisplayLikeSong() {
                                 )}
                             >
                                 <div className="flex justify-center items-center gap-3 text-[#b3b3b3] text-[14px] hover:text-white cursor-pointer">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                     <p>{t('likeSong.list')}</p>
-=======
-                                    <p>Danh sách</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                    <p>Danh sách</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                     <FontAwesomeIcon icon={faList} />
                                 </div>
                             </TippyHeadless>
@@ -378,46 +276,21 @@ function DisplayLikeSong() {
                     {shortType ? (
                         <div className="grid grid-cols-2 sm:grid-cols-[1.5fr_1fr_1fr_0.3fr_0.2fr] px-6 mt-10 mb-4 text-[#a7a7a7]">
                             <p className="font-semibold">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                 <b className="mr-4">#</b>
                                 {t('likeSong.title')}
                             </p>
                             <p className="font-semibold">{t('likeSong.artist')}</p>
                             <p className="font-semibold">{t('likeSong.album')}</p>
-=======
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-                                <b className="mr-4">#</b>Tiêu đề
-                            </p>
-                            <p className="font-semibold">Nghệ sĩ</p>
-                            <p className="font-semibold">Album</p>
-<<<<<<< HEAD
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                             <img className="m-auto w-4" src={assets.clock_icon} alt="" />
                             <span></span> {/* Cột cho biểu tượng ba chấm */}
                         </div>
                     ) : (
                         <div className="grid grid-cols-2 sm:grid-cols-[1.7fr_1fr_0.3fr_0.2fr] px-6 mt-10 mb-4 text-[#a7a7a7]">
                             <p className="font-semibold">
-<<<<<<< HEAD
-<<<<<<< HEAD
                                 <b className="mr-4">#</b>
                                 {t('likeSong.title')}
                             </p>
                             <p className="font-semibold">{t('likeSong.album')}</p>
-=======
-                                <b className="mr-4">#</b>Tiêu đề
-                            </p>
-                            <p className="font-semibold">Album</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                <b className="mr-4">#</b>Tiêu đề
-                            </p>
-                            <p className="font-semibold">Album</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                             <img className="m-auto w-4" src={assets.clock_icon} alt="" />
                             <span></span> {/* Cột cho biểu tượng ba chấm */}
                         </div>
@@ -490,15 +363,7 @@ function DisplayLikeSong() {
                                                         }}
                                                     >
                                                         <FontAwesomeIcon icon={faCircleXmark} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         <span>{t('likeSong.removeFromLibrary')}</span>
-=======
-                                                        <span>Xóa khỏi danh sách yêu thích</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                        <span>Xóa khỏi danh sách yêu thích</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                     </button>
                                                     <TippyHeadless
                                                         interactive
@@ -531,15 +396,7 @@ function DisplayLikeSong() {
                                                     >
                                                         <button className="flex items-center gap-2 w-full text-left py-2 px-3 hover:bg-[#ffffff1a]">
                                                             <FontAwesomeIcon icon={faFolder} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                             <span>{t('likeSong.addToPlaylist')}</span>
-=======
-                                                            <span>Thêm vào playlist</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                            <span>Thêm vào playlist</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                         </button>
                                                     </TippyHeadless>
                                                 </div>
@@ -621,15 +478,7 @@ function DisplayLikeSong() {
                                                         }}
                                                     >
                                                         <FontAwesomeIcon icon={faCircleXmark} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                         <span>{t('likeSong.removeFromLibrary')}</span>
-=======
-                                                        <span>Xóa khỏi danh sách yêu thích</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                        <span>Xóa khỏi danh sách yêu thích</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                     </button>
                                                     <TippyHeadless
                                                         interactive
@@ -662,15 +511,7 @@ function DisplayLikeSong() {
                                                     >
                                                         <button className="flex items-center gap-2 w-full text-left py-2 px-3 hover:bg-[#ffffff1a]">
                                                             <FontAwesomeIcon icon={faFolder} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                             <span>{t('likeSong.addToPlaylist')}</span>
-=======
-                                                            <span>Thêm vào playlist</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                            <span>Thêm vào playlist</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                         </button>
                                                     </TippyHeadless>
                                                 </div>
@@ -693,15 +534,7 @@ function DisplayLikeSong() {
                 </>
             ) : (
                 <div className="flex justify-center items-center h-[200px]">
-<<<<<<< HEAD
-<<<<<<< HEAD
                     <p className="text-white text-sm font-semibold">{t('likeSong.noSongsInLibrary')}</p>
-=======
-                    <p className="text-white text-sm font-semibold">Không có bài hát nào trong danh sách yêu thích</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                    <p className="text-white text-sm font-semibold">Không có bài hát nào trong danh sách yêu thích</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                 </div>
             )}
 

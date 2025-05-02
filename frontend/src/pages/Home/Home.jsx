@@ -45,6 +45,7 @@ function Home() {
         try {
             const response = await getAllSongs();
             setSongs(response.data);
+            console.log('check', response.data);
         } catch (error) {
             console.log('Lỗi khi tải dữ liệu bài hát!');
             console.error(error);

@@ -22,13 +22,7 @@ import { faCirclePlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import TippyHeadless from '@tippyjs/react/headless';
 import Footer from '@/layouts/components/Footer';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { useTranslation } from 'react-i18next';
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
 
 const DisplayDetaiSong = () => {
     const dispatch = useDispatch();
@@ -40,15 +34,7 @@ const DisplayDetaiSong = () => {
     const [target, setTarget] = useState(false);
     const [hovering, setHovering] = useState(false);
     const { id } = useParams();
-<<<<<<< HEAD
-<<<<<<< HEAD
     const { t } = useTranslation();
-=======
-
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
     const displaySongRef = useRef();
     const bgColor = '#009933';
     const location = useLocation();
@@ -149,35 +135,17 @@ const DisplayDetaiSong = () => {
             <div className="mt-10 flex flex-col md:flex-row md:items-end gap-8 px-6">
                 <img className="w-48 h-48 rounded object-cover" src={songData.hinh_anh} alt="" />
                 <div className="flex flex-col justify-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
                     <p className="text-[#ffffff]">{t('detailSong.title')}</p>
-=======
-                    <p className="text-[#ffffff]">Bài hát</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                    <p className="text-[#ffffff]">Bài hát</p>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                     <h2 className="text-4xl text-[#ffffff] font-bold mb-4 md:text-7xl">{songData.ten_bai_hat}</h2>
                     <p className="mt-1 flex items-center">
                         <img className="w-5" src={assets.spotify_logo} alt="" />
                         <span className="pl-2 font-bold">{songData.ma_user?.name} -</span>
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <span className="pl-2">
                             {songData.like_count} {t('detailSong.like')} -{' '}
                         </span>
                         <span className="pl-2">
                             {songData.luot_nghe} {t('detailSong.listen')} -{' '}
                         </span>
-=======
-                        <span className="pl-2">{songData.like_count} yêu thích - </span>
-                        <span className="pl-2">{songData.luot_nghe} lượt nghe - </span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                        <span className="pl-2">{songData.like_count} yêu thích - </span>
-                        <span className="pl-2">{songData.luot_nghe} lượt nghe - </span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                         <span className="pl-2">{formatDate(songData.ngay_phat_hanh)}</span>
                     </p>
                 </div>
@@ -208,15 +176,7 @@ const DisplayDetaiSong = () => {
                                         onClick={handleLikeSong}
                                     >
                                         <FontAwesomeIcon icon={faCirclePlus} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                         <span>{t('detailSong.addToLibrary')}</span>
-=======
-                                        <span>Thêm vào danh sách yêu thích</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                        <span>Thêm vào danh sách yêu thích</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                     </button>
                                     <TippyHeadless
                                         interactive
@@ -232,15 +192,7 @@ const DisplayDetaiSong = () => {
                                                     onClick={handleCreateAndAddToPlaylist}
                                                 >
                                                     <BsPlusLg size={16} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                                     <span>{t('detailSong.createPlaylist')}</span>
-=======
-                                                    <span>Tạo playlist mới</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                                    <span>Tạo playlist mới</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                                 </button>
                                                 <hr className="my-1 border-gray-600" />
                                                 {playlists.map((playlist) => (
@@ -257,15 +209,7 @@ const DisplayDetaiSong = () => {
                                     >
                                         <button className="flex items-center gap-4 w-full text-[#b3b3b3] py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:text-white hover:bg-[#ffffff1a]">
                                             <FontAwesomeIcon icon={faCirclePlus} />
-<<<<<<< HEAD
-<<<<<<< HEAD
                                             <span>{t('detailSong.addToPlaylist')}</span>
-=======
-                                            <span>Thêm vào playlist</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                                            <span>Thêm vào playlist</span>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                                         </button>
                                     </TippyHeadless>
                                 </div>
@@ -287,15 +231,7 @@ const DisplayDetaiSong = () => {
                 <div className="flex items-center">
                     <img className="rounded-full h-[60px] w-[60px] text-[#fff] object-cover" src={songData.hinh_anh} alt="" />
                     <div className="ml-5 flex flex-col">
-<<<<<<< HEAD
-<<<<<<< HEAD
                         <h6 className="text-white">{t('detailSong.artist')}</h6>
-=======
-                        <h6 className="text-white">Nghệ sĩ</h6>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
-                        <h6 className="text-white">Nghệ sĩ</h6>
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
                         <b className="uppercase text-[#ffffff]">{songData.ma_user?.name}</b>
                     </div>
                 </div>

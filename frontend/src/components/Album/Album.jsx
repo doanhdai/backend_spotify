@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import config from '@/configs';
 
 function Album(props) {
+    console.log(props);
     return (
         <div className="flex flex-col w-full aspect-[3/4] p-2 rounded cursor-pointer hover:bg-[#ffffff26]">
             <Link to={config.routes.album + `/${props.id}`}>

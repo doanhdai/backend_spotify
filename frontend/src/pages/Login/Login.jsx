@@ -31,8 +31,6 @@ function Login({ setIsLoggedIn }) {
         try {
             const data = await loginUser({ email, password });
             if (data.access) {
-<<<<<<< HEAD
-<<<<<<< HEAD
                 console.log(data);
                 localStorage.setItem('access_token', data.access);
                 localStorage.setItem('refresh_token', data.refresh);
@@ -40,18 +38,6 @@ function Login({ setIsLoggedIn }) {
                 localStorage.setItem('is_premium', data.user?.is_premium);
                 localStorage.setItem('is_premium_expired', data.user?.is_premium_expired);
                 localStorage.setItem('id_user', JSON.stringify(data.user?.id));
-=======
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-                localStorage.setItem('access_token', data.access);
-                localStorage.setItem('refresh_token', data.refresh);
-                localStorage.setItem('name_user', data.user?.name);
-                localStorage.setItem('id_user', JSON.stringify(data.user?.id));
-                console.log(data.user)
-<<<<<<< HEAD
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
-=======
->>>>>>> 9f9620225d58d73e172f6fa0d40d66304c31eac9
 
                 dispatch(login(data.access));
                 toast.success('Đăng nhập thành công');

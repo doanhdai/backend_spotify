@@ -62,17 +62,21 @@ export const getCategory = async () => apiClient.get('/songs/genres/list/');
 // GET LIST OF PREMIUM
 export const getAllPremium = async () => apiClient.get('/premium/list/');
 
+// GET PREMIUM DETAIL
+
 // GET LIST OF CHATS IN A CONVERSATION
-export const getChat = async (conversation_id) => apiClient.get(`/conversations/${conversation_id}/messages/`);
 
 // GET CHAT AI
-export const getChatAI = async (message) => apiClient.post('/chat/', { message }); // get chat ai
 
 // GET LIST OF CONVERSATIONS
-export const getAllConversation = async () => apiClient.get('/conversations/');
 
 //GET PREMIUM DETAIL
 export const getPremiumDetail = async (idPremium) => apiClient.get(`/premium/register/${idPremium}/`);
+
+// chat
+export const getChat = async (conversation_id) => apiClient.get(`/conversations/${conversation_id}/messages/`); // get all messages in a conversation
+export const getAllConversation = async () => apiClient.get('/conversations/'); // get all conversations
+export const getChatAI = async (message) => apiClient.post('/chat/', { message }); // get chat ai
 
 /*******************************
  *          POST API

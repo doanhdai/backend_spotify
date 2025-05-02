@@ -102,11 +102,7 @@
         "songs": "Songs",
         "artists": "Artists",
         "albums": "Albums",
-
         "topResult": "Top Result",
-        "songs": "Songs",
-        "artists": "Artists",
-        "albums": "Albums",
         "song": "Song",
         "artist": "Artist",
         "album": "Album",
@@ -114,19 +110,9 @@
         "play": "Play",
         "add": "Add",
         "more": "More",
-
         "loading": "Loading...",
         "error": "Error",
         "noResults": "No results found"
-    },
-
-    "search": {
-        "title": "Search",
-
-        "all": "All",
-        "songs": "Songs",
-        "artists": "Artists",
-        "albums": "Albums"
     },
 
     "common": {
@@ -152,5 +138,28 @@
         "popularRadio": "Popular Radio",
         "forYou": "Made for {name}",
         "topMusicCollection": "Your Top Music Collection"
+    },
+    "detailSong": {
+        "title": "Song",
+        "artist": "Artist",
+        "like": "Like",
+        "listen": "Listen",
+        "add": "Add",
+        "addToPlaylist": "Add to Playlist",
+        "addToLibrary": "Add to Library",
+        "addToQueue": "Add to Queue"
+    },
+    "likeSong": {
+        "playlist": "Playlist",
+        "title": "Liked Songs",
+        "desc": "Your liked songs",
+        "addToLibrary": "Add to Library",
+        "removeFromLibrary": "Remove from Library",
+        "addToFolder": "Add to Folder",
+        "otherOptions": "Other Options",
+        "viewAs": "View as",
+        "shorten": "Shorten",
+        "list": "List",
+        "noSongsInLibrary": "No songs in Library"
     }
 }

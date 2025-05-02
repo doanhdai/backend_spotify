@@ -1,20 +1,58 @@
 // components/PlayerProvider.jsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllSongs, setTrack, setTime, setPlayStatus, next, seekTo } from '@/redux/Reducer/playerSlice';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import PremiumModal from '@/components/PremiumModal/PremiumModal';
 
 const PlayerProvider = ({ children }) => {
     const dispatch = useDispatch();
     const { track, playStatus, volume, time, status, currentIndex, currentPlaylist } = useSelector(
         (state) => state.player,
     );
-
+    const [showPremiumModal, setShowPremiumModal] = useState(false);
+    const [hasShownPremiumModal, setHasShownPremiumModal] = useState(false);
+    const is_premium = localStorage.getItem('is_premium');
     const audioRef = useRef();
 
-    // Fetch all songs on component mount
+    // Function to get currently playing track
+    const getCurrentTrack = () => {
+        if (track) {
+            return {
+                ...track,
+                currentTime: time.currentTime,
+                isPlaying: playStatus,
+                index: currentIndex,
+            };
+        }
+        return null;
+    };
+
+    // Example of using the current track
+    useEffect(() => {
+        const currentTrack = getCurrentTrack();
+        if (currentTrack) {
+            console.log(currentTrack);
+            if (currentTrack.is_premium === true && time.currentTime.second === 5) {
+                if (audioRef.current && is_premium === 'false') {
+                    audioRef.current.pause();
+                    dispatch(setPlayStatus(false));
+                    setShowPremiumModal(true);
+                }
+
+                if (is_premium === 'true') {
+                    audioRef.current.play();
+                    dispatch(setPlayStatus(true));
+                }
+            }
+        }
+    }, [track, time, playStatus, setHasShownPremiumModal]);
+
     useEffect(() => {
         dispatch(fetchAllSongs());
     }, [dispatch]);
+
     useEffect(() => {
         if (status === 'succeeded') {
             const savedState = JSON.parse(localStorage.getItem('musicPlayerState'));
@@ -23,12 +61,10 @@ const PlayerProvider = ({ children }) => {
                 const savedPlayStatus = savedState.playStatus || false;
                 const savedTime = savedState.currentTime || 0;
 
-                // Cấu hình audio trước
                 audioRef.current.src = savedState.track.audio;
                 audioRef.current.currentTime = savedTime;
-                dispatch(seekTo(savedTime)); // Đồng bộ thời gian với Redux store
+                dispatch(seekTo(savedTime));
 
-                // Đặt playStatus và phát nếu cần
                 dispatch(setPlayStatus(savedPlayStatus));
                 if (savedPlayStatus) {
                     audioRef.current.play().catch((error) => {
@@ -88,7 +124,7 @@ const PlayerProvider = ({ children }) => {
     // Update time during playback
     useEffect(() => {
         const updateTime = () => {
-            if (audioRef.current.readyState >= 2) {
+            if (audioRef.current && audioRef.current.readyState >= 2) {
                 const currentTime = audioRef.current.currentTime;
                 const duration = audioRef.current.duration;
                 dispatch(
@@ -133,6 +169,13 @@ const PlayerProvider = ({ children }) => {
     return (
         <>
             <audio ref={audioRef} />
+            {showPremiumModal && (
+                <PremiumModal
+                    onClose={() => setShowPremiumModal(false)}
+                    trackName={track?.title || 'This track'}
+                    setShowPremiumModal={setShowPremiumModal}
+                />
+            )}
             {children}
         </>
     );

@@ -9,15 +9,18 @@ import './index.css';
 import { store } from './redux/store';
 import PlayerProvider from './providers/PlayerProvider.jsx';
 import AuthInitializer from './redux/Action/AuthInitializer.jsx';
+import { BrowserRouter, Router } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <Provider store={store}>
-            <PlayerProvider>
-                <AuthInitializer />
-                <ToastContainer />
-                <App />
-            </PlayerProvider>
+            <BrowserRouter>
+                <PlayerProvider>
+                    <AuthInitializer />
+                    <ToastContainer />
+                    <App />
+                </PlayerProvider>
+            </BrowserRouter>
         </Provider>
     </React.StrictMode>,
 );

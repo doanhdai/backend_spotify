@@ -303,37 +303,37 @@ function Chat() {
         return Array.from(new Map(normalized.map((msg) => [`${msg.content}-${msg.timestamp}`, msg])).values());
     }, [messages]);
 
-    const filteredConversations = useMemo(() => {
-        console.log('searchQuery:', searchQuery); // Log giá trị searchQuery
+const filteredConversations = useMemo(() => {
+    console.log('searchQuery:', searchQuery); // Log giá trị searchQuery
 
-        const combined = conversations
-            .map((conv) => ({
-                ...conv,
-                type: conv.type_conversation === 'group' ? 'group_chat' : 'conversation',
-            }))
-            .filter((conv) => {
-                // Nếu searchQuery rỗng, giữ lại tất cả cuộc hội thoại
-                if (!searchQuery.trim()) return true;
+    const combined = conversations
+        .map((conv) => ({
+            ...conv,
+            type: conv.type_conversation === 'group' ? 'group_chat' : 'conversation',
+        }))
+        .filter((conv) => {
+            // Nếu searchQuery rỗng, giữ lại tất cả cuộc hội thoại
+            if (!searchQuery.trim()) return true;
 
-                // Lọc theo tên nhóm cho GroupChat
-                if (conv.type_conversation === 'group') {
-                    return conv.name?.toLowerCase().includes(searchQuery.toLowerCase());
-                }
+            // Lọc theo tên nhóm cho GroupChat
+            if (conv.type_conversation === 'group') {
+                return conv.name?.toLowerCase().includes(searchQuery.toLowerCase());
+            }
 
-                // Lọc theo tên người tham gia cho PrivateChat
-                return conv.participants.some(
-                    (p) => p.id !== parseInt(id_user) && p.name?.toLowerCase().includes(searchQuery.toLowerCase()),
-                );
-            });
-
-        console.log('Filtered conversations:', combined);
-
-        return combined.sort((a, b) => {
-            const aTime = a.last_message?.timestamp ? new Date(a.last_message.timestamp).getTime() : 0;
-            const bTime = b.last_message?.timestamp ? new Date(b.last_message.timestamp).getTime() : 0;
-            return bTime - aTime; // Sắp xếp giảm dần (mới nhất lên đầu)
+            // Lọc theo tên người tham gia cho PrivateChat
+            return conv.participants.some(
+                (p) => p.id !== parseInt(id_user) && p.name?.toLowerCase().includes(searchQuery.toLowerCase()),
+            );
         });
-    }, [conversations, searchQuery, id_user]);
+
+    console.log('Filtered conversations:', combined);
+
+    return combined.sort((a, b) => {
+        const aTime = a.last_message?.timestamp ? new Date(a.last_message.timestamp).getTime() : 0;
+        const bTime = b.last_message?.timestamp ? new Date(b.last_message.timestamp).getTime() : 0;
+        return bTime - aTime; // Sắp xếp giảm dần (mới nhất lên đầu)
+    });
+}, [conversations, searchQuery, id_user]);
 
     const formatTimestamp = (dateString) => {
         const date = new Date(dateString);
@@ -507,11 +507,14 @@ function Chat() {
                     onClick={() => handleConversationSelect(metaAIConversation)}
                 >
                     <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                        <img src={meta} className="w-full h-full object-cover rounded-full" />
+                        <img
+                            src="https://subiz.com.vn/blog/wp-content/uploads/2024/05/Frame-876-1024x569.png"
+                            className="w-full h-full object-cover rounded-full"
+                        />
                     </div>
                     <div className="flex-1 items-center">
                         <div className="flex justify-between items-center">
-                            <h3 className="text-white text-base font-semibold">Meta AI</h3>
+                            <h3 className="text-white text-base font-semibold">Gemini AI</h3>
                         </div>
                     </div>
                 </div>

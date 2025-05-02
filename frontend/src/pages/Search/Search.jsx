@@ -12,9 +12,7 @@ function Search() {
     const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
     const { t } = useTranslation();
-
     const [searchTerm, setSearchTerm] = useState('');
-
     useEffect(() => {
         const query = searchParams.get('keyword') || '';
         setSearchTerm(query);
