@@ -30,6 +30,8 @@ import DisplayDetaiSong from '@/components/DisplayDetailSong';
 import DisplayPremium from '@/pages/Premium';
 import DisplayPremiumRegister from '@/pages/PremiumRegister';
 import MvSong from '@/components/VideoPage';
+import DisplaySettings from '@/pages/Settings';
+
 /**
  * Admin routes
  */
@@ -79,6 +81,7 @@ const publicRoutes = [
     // { path: config.routes.searchSongAlbumArt, component: SearchSongAlbumArt },
     { path: config.routes.premium, component: DisplayPremium},    
     { path: config.routes.premium_register + '/:id', component: DisplayPremiumRegister},    
+    { path: config.routes.settings, component: DisplaySettings},    
 
     { path: config.routes.admin_dashboard, component: Dashboard, layout: AdminLayout},
     { path: config.routes.admin_user, component: DisplayAdminUser, layout: AdminLayout},

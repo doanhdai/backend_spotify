@@ -45,7 +45,7 @@ export const getFavoriteSongs = async () => apiClient.get('songs/favorites/list/
 export const getArtistSong = async (idArtist) => apiClient.get(`/songs/artist/${idArtist}/`);
 
 // GET LIST OF ALBUMS BY ARTIST
-export const getArtistAlbum = async (idArtist) => apiClient.get(`/songs/artist/${idArtist}/`);
+export const getArtistAlbum = async (idArtist) => apiClient.get(`/songs/album/artist/${idArtist}/`);
 
 // GET SONG BY NAME
 export const searchSongsByName = async (query) => apiClient.get(`/songs/search/?keyword=${query}`);

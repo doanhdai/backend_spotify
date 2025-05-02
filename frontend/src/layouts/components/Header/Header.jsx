@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import Search from '@/pages/Search';
 import { useSelector } from 'react-redux';
 import Language from '../Language/Language';
+import Premium from '@/pages/Premium';
 
 function Header() {
     const inputRef = useRef(null);
@@ -83,9 +84,8 @@ function Header() {
                     </Link>
                     <div className="block w-full">
                         <div
-                            className={`relative w-full h-[48px] rounded-full flex items-center gap-2 ${
-                                isFocused ? 'outline outline-white outline-2' : ''
-                            } bg-[#1f1f1f] text-[#b3b3b3] transition-all duration-150 cursor-pointer hover:bg-[#2a2a2a]`}
+                            className={`relative w-full h-[48px] rounded-full flex items-center gap-2 ${isFocused ? 'outline outline-white outline-2' : ''
+                                } bg-[#1f1f1f] text-[#b3b3b3] transition-all duration-150 cursor-pointer hover:bg-[#2a2a2a]`}
                         >
                             <Search />
                         </div>
@@ -95,9 +95,11 @@ function Header() {
                 <div className={`flex items-center gap-5 ${isLoggedIn ? '' : 'w-[446px] justify-end'}`}>
                     {isLoggedIn ? (
                         <>
-                            <button className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]">
-                                {t('header.premium')}
-                            </button>
+                            <Link to={config.routes.premium}>
+                                <button className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]">
+                                    {t('header.premium')}
+                                </button>
+                            </Link>
                             <button
                                 // onClick={() => {
                                 //     navigate("/chat");
@@ -134,13 +136,17 @@ function Header() {
                                                         <span>{t('header.profile')}</span>
                                                     </button>
                                                 </Link>
-                                                <button className="flex items-center justify-between w-full py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:bg-[#ffffff1a]">
-                                                    <span>{t('header.updatePremium')}</span>
-                                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
-                                                </button>
-                                                <button className="flex items-center justify-between w-full py-3 pl-3 pr-2 rounded-[4px] border-b-[1px] rounded-b-[1px] cursor-pointer hover:bg-[#ffffff1a]">
-                                                    <span>{t('header.setting')}</span>
-                                                </button>
+                                                <Link to={config.routes.premium}>
+                                                    <button className="flex items-center justify-between w-full py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:bg-[#ffffff1a]">
+                                                        <span>{t('header.updatePremium')}</span>
+                                                        <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
+                                                    </button>
+                                                </Link>
+                                                <Link to={config.routes.settings}>
+                                                    <button className="flex items-center justify-between w-full py-3 pl-3 pr-2 rounded-[4px] border-b-[1px] rounded-b-[1px] cursor-pointer hover:bg-[#ffffff1a]">
+                                                        <span>{t('header.setting')}</span>
+                                                    </button>
+                                                </Link>
                                                 <Link to={config.routes.home}>
                                                     <button
                                                         className="flex items-center justify-between w-full py-3 pl-3 pr-2 rounded-[4px] cursor-pointer hover:bg-[#ffffff1a]"
