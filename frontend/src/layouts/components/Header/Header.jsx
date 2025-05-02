@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next';
 import Search from '@/pages/Search';
 import { useSelector } from 'react-redux';
 import Language from '../Language/Language';
+import Premium from '@/pages/Premium';
 
 function Header() {
     const inputRef = useRef(null);

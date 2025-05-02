@@ -9,7 +9,7 @@ const Playlist = () => {
       const respone = await getAllPlaylist();
       const data = respone.data;
       setPlaylists(data);
-      // console.log(data);
+      console.log(respone);
     } catch (error) {
       console.log(error);
     }

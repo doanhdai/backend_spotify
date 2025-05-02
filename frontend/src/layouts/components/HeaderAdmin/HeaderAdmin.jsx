@@ -35,7 +35,7 @@ function HeaderAdmin() {
                 </Link>
                 <h1 className="ml-3 text-xl font-semibold">Administration</h1>
             </div>
-            
+
             {/* Search Bar */}
             <div className="relative w-1/3">
                 <input
@@ -46,7 +46,7 @@ function HeaderAdmin() {
                 />
                 <FontAwesomeIcon icon={faSearch} className="absolute left-3 top-3 text-gray-400" />
             </div>
-            
+
             {/* Icons & User Dropdown */}
             <div className="flex items-center gap-6">
                 <Tippy content={t('header.notifications')}>
@@ -54,7 +54,7 @@ function HeaderAdmin() {
                         <FontAwesomeIcon icon={faBell} className="w-5 h-5" />
                     </button>
                 </Tippy>
-                
+
                 {isLoggedIn ? (
                     <Tippy content={t('header.profile')} interactive>
                         <div className="relative group cursor-pointer">
@@ -66,12 +66,13 @@ function HeaderAdmin() {
                                 <Link to={config.routes.profile} className="block px-4 py-2 hover:bg-gray-200">
                                     <FontAwesomeIcon icon={faUserCircle} className="mr-2" /> {t('header.profile')}
                                 </Link>
-                                <Link to={config.routes.settings} className="block px-4 py-2 hover:bg-gray-200">
+                                {/* <Link to={config.routes.settings} className="block px-4 py-2 hover:bg-gray-200">
                                     <FontAwesomeIcon icon={faCog} className="mr-2" /> {t('header.settings')}
                                 </Link>
-                                <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-200">
+                                 */}
+                                <Link to={config.routes.login} onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-200">
                                     <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" /> {t('header.logout')}
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </Tippy>

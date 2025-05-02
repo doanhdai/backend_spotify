@@ -32,6 +32,8 @@ import DisplayPremiumRegister from '@/pages/PremiumRegister';
 import PaymentResult from '@/pages/PaymentResult/PaymentResult';
 
 import MvSong from '@/components/VideoPage';
+import DisplaySettings from '@/pages/Settings';
+
 /**
  * Admin routes
  */

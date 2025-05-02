@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-// import { getArtist } from "@/service/apiService";
+import { getAlbum, getArtistAlbum } from "@/service/apiService";
+
 
 const Album = () => {
     const [albums, setAlbums] = useState([]);
+    const userId = localStorage.getItem('id_user');
 
     const fetchAllAlbums = async () => {
         try {
-            const respone = await getAlbum();
-            const data = respone.data;
+            const respone = await getArtistAlbum(userId);
+            const data = respone.data.albums;
             setAlbums(data);
-            console.log(data);
         } catch (error) {
             console.error(error);
         }

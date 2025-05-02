@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaUser, FaLock, FaBell, FaGlobe, FaSignOutAlt } from "react-icons/fa";
+import config from '@/configs';
 
 function Settings() {
     const settingsOptions = [
-        { icon: <FaUser />, text: "Tài khoản", link: "/settings/account" },
+        { icon: <FaUser />, text: "Tài khoản", link: config.routes.artist_dashboard},
         { icon: <FaLock />, text: "Bảo mật & Quyền riêng tư", link: "/settings/privacy" },
         { icon: <FaBell />, text: "Thông báo", link: "/settings/notifications" },
         { icon: <FaGlobe />, text: "Ngôn ngữ", link: "/settings/language" },
