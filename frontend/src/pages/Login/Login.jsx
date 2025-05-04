@@ -9,7 +9,7 @@ import { assets } from '@/assets/assets';
 import config from '@/configs';
 import Language from '@/layouts/components/Language/language';
 import { useDispatch } from 'react-redux';
-import { login } from '@/redux/Reducer/authSlice';
+import { login, setUserInfo } from '@/redux/Reducer/authSlice';
 import { loginUser } from '@/service/apiService';
 
 function Login({ setIsLoggedIn }) {
@@ -40,7 +40,9 @@ function Login({ setIsLoggedIn }) {
                 localStorage.setItem('id_user', JSON.stringify(data.user?.id));
 
                 dispatch(login(data.access));
+                dispatch(setUserInfo(data.user));
                 toast.success('Đăng nhập thành công');
+
                 navigate('/');
             } else {
                 toast.error('Lỗi: Không tìm thấy token!');

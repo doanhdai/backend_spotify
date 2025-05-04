@@ -55,7 +55,7 @@ def create_payment(request):
 
         # Get premium package details
         try:
-            premium = Premium.objects.get(ma_premium=premium_id)
+            premium = Premium.objects.get(id=premium_id)
         except Premium.DoesNotExist:
             return Response({
                 'success': False,
@@ -296,15 +296,15 @@ def payment_callback(request):
                     return JsonResponse({"error": f"User not found with id: {user_id}"}, status=404)
                 
                 try:
-                    premium = Premium.objects.get(ma_premium=premium_id)
-                    logging.info(f"Found premium: {premium.ma_premium}")
+                    premium = Premium.objects.get(id=premium_id)
+                    logging.info(f"Found premium: {premium.id}")
                 except Premium.DoesNotExist:
                     logging.error(f"Premium not found with id: {premium_id}")
                     return JsonResponse({"error": f"Premium not found with id: {premium_id}"}, status=404)
                 
                 # Check if premium package is active
                 if premium.trang_thai != 1:
-                    logging.error(f"Premium package {premium.ma_premium} is not active")
+                    logging.error(f"Premium package {premium.id} is not active")
                     payment.status = 'failed'
                     payment.save()
                     return JsonResponse({
@@ -437,7 +437,7 @@ def check_payment_status(request):
             'status': payment.status,
             'order_id': payment.order_id,
             'user_id': payment.user.id,
-            'premium_id': payment.premium.ma_premium,
+            'premium_id': payment.premium.id,
             'amount': payment.amount,
             'created_at': payment.created_at
         })
@@ -447,3 +447,5 @@ def check_payment_status(request):
             'success': False,
             'error': str(e)
         }, status=500) 
+        
+        

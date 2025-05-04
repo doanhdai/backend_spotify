@@ -31,7 +31,7 @@ const PremiumRegister = () => {
         if (id) {
             fetchPremiumDetail();
         }
-    });
+    }, [id]);
 
     // useEffect(() => {
     //     fetchManualActivatePremium();

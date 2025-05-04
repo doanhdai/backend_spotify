@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     isLoggedIn: false,
     token: null,
+    userInfo: null,
 };
 
 const authSlice = createSlice({
@@ -20,6 +21,9 @@ const authSlice = createSlice({
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
         },
+        setUserInfo(state, action) {
+            state.userInfo = action.payload;
+        },
         initializeAuth(state) {
             const token = localStorage.getItem('access_token');
             if (token) {
@@ -30,5 +34,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { login, logout, initializeAuth } = authSlice.actions;
+export const { login, logout, initializeAuth, setUserInfo } = authSlice.actions;
 export default authSlice.reducer;

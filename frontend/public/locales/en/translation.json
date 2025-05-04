@@ -2,6 +2,7 @@
     "header": {
         "input": "what do you want to broadcast today",
         "premium": "Explore premium",
+        "premiumUser": "Premium",
         "download": "Download the app",
 
         "title": "Account",
@@ -161,5 +162,13 @@
         "shorten": "Shorten",
         "list": "List",
         "noSongsInLibrary": "No songs in Library"
+    },
+    "premium": {
+        "premium_title": "Explore premium",
+        "premium_description": "Enjoy uninterrupted music with additional benefits!",
+        "premium_badge": "Already subscribed",
+        "title": "Premium",
+        "description": "Enjoy uninterrupted music with additional benefits!",
+        "button": "Sign up now"
     }
 }

@@ -34,7 +34,7 @@ def send_callback(payment):
         # Log thông tin payment
         logging.info(f"📝 Chuẩn bị callback cho payment {payment.order_id}")
         logging.info(f"   - User ID: {payment.user.id}")
-        logging.info(f"   - Premium ID: {payment.premium.ma_premium}")
+        logging.info(f"   - Premium ID: {payment.premium.id}")  
         logging.info(f"   - Amount: {payment.amount}")
 
         data = {
@@ -47,7 +47,7 @@ def send_callback(payment):
             "payment_id": f"pay_{payment.order_id}",
             "embed_data": json.dumps({
                 "user_id": payment.user.id,
-                "premium_id": payment.premium.ma_premium
+                "premium_id": payment.premium.id
             })
         }
 
@@ -102,7 +102,7 @@ def run_service():
             for payment in pending_payments:
                 logging.info(f"⏳ Xử lý thanh toán: {payment.order_id}")
                 logging.info(f"   - User: {payment.user.username}")
-                logging.info(f"   - Premium: {payment.premium.ma_premium}")
+                logging.info(f"   - Premium: {payment.premium.id}")
                 logging.info(f"   - Amount: {payment.amount}")
                 logging.info(f"   - Created at: {payment.created_at}")
                 

@@ -3,12 +3,11 @@ from users.models import User
 from django.utils import timezone
 
 class Premium(models.Model):
-    ma_premium = models.CharField(max_length=50, unique=True, primary_key=True)  # Mã gói
-    ten_premium = models.CharField(max_length=200)  # Tên gói
-    mo_ta = models.TextField(blank=True, null=True)  # Mô tả gói
-    thoi_han = models.IntegerField(default=0)  # Thời hạn (ngày)
-    gia_ban = models.FloatField(default=0)  # Giá bán
-    trang_thai = models.IntegerField(default=1)  # 1 = active, 0 = inactive
+    ten_premium = models.CharField(max_length=200)
+    mo_ta = models.TextField(blank=True, null=True)
+    thoi_han = models.IntegerField(default=0)
+    gia_ban = models.FloatField(default=0)
+    trang_thai = models.IntegerField(default=1)
 
     def __str__(self):
         return self.ten_premium
@@ -41,16 +40,7 @@ class PremiumPayment(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
-    callback_sent = models.BooleanField(default=False) 
+    callback_sent = models.BooleanField(default=False)
+
     def __str__(self):
         return f"Payment {self.order_id} - {self.user.username}"
-
-    ma_premium = models.CharField(max_length=50, unique=True, primary_key=True)  # Mã premium, khóa chính
-    ten_premium = models.CharField(max_length=200)  # Tên album
-    thoi_han = models.IntegerField(default=0)
-    gia_ban = models.FloatField(default=0)
-    mo_ta = models.CharField(max_length=50)
-    trang_thai = models.IntegerField(default=1)  # Trạng thái (1 = active, 0 = inactive)
-
-    def __str__(self):
-        return self.ten_premium

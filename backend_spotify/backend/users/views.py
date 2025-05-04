@@ -77,3 +77,11 @@ class GetAllArtistsView(generics.ListAPIView):
     def get_queryset(self):
         return User.objects.filter(ma_quyen=2) 
     
+class SearchArtistView(generics.ListAPIView):
+    serializer_class = ArtistSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        keyword = self.request.query_params.get('keyword', None)
+        return User.objects.filter(name__icontains=keyword, ma_quyen=2)
+    

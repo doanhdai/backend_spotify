@@ -60,12 +60,14 @@ import ChatPage from '@/pages/Chat';
 import Category from '@/pages/Search/Catelogy';
 import SeachSongAlbumArt from '@/pages/Search/SeachSongAlbumArt';
 import PaymentSuccess from '@/components/PremiumRegister/PaymentSuccess/PaymentSuccess';
+import DetailCategory from '@/pages/Search/DetailCategory/DetailCategory';
 
 const publicRoutes = [
     { path: config.routes.home, component: Home },
     { path: config.routes.search, component: SeachSongAlbumArt },
     { path: config.routes.chat, component: ChatPage },
     { path: config.routes.category, component: Category },
+    { path: config.routes.category + '/:id', component: DetailCategory },
     { path: config.routes.concerts, component: Concerts },
     { path: config.routes.album + '/:id', component: Album },
     { path: config.routes.artist + '/:id', component: Artist },

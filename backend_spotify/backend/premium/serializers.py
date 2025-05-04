@@ -2,12 +2,12 @@ from rest_framework import serializers
 from .models import Premium
 
 class PremiumSerializer(serializers.ModelSerializer):
-    ma_premium = serializers.CharField(read_only=True)
+    id = serializers.CharField(read_only=True)
 
     class Meta:
         model = Premium
-        fields = ['ma_premium', 'ten_premium', 'thoi_han', 'gia_ban', 'mo_ta', 'trang_thai']
-        read_only_fields = ['ma_album']
+        fields = ['id', 'ten_premium', 'thoi_han', 'gia_ban', 'mo_ta', 'trang_thai']
+        read_only_fields = ['id']
 
     def create(self, validated_data):
         last_premium = Premium.objects.order_by('-ma_premium').first()
@@ -22,7 +22,7 @@ class PremiumSerializer(serializers.ModelSerializer):
             last_id += 1
             new_id = f"PRE-{last_id + 1:04d}"
 
-        validated_data['ma_premium'] = new_id
+        validated_data['id'] = new_id
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
@@ -46,12 +46,15 @@ class PremiumSerializer(serializers.ModelSerializer):
         except Exception as e:
             raise serializers.ValidationError(f"Error occurred while deleting Premium: {str(e)}")
 
-    def get_detail(self, ma_premium):
+    def get_detail(self, id):
         """
         Trả về dữ liệu chi tiết của một Premium cụ thể.
         """
         try:
-            premium = Premium.objects.get(ma_premium=ma_premium)
+            premium = Premium.objects.get(id=id)
             return PremiumSerializer(premium).data
         except Premium.DoesNotExist:
-            raise serializers.ValidationError(f"Không tìm thấy gói Premium với mã: {ma_premium}")
+            raise serializers.ValidationError(f"Không tìm thấy gói Premium với mã: {id}")
+    
+
+
