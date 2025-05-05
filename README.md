@@ -1,51 +1,51 @@
 
-# Spotify Clone Project
+# Dự án Spotify Clone
 
-This project is a clone of Spotify, separated into two parts: `backend_spotify` and `frontend`.
+Đây là dự án mô phỏng lại ứng dụng Spotify, bao gồm hai phần chính: `backend_spotify` và `frontend`.
 
-## 📁 Project Structure
+## 📁 Cấu trúc dự án
 
-- `backend_spotify/`: Contains the backend code (likely built with Django, Node.js, or similar).
-- `frontend/`: Contains the frontend code (likely built with React.js).
-
----
-
-## 🚀 Installation Guide
-
-### Prerequisites
-
-- Node.js (v14+)
-- npm or yarn
-- Python 3.9+ (if backend is Django)
-- pip
-- MySQL or PostgreSQL (optional, depending on backend)
+- `backend_spotify/`: Chứa mã nguồn phía backend (có thể sử dụng Django hoặc Node.js).
+- `frontend/`: Chứa mã nguồn phía frontend (React.js).
 
 ---
 
-## ⚙️ Backend Setup
+## 🚀 Hướng dẫn cài đặt
 
-1. Go to the backend folder:
+### Yêu cầu trước khi cài đặt
+
+- Cài đặt **Node.js** (phiên bản 14 trở lên)
+- Cài đặt **npm** hoặc **yarn**
+- Cài đặt **Python 3.9+** (nếu backend là Django)
+- Cài đặt **pip**
+- **MySQL** hoặc **PostgreSQL** nếu dùng cơ sở dữ liệu
+
+---
+
+## ⚙️ Cài đặt Backend
+
+1. Truy cập vào thư mục backend:
 
 ```bash
 cd backend_spotify
 ```
 
-2. Create virtual environment and activate it (optional but recommended):
+2. (Tuỳ chọn) Tạo môi trường ảo và kích hoạt:
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+source venv/bin/activate        # Trên Windows dùng: venv\Scripts\activate
 ```
 
-3. Install dependencies:
+3. Cài đặt các thư viện cần thiết:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Set up environment variables:
+4. Tạo file `.env` để cấu hình các biến môi trường:
 
-Create a `.env` file in `backend_spotify/` and add necessary keys, for example:
+Ví dụ nội dung `.env`:
 
 ```env
 SECRET_KEY=your_secret_key
@@ -53,14 +53,14 @@ DEBUG=True
 DATABASE_URL=mysql://user:password@localhost:3306/spotifydb
 ```
 
-5. Run migrations:
+5. Tạo và áp dụng migration:
 
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-6. Run the development server:
+6. Chạy server backend:
 
 ```bash
 python manage.py runserver
@@ -68,29 +68,27 @@ python manage.py runserver
 
 ---
 
-## 🌐 Frontend Setup
+## 🌐 Cài đặt Frontend
 
-1. Go to the frontend folder:
+1. Truy cập vào thư mục frontend:
 
 ```bash
 cd frontend
 ```
 
-2. Install dependencies:
+2. Cài đặt các thư viện frontend:
 
 ```bash
 npm install
 ```
 
-3. Set up environment variables:
-
-Create a `.env` file in `frontend/` and configure:
+3. Tạo file `.env` và cấu hình địa chỉ backend:
 
 ```env
 REACT_APP_BACKEND_URL=http://localhost:8000
 ```
 
-4. Start the development server:
+4. Chạy ứng dụng frontend:
 
 ```bash
 npm start
@@ -98,15 +96,15 @@ npm start
 
 ---
 
-## 🧪 Testing
+## 🧪 Kiểm thử
 
-- Backend: Run tests with
+- Backend:
 
 ```bash
 python manage.py test
 ```
 
-- Frontend: Use
+- Frontend:
 
 ```bash
 npm test
@@ -114,18 +112,18 @@ npm test
 
 ---
 
-## 📝 Notes
+## 📝 Ghi chú
 
-- Make sure both frontend and backend `.env` files are configured properly.
-- Ensure ports do not conflict (backend default: 8000, frontend default: 3000).
-- CORS should be configured correctly in the backend.
-
----
-
-## 📬 Contact
-
-For questions or contributions, feel free to open an issue or contact the maintainer.
+- Cần đảm bảo file `.env` được cấu hình đúng ở cả backend và frontend.
+- Đảm bảo các cổng không bị trùng (mặc định backend chạy ở `8000`, frontend chạy ở `3000`).
+- Nếu sử dụng CORS, cần cấu hình cho phép frontend truy cập từ backend.
 
 ---
 
+## 📬 Liên hệ
 
+Nếu bạn có bất kỳ câu hỏi hoặc đóng góp nào, vui lòng tạo issue hoặc liên hệ với người phát triển dự án.
+
+---
+
+> Được phát triển với ❤️ bởi Doanh Đại
