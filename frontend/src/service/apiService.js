@@ -7,6 +7,8 @@ export const loginUser = async (data) => {
     return response.data;
 };
 
+
+
 export const refreshToken = async (refreshToken) => {
     const response = await axios.post(`${import.meta.env.VITE_REACT_API}/auth/token/refresh/`, {
         refresh: refreshToken,

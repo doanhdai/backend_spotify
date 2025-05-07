@@ -20,7 +20,8 @@ from .views import  AddFavoriteSongView, AddSongToPlaylistView,\
                     UpdatePlaylistView,\
                     UpdateSongView,\
                     GetAlbumDetailView,\
-                    GetAllAlbumsView, GetArtistAlbumsView
+                    GetAllAlbumsView, \
+                    GetArtistAlbumsView
 
 urlpatterns = [
     path('create/', CreateSongView.as_view(), name='create-song'), # Tạo bài hát

@@ -30,6 +30,7 @@ function Login({ setIsLoggedIn }) {
     const handleLogin = async () => {
         try {
             const data = await loginUser({ email, password });
+            console.log(data.usser);
             if (data.access) {
                 console.log(data);
                 localStorage.setItem('access_token', data.access);
@@ -41,7 +42,11 @@ function Login({ setIsLoggedIn }) {
 
                 dispatch(login(data.access));
                 toast.success('Đăng nhập thành công');
-                navigate('/');
+                if (data.user.ma_quyen.ma_quyen === 3) {
+                    navigate('/admin/dashboard');
+                } else {
+                    navigate('/');
+                }
             } else {
                 toast.error('Lỗi: Không tìm thấy token!');
             }

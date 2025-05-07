@@ -14,7 +14,7 @@ function Player() {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     let is_premium = localStorage.getItem('is_premium');
-    console.log(is_premium);
+    // console.log(is_premium);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const {
         track,
