@@ -34,7 +34,7 @@ const PlayerProvider = ({ children }) => {
         const currentTrack = getCurrentTrack();
         if (currentTrack) {
             console.log(currentTrack);
-            if (currentTrack.is_premium === true && time.currentTime.second === 5) {
+            if (currentTrack.is_premium === true && time.currentTime.second >= 5) {
                 if (audioRef.current && is_premium === 'false') {
                     audioRef.current.pause();
                     dispatch(setPlayStatus(false));

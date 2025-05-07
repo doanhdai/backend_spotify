@@ -31,10 +31,11 @@ function Header() {
     const [username, setUsername] = useState('');
     const [targetUser, setTargetUser] = useState(false);
     const [hovering, setHovering] = useState(false);
-
+    const userInfo = useSelector((state) => state.auth.userInfo);
+    console.log(userInfo);
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
-    let is_premium = localStorage.getItem('is_premium');
+
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
@@ -97,14 +98,22 @@ function Header() {
                 <div className={`flex items-center gap-5 ${isLoggedIn ? '' : 'w-[446px] justify-end'}`}>
                     {isLoggedIn ? (
                         <>
-                            {is_premium === 'false' && (
+                            {/* {userInfo.is_premium === false ? (
                                 <button
                                     className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]"
                                     onClick={() => navigate(config.routes.premium)}
                                 >
                                     {t('header.premium')}
                                 </button>
-                            )}
+                            ) : (
+                                <button
+                                    className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]"
+                                    onClick={() => navigate(config.routes.premium)}
+                                >
+                                    {t('header.premiumUser')}
+                                </button>
+                            )} */}
+
                             <button
                                 // onClick={() => {
                                 //     navigate("/chat");
