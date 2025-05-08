@@ -17,6 +17,7 @@ class TheLoai(models.Model):
     id = models.AutoField(primary_key=True)
     ten_the_loai = models.CharField(max_length=100, unique=True)
     status = models.BooleanField(default=True)
+    hinh_anh = models.ImageField(upload_to='the_loai/images/', blank=True, null=True)
 
     def __str__(self):
         return self.ten_the_loai
@@ -34,7 +35,7 @@ class Song(models.Model):
     audio = models.FileField(upload_to='songs/audio/', blank=True, null=True)
     luot_nghe = models.IntegerField(default=0)
     ngay_phat_hanh = models.DateTimeField(default=timezone.now)
-    is_premium = models.BooleanField(default=False)  # Đánh dấu bài hát chỉ dành cho người dùng premium
+    is_premium = models.BooleanField(default=False)  
 
     def __str__(self):
         return self.ten_bai_hat

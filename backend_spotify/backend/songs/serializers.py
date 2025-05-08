@@ -9,7 +9,7 @@ from users.serializers import RegisterSerializer
 class TheLoaiSerializer(serializers.ModelSerializer):
     class Meta:
         model = TheLoai
-        fields = ['id', 'ten_the_loai', 'status']
+        fields = ['id', 'ten_the_loai', 'status','hinh_anh']
 
 
 class SongSerializer(serializers.ModelSerializer):

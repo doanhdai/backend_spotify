@@ -286,7 +286,31 @@ class SearchAlbumsView(generics.ListAPIView):
             return Album.objects.filter(Q(ten_album__icontains=keyword))
         return Album.objects.all()
     
-    
+# class GetArtistAlbumsView(generics.ListAPIView):
+#     serializer_class = AlbumSerializer
+#     permission_classes = [AllowAny]  # Cho phép truy cập công khai, có thể đổi thành IsAuthenticated nếu cần
+
+#     def get_queryset(self):
+#         user_id = self.kwargs.get('user_id')
+#         try:
+#             # Kiểm tra xem user_id có tồn tại
+#             user = User.objects.get(id=user_id)
+#             # Lấy tất cả album của người dùng
+#             return Album.objects.filter(ma_user=user)
+#         except User.DoesNotExist:
+#             # Nếu user_id không tồn tại, trả về queryset rỗng
+#             return Album.objects.none()
+
+#     def list(self, request, *args, **kwargs):
+#         queryset = self.get_queryset()
+#         if not queryset.exists():
+#             user_id = self.kwargs.get('user_id')
+#             return Response(
+#                 {"detail": f"Không tìm thấy album nào cho người dùng với ID {user_id} hoặc người dùng không tồn tại."},
+#                 status=status.HTTP_404_NOT_FOUND
+#             )
+#         serializer = self.get_serializer(queryset, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
     
     
     
@@ -571,3 +595,25 @@ class GetArtistAlbumsView(generics.ListAPIView):
             "albums": serializer.data
         }, status=status.HTTP_200_OK)
 
+
+class GetAlbumByUserAllStatusView(generics.ListAPIView):
+    serializer_class = AlbumSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return Album.objects.filter(ma_user_id=user_id)
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            return Response({
+                "detail": "Không tìm thấy album nào của người dùng này.",
+                "albums": []
+            }, status=status.HTTP_200_OK)
+            
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            "detail": "Lấy danh sách album thành công.",
+            "albums": serializer.data
+        }, status=status.HTTP_200_OK)

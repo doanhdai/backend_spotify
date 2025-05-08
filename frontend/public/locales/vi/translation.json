@@ -2,6 +2,7 @@
     "header": {
         "input": "Hôm nay bạn muốn phát sóng gì",
         "premium": " Khám phá Premium",
+        "premiumUser": "Premium",
         "download": "Cài đặt ứng dụng",
         "title": "Tài khoản",
         "profile": "Hồ sơ",
@@ -179,5 +180,14 @@
         "shorten": "Rút gọn",
         "list": "Danh sách",
         "noSongsInLibrary": "Không có bài hát nào trong danh sách yêu thích"
+    },
+    "premium": {
+        "premium_title": "Khám phá premium",
+        "premium_description": "Tận hưởng âm nhạc không bị gián đoạn, cùng nhiều lợi ích khác!",
+        "premium_badge": "Đã đăng ký",
+
+        "title": "Premium",
+        "description": "Tận hưởng âm nhạc không bị gián đoạn, cùng nhiều lợi ích khác!",
+        "button": "Đăng ký ngay"
     }
 }

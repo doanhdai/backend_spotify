@@ -1,4 +1,5 @@
 from django.urls import path
+<<<<<<< HEAD
 from .views import AddFavoriteSongView, AddSongToPlaylistView, \
     CreateGenreView, \
     CreatePlaylistView, \
@@ -21,6 +22,32 @@ from .views import AddFavoriteSongView, AddSongToPlaylistView, \
     UpdateSongView, \
     GetAlbumDetailView, \
     GetAllAlbumsView, GetArtistAlbumsView, ApproveAlbumView, ApproveSongView
+=======
+from .views import  AddFavoriteSongView, AddSongToPlaylistView,\
+                    CreateGenreView,\
+                    CreatePlaylistView,\
+                    CreateSongView,\
+                    DeletePlaylistView,\
+                    GetAllGenresView, GetAllPlaylistsView, GetFavoriteSongsView, \
+                    GetSongDetailView,\
+                    GetSongsByGenreView, GetSongsInPlaylistView,\
+                    ListSongsInAlbumView,\
+                    PlaySongView,\
+                    ListAllSongsView,\
+                    ListArtistSongsView,\
+                    CreateAlbumView, RemoveFavoriteSongView,\
+                    RemoveSongFromPlaylistView, SearchAlbumsView, \
+                    SearchSongsView,\
+                    UpdateAlbumView,\
+                    AddSongsToAlbumView,\
+                    UpdateGenreView,\
+                    UpdatePlaylistView,\
+                    UpdateSongView,\
+                    GetAlbumDetailView,\
+                    GetAllAlbumsView, \
+                    GetArtistAlbumsView,\
+                    GetAlbumByUserAllStatusView
+>>>>>>> 6fe2e70d02eb14c9a2796ce33cc5bdcdae807ff6
 
 urlpatterns = [
     path('create/', CreateSongView.as_view(), name='create-song'), # Tạo bài hát
@@ -32,17 +59,23 @@ urlpatterns = [
     path('song/<int:id>/approve/', ApproveSongView.as_view(), name='approve-song'),
 
     path('search/', SearchSongsView.as_view(), name='search-songs'), # Tìm kiếm bài hát http://localhost:8000/api/v1/songs/search/?keyword=bai hat
-    path('album/create/', CreateAlbumView.as_view(), name='create-album'),  # Tạo album
+    path('album/create/', CreateAlbumView.as_view(), name='create-album'), 
+    path('album/search/', SearchAlbumsView.as_view(), name='search-album'), # Tìm kiếm album# Tạo album
     path('album/all/', GetAllAlbumsView.as_view(), name='get-all-albums'),  # Lấy danh sách tất cả album
     path('album/<str:ma_album>/', UpdateAlbumView.as_view(), name='update-album'), # Cập nhật album
     path('album/<str:ma_album>/detail/', GetAlbumDetailView.as_view(), name='album-detail'), # Chi tiết album
     path('album/<str:ma_album>/add-songs/', AddSongsToAlbumView.as_view(), name='add-songs-to-album'), # Thêm bài hát vào album
     path('album/<str:ma_album>/songs/', ListSongsInAlbumView.as_view(), name='list-songs-in-album'), # Danh sách bài hát trong album
-    path('album/search/', SearchAlbumsView.as_view(), name='search-album'), # Tìm kiếm album
+   
     path('album/artist/<int:user_id>/', GetArtistAlbumsView.as_view(), name='artist-albums'), # Lấy danh sách album của một tác giả
+<<<<<<< HEAD
     path('album/<str:ma_album>/approve/', ApproveAlbumView.as_view(), name='approve-album'),
 
     # Lấy danh sách album của một tác giả
+=======
+    path('album/artistAllStatus/<int:user_id>/', GetAlbumByUserAllStatusView.as_view(), name='album-by-user-all-status'), # Lấy danh sách album của một người dùng tất cả status
+
+>>>>>>> 6fe2e70d02eb14c9a2796ce33cc5bdcdae807ff6
     path('playlists/get-all/', GetAllPlaylistsView.as_view(), name='get-all-playlists'), # Lấy danh sách playlist
     path('playlists/<str:ma_playlist>/songs/', GetSongsInPlaylistView.as_view(), name='get_songs_in_playlist'), # Lấy danh sách bài hát trong playlist
     path('playlists/create/', CreatePlaylistView.as_view(), name='create-playlist'), # Tạo playlist

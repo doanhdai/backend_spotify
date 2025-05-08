@@ -7,6 +7,8 @@ export const loginUser = async (data) => {
     return response.data;
 };
 
+
+
 export const refreshToken = async (refreshToken) => {
     const response = await axios.post(`${import.meta.env.VITE_REACT_API}/auth/token/refresh/`, {
         refresh: refreshToken,
@@ -60,7 +62,12 @@ export const getGenres = async () => apiClient.get('/songs/genres/list/');
 export const getCategory = async () => apiClient.get('/songs/genres/list/');
 
 // GET LIST OF PREMIUM
-export const getAllPremium = async () => apiClient.get('/premium/list/');
+export const getAllPremium = async (userId) =>
+    apiClient.get(`/premium/user-status`, {
+        params: {
+            userId: userId,
+        },
+    });
 
 // GET PREMIUM DETAIL
 
@@ -71,7 +78,7 @@ export const getAllPremium = async () => apiClient.get('/premium/list/');
 // GET LIST OF CONVERSATIONS
 
 //GET PREMIUM DETAIL
-export const getPremiumDetail = async (idPremium) => apiClient.get(`/premium/register/${idPremium}/`);
+export const getPremiumDetail = async (idPremium) => apiClient.get(`/premium/detail/${idPremium}/`);
 
 // chat
 export const getChat = async (conversation_id) => apiClient.get(`/conversations/${conversation_id}/messages/`); // get all messages in a conversation

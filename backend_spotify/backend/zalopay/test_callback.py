@@ -37,7 +37,7 @@ try:
         "payment_id": f"pay_{payment.order_id}",
         "embed_data": json.dumps({
             "user_id": payment.user.id,
-            "premium_id": payment.premium.ma_premium
+            "premium_id": payment.premium.id
         })
     }
 

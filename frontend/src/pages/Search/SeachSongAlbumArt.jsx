@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Footer from '@/layouts/components/Footer';
 import { useTranslation } from 'react-i18next';
+import { searchAlbum, searchArtist } from '@/service/UserAPI';
 
 const SearchSongAlbumArt = () => {
     const [activeCategory, setActiveCategory] = useState('All');
@@ -13,6 +14,8 @@ const SearchSongAlbumArt = () => {
     const searchParams = new URLSearchParams(location.search);
     const searchQuery = searchParams.get('keyword') || '';
     const [searchResults, setSearchResults] = useState([]);
+    const [searchResultsArtist, setSearchResultsArtist] = useState([]);
+    const [searchResultsAlbum, setSearchResultsAlbum] = useState([]);
     const { t } = useTranslation();
     const navigate = useNavigate();
     console.log(searchResults);
@@ -52,6 +55,8 @@ const SearchSongAlbumArt = () => {
             }
 
             let res = await searchSongsByName(searchQuery);
+            let resArtist = await searchArtist(searchQuery);
+            let resAlbum = await searchAlbum(searchQuery);
 
             console.log(res);
 
@@ -116,6 +121,14 @@ const SearchSongAlbumArt = () => {
                     setSearchResults(formattedData);
                 }
             }
+
+            if (resArtist && resArtist.data) {
+                setSearchResultsArtist(resArtist.data);
+            }
+
+            if (resAlbum && resAlbum.data) {
+                setSearchResultsAlbum(resAlbum.data);
+            }
         } catch (error) {
             console.error('Error fetching songs:', error);
         }
@@ -126,6 +139,11 @@ const SearchSongAlbumArt = () => {
         const minutes = Math.floor(seconds / 60);
         const sec = seconds % 60;
         return `${minutes}:${sec < 10 ? '0' : ''}${sec}`;
+    };
+
+    const formatDate = (date) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(date).toLocaleDateString('en-US', options);
     };
 
     const topResult = searchResults.length > 0 ? searchResults[0] : null;
@@ -213,59 +231,65 @@ const SearchSongAlbumArt = () => {
             </div>
 
             {/* Danh sách nghệ sĩ */}
-            <h2 className="text-white text-xl md:text-2xl font-bold mt-4 md:mt-6 mb-3 md:mb-4">
-                {t('search.artists')}
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-10 overflow-x-auto pb-2 cursor-pointer">
-                {searchResults.slice(0, 6).map((artist) => (
-                    <div
-                        key={artist.id}
-                        className="flex flex-col items-center hover:bg-gray-700 transition duration-200 rounded-lg p-2"
-                        onClick={() => navigate(`/artist/${artist.id_artist}`)}
-                    >
-                        <img
-                            src={artist.image}
-                            alt={artist.artist}
-                            className="w-24 h-24 md:w-40 md:h-40 rounded-full"
-                        />
-                        <div className="text-center">
-                            <h3 className="text-white text-sm md:text-base font-medium group-hover:underline">
-                                {artist.artist}
-                            </h3>
-                            <p className="text-white text-xs md:text-sm mt-1 md:mt-2">{t('search.artist')}</p>
-                        </div>
+            {searchResultsArtist.length > 0 && (
+                <>
+                    <h2 className="text-white text-xl md:text-2xl font-bold mt-4 md:mt-6 mb-3 md:mb-4">
+                        {t('search.artists')}
+                    </h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-10 overflow-x-auto pb-2 cursor-pointer">
+                        {searchResultsArtist.slice(0, 6).map((artist) => (
+                            <div
+                                key={artist.id}
+                                className="flex flex-col items-center hover:bg-gray-700 transition duration-200 rounded-lg p-2"
+                                onClick={() => navigate(`/artist/${artist.id}`)}
+                            >
+                                <img
+                                    src={artist.avatar}
+                                    alt={artist.name}
+                                    className="w-24 h-24 md:w-40 md:h-40 rounded-full"
+                                />
+                                <div className="text-center">
+                                    <h3 className="text-white text-sm md:text-base font-medium group-hover:underline">
+                                        {artist.name}
+                                    </h3>
+                                    <p className="text-white text-xs md:text-sm mt-1 md:mt-2">{t('search.artist')}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </>
+            )}
 
             {/* Danh sách album */}
-            <div>
-                <h2 className="text-white text-xl md:text-2xl font-bold mt-4 md:mt-6 mb-3 md:mb-4">
-                    {t('search.albums')}
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 overflow-x-auto pb-2">
-                    {searchResults.slice(0, 6).map((album) => (
-                        <div
-                            key={album.id}
-                            className="relative bg-gray-800 p-2 md:p-4 rounded-lg hover:bg-gray-700 transition duration-200 group cursor-pointer"
-                            onClick={() => navigate(`/album/${album.id}`)}
-                        >
-                            <img
-                                src={album.image}
-                                alt={album.album}
-                                className="w-full h-32 md:h-40 rounded-md object-cover"
-                            />
-                            <p className="text-white text-xs md:text-sm mt-2 font-semibold">{album.album}</p>
-                            <p className="text-gray-400 text-xs">
-                                {album.year} • {album.artist}
-                            </p>
-                            <button className="absolute bottom-2 md:bottom-4 right-2 md:right-4 bg-green-500 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 transform hover:scale-110">
-                                <FontAwesomeIcon icon={faPlay} className="text-black text-sm md:text-lg" />
-                            </button>
-                        </div>
-                    ))}
+            {searchResultsAlbum.length > 0 && (
+                <div>
+                    <h2 className="text-white text-xl md:text-2xl font-bold mt-4 md:mt-6 mb-3 md:mb-4">
+                        {t('search.albums')}
+                    </h2>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4 overflow-x-auto pb-2">
+                        {searchResultsAlbum.slice(0, 6).map((album) => (
+                            <div
+                                key={album.id}
+                                className="relative bg-gray-800 p-2 md:p-4 rounded-lg hover:bg-gray-700 transition duration-200 group cursor-pointer"
+                                onClick={() => navigate(`/album/${album.id}`)}
+                            >
+                                <img
+                                    src={album.hinh_anh}
+                                    alt={album.ten_album}
+                                    className="w-full h-32 md:h-40 rounded-md object-cover"
+                                />
+                                <p className="text-white text-xs md:text-sm mt-2 font-semibold">{album.ten_album}</p>
+                                <p className="text-gray-400 text-xs">
+                                    {formatDate(album?.ngay_tao)} • {album?.ma_user?.name}
+                                </p>
+                                <button className="absolute bottom-2 md:bottom-4 right-2 md:right-4 bg-green-500 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 transform hover:scale-110">
+                                    <FontAwesomeIcon icon={faPlay} className="text-black text-sm md:text-lg" />
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <Footer />
         </div>
