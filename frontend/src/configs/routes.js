@@ -25,7 +25,6 @@ const routes = {
     admin_artist: '/admin/account/list_artists',
     admin_album: '/admin/list_albums',
     admin_song: '/admin/list_songs',
-    admin_playlist: '/admin/list_playlists',
     admin_premium: '/admin/list_premium',
     admin_premium_register: '/admin/list_premium_register',
     admin_genre: '/admin/list_genres',

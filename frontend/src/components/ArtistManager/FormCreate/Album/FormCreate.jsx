@@ -10,7 +10,7 @@ const FormCreate = () => {
         img: null,
         songs: [],
         created_at: new Date().toISOString(),
-        status: 0,
+        status: 1,
         user_id: localStorage.getItem("id_user"),
     });
 
@@ -85,7 +85,6 @@ const FormCreate = () => {
         try {
             const response = await postArtistAlbum(formData);
             alert("Đã lưu album, chờ kiểm duyệt từ quản trị viên.");
-            console.log(album.img)
             console.log("Album đã được lưu:", response.data);
         } catch (error) {
             console.error("Lỗi khi lưu album:", error);

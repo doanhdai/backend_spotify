@@ -27,8 +27,7 @@ const Artist = () => {
           <thead className="bg-gray-600">
             <tr>
               <th className="p-3 text-left">ID</th>
-              <th className="p-3 text-left">Tên người dùng</th>
-              <th className="p-3 text-left">Nghệ danh</th>
+              <th className="p-3 text-left">Tên artist</th>
               <th className="p-3 text-left">Ảnh đại diện</th>
               <th className="p-3 text-left">Trạng thái</th>
             </tr>
@@ -39,7 +38,6 @@ const Artist = () => {
               artists.map((artist) => (
                 <tr key={artist.id}>
                   <td className="p-3 text-left">{artist.id}</td>
-                  <td className="p-3 text-left">{artist.name}</td>
                   <td className="p-3 text-left">{artist.name}</td>
                   <td className="p-3 text-left">
                     <img src={artist.avatar} alt="avatar" className="w-12 h-12 rounded" />

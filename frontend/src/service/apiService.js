@@ -132,3 +132,7 @@ export const add_participant = async (data, id_participant) =>
     apiClient.post(`/conversations/${id_participant}/add-participants/`, data);
 
 export const leaveGroupChat = async (conversationId) => apiClient.post(`/conversations/${conversationId}/leave-group/`);
+
+export const approveAlbumStatus = async (albumId) => apiClient.put(`/songs/album/${albumId}/approve/`); 
+
+export const approveSongStatus = async (songId) => apiClient.put(`/songs/song/${songId}/approve/`); 

@@ -1,4 +1,22 @@
 const PremiumRegister = () => {
+
+    const [subcriptions, setSubcriptions] = useState([]);
+    
+      const fetchAllSubscriptions = async () => {
+        try {
+          const respond = await getAllArtist();
+          const data = respond.data;
+          setArtists(data);
+          // console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    
+      useEffect(() => {
+        fetchAllArtists();
+      }, [])
+
     return (
       <div className="w-full p-6 bg-gray-800">
         <h2 className="text-2xl font-bold mb-4">Danh sách TK đăng ký premium</h2>

@@ -8,9 +8,10 @@ const Album = () => {
 
     const fetchAllAlbums = async () => {
         try {
-            const respone = await getArtistAlbum(userId);
-            const data = respone.data.albums;
+            const response = await getArtistAlbum(userId);
+            const data = response.data.albums;
             setAlbums(data);
+            console.log(response)
         } catch (error) {
             console.error(error);
         }
@@ -37,15 +38,23 @@ const Album = () => {
 
                     <tbody>
                         {albums.length > 0 ? (
-                            albums.map((album, item) => (
-                                <tr key={album.ma_bai_hat}>
+                            albums.map((album) => (
+                                <tr key={album.ma_album}>
                                     <td className="p-3 text-left">{album.ma_album}</td>
                                     <td className="p-3 text-left">{album.ten_album}</td>
                                     <td className="p-3 text-left">{album.ngay_tao}</td>
                                     <td className="p-3 text-left">
-                                        <img src={album.hinh_anh} alt="Bài hát" className="w-12 h-12 rounded" />
+                                        <img src={album.hinh_anh} alt="Album" className="w-12 h-12 rounded" />
                                     </td>
-                                    <td className="p-3 text-left">{album.trang_thai === 1 ? "Đang phát hành" : "Vô hiệu hoá"}</td>
+                                    <td className="p-3 text-left">
+                                        {album.trang_thai === 2
+                                            ? "Đã duyệt"
+                                            : album.trang_thai === 1
+                                                ? "Đang chờ duyệt"
+                                                : album.trang_thai === 0
+                                                    ? "Đã từ chối"
+                                                    : "Không rõ"}
+                                    </td>
                                 </tr>
                             ))
                         ) : (
@@ -56,6 +65,7 @@ const Album = () => {
                             </tr>
                         )}
                     </tbody>
+
                 </table>
             </div>
         </div>

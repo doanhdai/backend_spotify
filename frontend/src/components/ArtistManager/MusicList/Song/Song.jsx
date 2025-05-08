@@ -45,7 +45,15 @@ const Song = () => {
                                     <td className="p-3 text-left">
                                         <img src={song.hinh_anh} alt="Bài hát" className="w-12 h-12 rounded" />
                                     </td>
-                                    <td className="p-3 text-left">{song.trang_thai === 1 ? "Đã duyệt" : "Chờ duyệt"}</td>
+                                    <td className="p-3 text-left">
+                                        {song.trang_thai === 2
+                                            ? "Đã duyệt"
+                                            : song.trang_thai === 1
+                                                ? "Đang chờ duyệt"
+                                                : song.trang_thai === 0
+                                                    ? "Đã từ chối"
+                                                    : "Không rõ"}
+                                    </td>
                                 </tr>
                             ))
                         ) : (

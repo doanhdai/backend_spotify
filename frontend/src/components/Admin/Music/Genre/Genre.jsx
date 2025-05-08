@@ -38,7 +38,7 @@ const Genre = () => {
                 <tr key={genre.id}>
                   <td className="p-3 text-left">{genre.id}</td>
                   <td className="p-3 text-left">{genre.ten_the_loai}</td>
-                  <td className="p-3 text-left">{genre.status === 'true' ? 'Hiển thị' : 'Vô hiệu hóa'}</td>
+                  <td className="p-3 text-left">{genre.status === true ? 'Đang hiển thị' : 'Vô hiệu hóa'}</td>
                 </tr>
               ))
               : <tr>

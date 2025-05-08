@@ -39,7 +39,6 @@ import DisplaySettings from '@/pages/Settings';
  */
 import DisplayAdminUser from '@/pages/Admin/Account/User';
 import DisplayAdminArtist from '@/pages/Admin/Account/Artist';
-import DisplayAdminPlayList from '@/pages/Admin/Music/Playlist';
 import DisplayAdminSong from '@/pages/Admin/Music/Song';
 import DisplayAdminAlbum from '@/pages/Admin/Music/Album';
 import DisplayAdminGenre from '@/pages/Admin/Music/Genre';
@@ -93,7 +92,6 @@ const publicRoutes = [
     { path: config.routes.admin_artist, component: DisplayAdminArtist, layout: AdminLayout },
     { path: config.routes.admin_album, component: DisplayAdminAlbum, layout: AdminLayout },
     { path: config.routes.admin_song, component: DisplayAdminSong, layout: AdminLayout },
-    { path: config.routes.admin_playlist, component: DisplayAdminPlayList, layout: AdminLayout },
     { path: config.routes.admin_premium, component: DisplayAdminPremium, layout: AdminLayout },
     { path: config.routes.admin_premium_register, component: DisplayAdminPremiumRegister, layout: AdminLayout },
     { path: config.routes.admin_genre, component: DisplayAdminGenre, layout: AdminLayout },

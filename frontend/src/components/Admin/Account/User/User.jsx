@@ -29,10 +29,7 @@ const User = () => {
               <th className="p-3 text-left">ID</th>
               <th className="p-3 text-left">Tên người dùng</th>
               <th className="p-3 text-left">Email</th>
-              <th className="p-3 text-left">Mật khẩu</th>
-              <th className="p-3 text-left">Vai trò</th>
               <th className="p-3 text-left">Ảnh đại diện</th>
-              <th className="p-3 text-left">Trạng thái</th>
             </tr>
           </thead>
 
@@ -42,11 +39,10 @@ const User = () => {
                 <tr key={user.id}>
                   <td className="p-3 text-left">{user.id}</td>
                   <td className="p-3 text-left">{user.name}</td>
-                  <td className="p-3 text-left">{user.name}</td>
+                  <td className="p-3 text-left">{user.email}</td>
                   <td className="p-3 text-left">
                     <img src={user.avatar} alt="avatar" className="w-12 h-12 rounded" />
                   </td>
-                  <td className="p-3 text-left">{user.name}</td>
                 </tr>
               ))
             ) : (

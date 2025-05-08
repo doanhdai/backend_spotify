@@ -1,23 +1,32 @@
 import { useEffect, useState } from "react";
-import { getAlbum } from "@/service/apiService";
+import { getAlbum, approveAlbumStatus } from "@/service/apiService";
 
 const Album = () => {
   const [albums, setAlbums] = useState([]);
 
   const fetchAllAlbums = async () => {
     try {
-      const respone = await getAlbum();
-      const data = respone.data;
-      setAlbums(data);
-      console.log(data);
+      const response = await getAlbum();
+      setAlbums(response.data);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
+
+  const handleChangeStatus = async (albumId) => {
+    try {
+      await approveAlbumStatus(albumId); // Gọi API với trạng thái truyền vào
+      alert("Đã xử lý!");
+      fetchAllAlbums(); // Refresh lại danh sách
+    } catch (error) {
+      console.error("Lỗi khi cập nhật trạng thái album:", error);
+      alert("Cập nhật trạng thái thất bại!");
+    }
+  };
 
   useEffect(() => {
     fetchAllAlbums();
-  }, [])
+  }, []);
 
   return (
     <div className="w-full p-6 bg-gray-800">
@@ -34,11 +43,12 @@ const Album = () => {
                 <th className="p-3 text-left">Số lượng bài hát</th>
                 <th className="p-3 text-left">Hình ảnh</th>
                 <th className="p-3 text-left">Trạng thái</th>
+                <th className="p-3 text-left">Hành động</th>
               </tr>
             </thead>
 
             <tbody>
-              {albums.length > 0 ?
+              {albums.length > 0 ? (
                 albums.map((album) => (
                   <tr key={album.ma_album}>
                     <td className="p-3 text-left">{album.ma_album}</td>
@@ -47,24 +57,54 @@ const Album = () => {
                     <td className="p-3 text-left">{album.ngay_tao}</td>
                     <td className="p-3 text-left">10</td>
                     <td className="p-3 text-left">
-                      <img src={album.hinh_anh} alt="avatar" className="w-12 h-12 rounded" />
+                      <img
+                        src={album.hinh_anh}
+                        alt="album"
+                        className="w-12 h-12 rounded"
+                      />
                     </td>
-                    <td className="p-3 text-left">{album.trang_thai == 1 ? "Đang hiển thị" : "Vô hiệu hóa"}</td>
+                    <td className="p-3 text-left">
+                      {album.trang_thai === 2
+                        ? "Đã duyệt"
+                        : album.trang_thai === 1
+                        ? "Đang chờ duyệt"
+                        : album.trang_thai === 0
+                        ? "Đã từ chối"
+                        : "Không rõ"}
+                    </td>
+                    <td className="p-3 text-left space-x-2">
+                      {album.trang_thai === 1 && (
+                        <>
+                          <button
+                            onClick={() => handleChangeStatus(album.ma_album, 2)}
+                            className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                          >
+                            Duyệt
+                          </button>
+                          <button
+                            onClick={() => handleChangeStatus(album.ma_album, 0)}
+                            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                          >
+                            Từ chối
+                          </button>
+                        </>
+                      )}
+                    </td>
                   </tr>
                 ))
-                : (
-                  <tr>
-                    <td colSpan="7" className="p-3 text-center text-gray-400">
-                      Không có dữ liệu
-                    </td>
-                  </tr>
-                )}
+              ) : (
+                <tr>
+                  <td colSpan="8" className="p-3 text-center text-gray-400">
+                    Không có dữ liệu
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Album;
