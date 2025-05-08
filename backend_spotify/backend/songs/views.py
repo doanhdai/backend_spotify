@@ -60,9 +60,16 @@ class UpdateSongView(generics.UpdateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+import logging
+
+logger = logging.getLogger(__name__)
+
 class ApproveAlbumView(generics.UpdateAPIView):
     queryset = Album.objects.all()
-    serializer_class = SongSerializer
+    serializer_class = AlbumSerializer  # Use AlbumSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'ma_album'
 
@@ -70,19 +77,31 @@ class ApproveAlbumView(generics.UpdateAPIView):
         logger.info(f"Request data: {request.data}")
         instance = self.get_object()
 
-        if instance.trang_thai == 2:
-            return Response({"detail": "Album đã được kiểm duyệt."}, status=status.HTTP_400_BAD_REQUEST)
+        # Check if album is in a pending state
+        if instance.trang_thai != 1:
+            return Response(
+                {"detail": "Album không ở trạng thái chờ duyệt."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        instance.trang_thai = 2
+        # Get status from request data
+        trang_thai = request.data.get('trang_thai')
+        if trang_thai not in [0, 2]:
+            return Response(
+                {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 2 (duyệt)."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Update status
+        instance.trang_thai = trang_thai
         instance.save()
 
         serializer = self.get_serializer(instance)
-        logger.info(f"Album {instance.ma_album} approved with status 2")
+        logger.info(f"Album {instance.ma_album} updated to status {trang_thai}")
         return Response({
-            "detail": "Album đã được kiểm duyệt thành công.",
+            "detail": f"Album đã được {'duyệt' if trang_thai == 2 else 'từ chối'} thành công.",
             "album": serializer.data
         }, status=status.HTTP_200_OK)
-
 
 class ApproveSongView(generics.UpdateAPIView):
     queryset = Song.objects.all()
@@ -93,17 +112,36 @@ class ApproveSongView(generics.UpdateAPIView):
     def update(self, request, *args, **kwargs):
         logger.info(f"Request data: {request.data}")
         instance = self.get_object()
+        # Check if song is in a pending state
+        if instance.trang_thai != 1:
+            return Response(
+                {"detail": "Bài hát không ở trạng thái chờ duyệt."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        if instance.trang_thai == 2:
-            return Response({"detail": "Bài hát đã được kiểm duyệt."}, status=status.HTTP_400_BAD_REQUEST)
+        # Get and validate trang_thai from request data
+        try:
+            trang_thai = int(request.data.get('trang_thai'))
+        except (TypeError, ValueError):
+            return Response(
+                {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 2 (duyệt)."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        instance.trang_thai = 2
+        if trang_thai not in [0, 2]:
+            return Response(
+                {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 2 (duyệt)."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Update status
+        instance.trang_thai = trang_thai
         instance.save()
 
         serializer = self.get_serializer(instance)
-        logger.info(f"Bài hát {instance.id} approved with status 2")
+        logger.info(f"Bài hát {instance.id} updated to status {trang_thai}")
         return Response({
-            "detail": "Bài hát đã được kiểm duyệt thành công.",
+            "detail": f"Bài hát đã được {'duyệt' if trang_thai == 2 else 'từ chối'} thành công.",
             "song": serializer.data
         }, status=status.HTTP_200_OK)
 
