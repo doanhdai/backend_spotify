@@ -76,21 +76,6 @@ npm dev
 
 ---
 
-## 🧪 Kiểm thử
-
-- Backend:
-
-```bash
-python manage.py test
-```
-
-- Frontend:
-
-```bash
-npm test
-```
-
----
 
 ## 📝 Ghi chú
 
@@ -106,4 +91,3 @@ Nếu bạn có bất kỳ câu hỏi hoặc đóng góp nào, vui lòng tạo i
 
 ---
 
-> Được phát triển với ❤️ bởi Doanh Đại
