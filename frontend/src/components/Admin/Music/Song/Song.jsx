@@ -66,9 +66,9 @@ const Song = () => {
                       <img src={song.hinh_anh} alt="Bài hát" className="w-12 h-12 rounded" />
                     </td>
                     <td className="p-3 text-left">
-                      {song.trang_thai === 2
+                      {song.trang_thai === 1
                         ? "Đã duyệt"
-                        : song.trang_thai === 1
+                        : song.trang_thai === 2
                           ? "Đang chờ duyệt"
                           : song.trang_thai === 0
                             ? "Đã từ chối"
@@ -78,7 +78,7 @@ const Song = () => {
                       {song.trang_thai === 1 && (
                         <>
                           <button
-                            onClick={() => handleChangeStatus(song.id, 2)}
+                            onClick={() => handleChangeStatus(song.id, 1)}
                             className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
                           >
                             Duyệt

@@ -10,7 +10,7 @@ const FormCreate = () => {
         img: null,
         songs: [],
         created_at: new Date().toISOString(),
-        status: 1,
+        status: 2,
         user_id: localStorage.getItem("id_user"),
     });
 

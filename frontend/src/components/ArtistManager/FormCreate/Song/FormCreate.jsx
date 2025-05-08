@@ -7,7 +7,7 @@ const FormCreateSong = () => {
         name: "",
         listens: 0,
         duration: 0,
-        status: 0,
+        status: 2,
         img: null,
         audio: null,
         album_id: null,

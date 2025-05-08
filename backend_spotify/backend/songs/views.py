@@ -78,7 +78,7 @@ class ApproveAlbumView(generics.UpdateAPIView):
         instance = self.get_object()
 
         # Check if album is in a pending state
-        if instance.trang_thai != 1:
+        if instance.trang_thai != 2:
             return Response(
                 {"detail": "Album không ở trạng thái chờ duyệt."},
                 status=status.HTTP_400_BAD_REQUEST
@@ -86,9 +86,9 @@ class ApproveAlbumView(generics.UpdateAPIView):
 
         # Get status from request data
         trang_thai = request.data.get('trang_thai')
-        if trang_thai not in [0, 2]:
+        if trang_thai not in [0, 1]:
             return Response(
-                {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 2 (duyệt)."},
+                {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 1 (duyệt)."},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -99,7 +99,7 @@ class ApproveAlbumView(generics.UpdateAPIView):
         serializer = self.get_serializer(instance)
         logger.info(f"Album {instance.ma_album} updated to status {trang_thai}")
         return Response({
-            "detail": f"Album đã được {'duyệt' if trang_thai == 2 else 'từ chối'} thành công.",
+            "detail": f"Album đã được {'duyệt' if trang_thai == 1 else 'từ chối'} thành công.",
             "album": serializer.data
         }, status=status.HTTP_200_OK)
 
@@ -113,7 +113,7 @@ class ApproveSongView(generics.UpdateAPIView):
         logger.info(f"Request data: {request.data}")
         instance = self.get_object()
         # Check if song is in a pending state
-        if instance.trang_thai != 1:
+        if instance.trang_thai != 2:
             return Response(
                 {"detail": "Bài hát không ở trạng thái chờ duyệt."},
                 status=status.HTTP_400_BAD_REQUEST
@@ -124,11 +124,11 @@ class ApproveSongView(generics.UpdateAPIView):
             trang_thai = int(request.data.get('trang_thai'))
         except (TypeError, ValueError):
             return Response(
-                {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 2 (duyệt)."},
+                {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 1 (duyệt)."},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        if trang_thai not in [0, 2]:
+        if trang_thai not in [0, 1]:
             return Response(
                 {"detail": "Trạng thái không hợp lệ. Phải là 0 (từ chối) hoặc 2 (duyệt)."},
                 status=status.HTTP_400_BAD_REQUEST
@@ -141,7 +141,7 @@ class ApproveSongView(generics.UpdateAPIView):
         serializer = self.get_serializer(instance)
         logger.info(f"Bài hát {instance.id} updated to status {trang_thai}")
         return Response({
-            "detail": f"Bài hát đã được {'duyệt' if trang_thai == 2 else 'từ chối'} thành công.",
+            "detail": f"Bài hát đã được {'duyệt' if trang_thai == 1 else 'từ chối'} thành công.",
             "song": serializer.data
         }, status=status.HTTP_200_OK)
 

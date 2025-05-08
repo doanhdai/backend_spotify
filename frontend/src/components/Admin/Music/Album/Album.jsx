@@ -64,9 +64,9 @@ const Album = () => {
                       />
                     </td>
                     <td className="p-3 text-left">
-                      {album.trang_thai === 2
+                      {album.trang_thai === 1
                         ? "Đã duyệt"
-                        : album.trang_thai === 1
+                        : album.trang_thai === 2
                         ? "Đang chờ duyệt"
                         : album.trang_thai === 0
                         ? "Đã từ chối"
@@ -76,7 +76,7 @@ const Album = () => {
                       {album.trang_thai === 1 && (
                         <>
                           <button
-                            onClick={() => handleChangeStatus(album.ma_album, 2)}
+                            onClick={() => handleChangeStatus(album.ma_album, 1)}
                             className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
                           >
                             Duyệt
