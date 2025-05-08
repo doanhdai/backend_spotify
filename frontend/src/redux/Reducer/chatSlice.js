@@ -7,6 +7,7 @@ const initialState = {
     messages: [],
     loading: false,
     error: null,
+    hasNewMessage: false,
 };
 
 const chatSlice = createSlice({
@@ -34,6 +35,9 @@ const chatSlice = createSlice({
         setGroupChats: (state, action) => {
             state.group_chats = action.payload;
         },
+        setNewMessage: (state, action) => {
+            state.hasNewMessage = action.payload;
+        },
     },
 });
 
@@ -45,6 +49,7 @@ export const {
     addMessage,
     setLoading,
     setError,
+    setNewMessage,
 } = chatSlice.actions;
 
 export default chatSlice.reducer; 

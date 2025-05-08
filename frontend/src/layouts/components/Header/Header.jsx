@@ -22,6 +22,7 @@ import Search from '@/pages/Search';
 import { useSelector } from 'react-redux';
 import Language from '../Language/Language';
 import Premium from '@/pages/Premium';
+import { setNewMessage } from '@/redux/Reducer/chatSlice';
 
 function Header() {
     const inputRef = useRef(null);
@@ -32,7 +33,7 @@ function Header() {
     const [targetUser, setTargetUser] = useState(false);
     const [hovering, setHovering] = useState(false);
     const userInfo = useSelector((state) => state.auth.userInfo);
-    console.log(userInfo);
+    const hasNewMessage = useSelector((state) => state.chat.hasNewMessage);
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -63,7 +64,9 @@ function Header() {
 
         window.location.reload();
     };
-
+    const handleChatClick = () => {
+        dispatch(setNewMessage(false)); // Reset trạng thái tin nhắn mới khi nhấp vào chat
+    };
     return (
         <>
             <div className="w-full h-[8%] flex justify-between items-center font-semibold px-2 pt-2">
@@ -120,13 +123,21 @@ function Header() {
                                 // }}
                                 className="text-[#b3b3b3] hover:text-white hover:scale-110 cursor-pointer"
                             >
-                                <Link to="/chat">
-                                    <LuMessageSquareMore size={20} />
-                                </Link>
+                                <div className="relative">
+                                    <Link to="/chat" onClick={handleChatClick}>
+                                        <LuMessageSquareMore
+                                            size={25}
+                                            className="text-[#b3b3b3] hover:text-white hover:scale-110"
+                                        />
+                                        {hasNewMessage && (
+                                            <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+                                        )}
+                                    </Link>
+                                </div>
                             </button>
                             <Tippy content="Thông tin mới">
                                 <button className="text-[#b3b3b3] hover:text-white hover:scale-110 cursor-pointer">
-                                    <FaRegBell />
+                                    <FaRegBell size={23} />
                                 </button>
                             </Tippy>
                             <TippyHeadless

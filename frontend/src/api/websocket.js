@@ -16,7 +16,9 @@ class WebSocketService {
         const state = store.getState();
         return state.auth.token;
     }
-
+    getCurrentUserId() {
+        return parseInt(localStorage.getItem('id_user'));
+    }
     connect() {
         if (this.isConnecting || this.ws?.readyState === WebSocket.OPEN) return;
 
@@ -56,6 +58,12 @@ class WebSocketService {
                         timestamp: data.timestamp,
                         conversation_id: data.conversation_id || data.group_chat_id, // Hỗ trợ cả group_chat_id
                     };
+
+                    const currentUserId = this.getCurrentUserId();
+                    console.log('Current User ID:', currentUserId);
+                    if (parseInt(data.sender_id) !== currentUserId) {
+                        store.dispatch(setNewMessage(true));
+                    }
                     store.dispatch(addMessage(message));
                 }
             } catch (error) {
