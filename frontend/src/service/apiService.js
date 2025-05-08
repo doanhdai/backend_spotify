@@ -69,6 +69,8 @@ export const getAllPremium = async (userId) =>
         },
     });
 
+export const getAllPremiums = async () => apiClient.get('/premium/list/')
+
 // GET PREMIUM DETAIL
 
 // GET LIST OF CHATS IN A CONVERSATION
@@ -140,6 +142,10 @@ export const add_participant = async (data, id_participant) =>
 
 export const leaveGroupChat = async (conversationId) => apiClient.post(`/conversations/${conversationId}/leave-group/`);
 
-export const approveAlbumStatus = async (albumId) => apiClient.put(`/songs/album/${albumId}/approve/`); 
+export const approveAlbumStatus = async (albumId, status) => {
+    return apiClient.put(`/songs/album/${albumId}/approve/`, { trang_thai: status });
+};
 
-export const approveSongStatus = async (songId) => apiClient.put(`/songs/song/${songId}/approve/`); 
+export const approveSongStatus = async (songId, status) => {
+    return apiClient.put(`/songs/song/${songId}/approve/`, { trang_thai: status });
+};

@@ -36,7 +36,7 @@ const SidebarArtist = () => {
                         <li><Link to={config.routes.artist_create_song} className="block p-2 hover:bg-[#1e272e] rounded transition">Bài hát</Link></li>
                     </ul>
                 </li>
-                <li className='group'>
+                {/* <li className='group'>
                     <button className="flex items-center justify-between w-full p-3 rounded-lg bg-cyan-900 hover:bg-[#40739e] transition-colors">
                         <span className="flex items-center gap-2">
                             <FontAwesomeIcon icon={faChartColumn} /> Thống kê
@@ -47,7 +47,7 @@ const SidebarArtist = () => {
                         <li><Link to={config.routes.artist_listens} className="block p-2 hover:bg-[#1e272e] rounded transition">Lượt nghe</Link></li>
                         <li><Link to={config.routes.artist_turnover} className="block p-2 hover:bg-[#1e272e] rounded transition">Doanh thu</Link></li>
                     </ul>
-                </li>
+                </li> */}
             </ul>
         </div>
     );

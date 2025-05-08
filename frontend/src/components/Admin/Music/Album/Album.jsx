@@ -8,16 +8,17 @@ const Album = () => {
     try {
       const response = await getAlbum();
       setAlbums(response.data);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleChangeStatus = async (albumId) => {
+  const handleChangeStatus = async (albumId, status) => {
     try {
-      await approveAlbumStatus(albumId); // Gọi API với trạng thái truyền vào
+      await approveAlbumStatus(albumId, status); // Pass status to API
       alert("Đã xử lý!");
-      fetchAllAlbums(); // Refresh lại danh sách
+      fetchAllAlbums(); // Refresh album list
     } catch (error) {
       console.error("Lỗi khi cập nhật trạng thái album:", error);
       alert("Cập nhật trạng thái thất bại!");
@@ -46,7 +47,6 @@ const Album = () => {
                 <th className="p-3 text-left">Hành động</th>
               </tr>
             </thead>
-
             <tbody>
               {albums.length > 0 ? (
                 albums.map((album) => (

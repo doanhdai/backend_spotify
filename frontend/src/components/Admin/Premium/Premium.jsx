@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { getAllPremium } from "@/service/apiService";
+import { getAllPremium, getAllPremiums } from "@/service/apiService";
 
 const Premium = () => {
   const [premiums, setPremiums] = useState([]);
 
   const fetchAllPremium = async () => {
     try {
-      const respone = await getAllPremium();
-      const data = respone.data;
+      const response = await getAllPremiums();
+      const data = response.data;
       setPremiums(data);
-      console.log(data);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
