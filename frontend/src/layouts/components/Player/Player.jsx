@@ -14,7 +14,6 @@ function Player() {
     const dispatch = useDispatch();
     const { t } = useTranslation();
     let is_premium = localStorage.getItem('is_premium');
-    console.log(is_premium);
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
     const {
         track,
@@ -103,7 +102,9 @@ function Player() {
     };
 
     const playVideo = () => {
-        if (track.is_premium === false && track.video === null) {
+        console.log(track);
+        if (track.is_premium === false || track.video === null) {
+            navigate(`/video/${track.id}`);
             return;
         } else {
             if (track?.video && is_premium === 'true') {

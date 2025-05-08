@@ -169,6 +169,7 @@
         "premium_badge": "Already subscribed",
         "title": "Premium",
         "description": "Enjoy uninterrupted music with additional benefits!",
-        "button": "Sign up now"
+        "button": "Sign up now",
+        "premium_badge1": "Sign up"
     }
 }

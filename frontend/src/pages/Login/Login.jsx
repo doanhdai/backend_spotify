@@ -40,7 +40,7 @@ function Login({ setIsLoggedIn }) {
                 localStorage.setItem('id_user', JSON.stringify(data.user?.id));
 
                 dispatch(login(data.access));
-                dispatch(setUserInfo(data.user));
+
                 toast.success('Đăng nhập thành công');
 
                 navigate('/');
