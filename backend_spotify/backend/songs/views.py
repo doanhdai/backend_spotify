@@ -547,3 +547,25 @@ class GetArtistAlbumsView(generics.ListAPIView):
             "albums": serializer.data
         }, status=status.HTTP_200_OK)
 
+
+class GetAlbumByUserAllStatusView(generics.ListAPIView):
+    serializer_class = AlbumSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return Album.objects.filter(ma_user_id=user_id)
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            return Response({
+                "detail": "Không tìm thấy album nào của người dùng này.",
+                "albums": []
+            }, status=status.HTTP_200_OK)
+            
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            "detail": "Lấy danh sách album thành công.",
+            "albums": serializer.data
+        }, status=status.HTTP_200_OK)

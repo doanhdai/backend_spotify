@@ -21,7 +21,8 @@ from .views import  AddFavoriteSongView, AddSongToPlaylistView,\
                     UpdateSongView,\
                     GetAlbumDetailView,\
                     GetAllAlbumsView, \
-                    GetArtistAlbumsView
+                    GetArtistAlbumsView,\
+                    GetAlbumByUserAllStatusView
 
 urlpatterns = [
     path('create/', CreateSongView.as_view(), name='create-song'), # Tạo bài hát
@@ -41,7 +42,8 @@ urlpatterns = [
     path('album/<str:ma_album>/songs/', ListSongsInAlbumView.as_view(), name='list-songs-in-album'), # Danh sách bài hát trong album
    
     path('album/artist/<int:user_id>/', GetArtistAlbumsView.as_view(), name='artist-albums'), # Lấy danh sách album của một tác giả
-    
+    path('album/artistAllStatus/<int:user_id>/', GetAlbumByUserAllStatusView.as_view(), name='album-by-user-all-status'), # Lấy danh sách album của một người dùng tất cả status
+
     path('playlists/get-all/', GetAllPlaylistsView.as_view(), name='get-all-playlists'), # Lấy danh sách playlist
     path('playlists/<str:ma_playlist>/songs/', GetSongsInPlaylistView.as_view(), name='get_songs_in_playlist'), # Lấy danh sách bài hát trong playlist
     path('playlists/create/', CreatePlaylistView.as_view(), name='create-playlist'), # Tạo playlist
