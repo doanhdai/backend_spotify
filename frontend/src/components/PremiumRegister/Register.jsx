@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getPremiumDetail } from '@/service/apiService';
 import { createZalopayPayment } from '@/service/paymentService';
+import { toast } from 'react-toastify';
 
 const paymentMethods = [
     { id: 'credit_card', name: 'Thẻ tín dụng / Debit' },
@@ -32,6 +33,14 @@ const PremiumRegister = () => {
             fetchPremiumDetail();
         }
     }, [id]);
+
+    useEffect(() => {
+        let is_premium = localStorage.getItem('is_premium');
+        if (is_premium === 'true') {
+            navigate('/premium');
+            toast.success('Đăng ký gói premium thành công');
+        }
+    }, []);
 
     // useEffect(() => {
     //     fetchManualActivatePremium();

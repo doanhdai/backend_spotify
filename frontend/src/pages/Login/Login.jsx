@@ -41,7 +41,7 @@ function Login({ setIsLoggedIn }) {
                 localStorage.setItem('id_user', JSON.stringify(data.user?.id));
 
                 dispatch(login(data.access));
-                dispatch(setUserInfo(data.user));
+
                 toast.success('Đăng nhập thành công');
                 if (data.user.ma_quyen.ma_quyen === 3) {
                     navigate('/admin/dashboard');

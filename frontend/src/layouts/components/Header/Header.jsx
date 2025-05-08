@@ -19,10 +19,11 @@ import { FaRegBell } from 'react-icons/fa';
 import config from '@/configs';
 import { useTranslation } from 'react-i18next';
 import Search from '@/pages/Search';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Language from '../Language/Language';
 import Premium from '@/pages/Premium';
 import { setNewMessage } from '@/redux/Reducer/chatSlice';
+import { setUserInfo, UserLogout } from '@/redux/Reducer/authSlice';
 
 function Header() {
     const inputRef = useRef(null);
@@ -32,11 +33,12 @@ function Header() {
     const [username, setUsername] = useState('');
     const [targetUser, setTargetUser] = useState(false);
     const [hovering, setHovering] = useState(false);
-    const userInfo = useSelector((state) => state.auth.userInfo);
     const hasNewMessage = useSelector((state) => state.chat.hasNewMessage);
+    const userInfo = useSelector((state) => state.auth?.userInfo);
+    let dis = useDispatch();
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
-
+    console.log(userInfo);
     useEffect(() => {
         const storedUsername = localStorage.getItem('username');
         if (storedUsername) {
@@ -61,6 +63,8 @@ function Header() {
         localStorage.removeItem('id_user');
         localStorage.removeItem('musicPlayerState');
         localStorage.removeItem('name_user');
+        localStorage.removeItem('is_premium');
+        localStorage.removeItem('is_premium_expired');
 
         window.location.reload();
     };
@@ -101,7 +105,7 @@ function Header() {
                 <div className={`flex items-center gap-5 ${isLoggedIn ? '' : 'w-[446px] justify-end'}`}>
                     {isLoggedIn ? (
                         <>
-                            {/* {userInfo.is_premium === false ? (
+                            {localStorage.getItem('is_premium') === 'false' ? (
                                 <button
                                     className="bg-white text-black font-bold text-[14px] px-4 py-1.5 rounded-2xl hidden md:block hover:scale-105 hover:bg-[#f0f0f0]"
                                     onClick={() => navigate(config.routes.premium)}
@@ -115,7 +119,8 @@ function Header() {
                                 >
                                     {t('header.premiumUser')}
                                 </button>
-                            )} */}
+                            )} 
+                            
 
                             <button
                                 // onClick={() => {

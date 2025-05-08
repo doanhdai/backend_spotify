@@ -43,7 +43,7 @@ const PurchasedPremiumCard = ({ title, price, duration, descriptions, package_id
                         } text-white font-semibold rounded-lg shadow-md transition-all`}
                         disabled={is_premiumCard === 'completed'}
                     >
-                        {is_premiumCard === 'completed' ? t('premium.premium_badge') : t('premium.premium_badge')}
+                        {is_premiumCard === 'completed' ? t('premium.premium_badge') : t('premium.premium_badge1')}
                     </button>
                 </div>
             </div>
@@ -60,6 +60,7 @@ const PremiumSection = () => {
         try {
             const respone = await getAllPremium(userId);
             setPremium(respone.data);
+            console.log(respone.data);
         } catch (error) {
             console.error(error);
         }
@@ -97,7 +98,7 @@ const PremiumSection = () => {
                     {premium.map((item, index) => (
                         <PurchasedPremiumCard
                             key={index}
-                            package_id={item.id}
+                            package_id={item.premium?.id}
                             is_premiumCard={item.latest_payment?.status}
                             title={item.premium?.ten_premium}
                             price={formatPrice(item.premium?.gia_ban)}

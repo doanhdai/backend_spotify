@@ -103,7 +103,9 @@ function Player() {
     };
 
     const playVideo = () => {
-        if (track.is_premium === false && track.video === null) {
+        console.log(track);
+        if (track.is_premium === false || track.video === null) {
+            navigate(`/video/${track.id}`);
             return;
         } else {
             if (track?.video && is_premium === 'true') {
