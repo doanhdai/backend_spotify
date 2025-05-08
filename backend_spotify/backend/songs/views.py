@@ -82,12 +82,28 @@ class GetSongDetailView(generics.RetrieveAPIView):
         serializer = self.get_serializer(song)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    
+# lấy ra tất cả bài hát
 class ListAllSongsView(generics.ListAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
     permission_classes = [AllowAny]
 
+# lấy ra tất cả bài hát có trạng thái là 1
+class ListActiveSongsView(generics.ListAPIView):
+    serializer_class = SongSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return Song.objects.filter(trang_thai=1)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            logger.info("No active songs found")
+            return Response({"detail": "Không tìm thấy bài hát nào đang hoạt động."}, status=status.HTTP_404_NOT_FOUND)
+        serializer = self.get_serializer(queryset, many=True)
+        logger.info(f"Retrieved {queryset.count()} active songs")
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class SearchSongsView(generics.ListAPIView):
@@ -515,6 +531,7 @@ class GetAlbumDetailView(generics.RetrieveAPIView):
         
         return Response(response_data, status=status.HTTP_200_OK)
 
+# lấy tất cả album
 class GetAllAlbumsView(generics.ListAPIView):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
@@ -524,6 +541,19 @@ class GetAllAlbumsView(generics.ListAPIView):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+# lấy tất cả album có trạng thái là 1
+class GetAllAlbumsActiveView(generics.ListAPIView):
+    queryset = Album.objects.filter(trang_thai=1)
+    serializer_class = AlbumSerializer
+    permission_classes = [AllowAny]
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        
 
 class GetArtistAlbumsView(generics.ListAPIView):
     serializer_class = AlbumSerializer

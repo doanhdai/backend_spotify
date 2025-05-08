@@ -22,7 +22,10 @@ from .views import  AddFavoriteSongView, AddSongToPlaylistView,\
                     GetAlbumDetailView,\
                     GetAllAlbumsView, \
                     GetArtistAlbumsView,\
-                    GetAlbumByUserAllStatusView
+                    GetAlbumByUserAllStatusView,\
+                    GetAllAlbumsActiveView, \
+                    ListActiveSongsView
+                    
 
 urlpatterns = [
     path('create/', CreateSongView.as_view(), name='create-song'), # Tạo bài hát
@@ -30,12 +33,14 @@ urlpatterns = [
     path('update/<int:id>/', UpdateSongView.as_view(), name='update-song'),  # Cập nhật bài hát
     path('detail/<int:id>/', GetSongDetailView.as_view(), name='song-detail'), # Chi tiết bài hát
     path('all/', ListAllSongsView.as_view(), name='list-all-songs'),  # Tất cả bài hát cua tat ca nguoi dung
+    path('active/', ListActiveSongsView.as_view(), name='list-active-songs'),  # Tat ca bai hat co trang thai la 1
     path('artist/<int:user_id>/', ListArtistSongsView.as_view(), name='list-artist-songs'),  # Tat ca bai hat cua mot nghe si
     
     path('search/', SearchSongsView.as_view(), name='search-songs'), # Tìm kiếm bài hát http://localhost:8000/api/v1/songs/search/?keyword=bai hat
     path('album/create/', CreateAlbumView.as_view(), name='create-album'), 
     path('album/search/', SearchAlbumsView.as_view(), name='search-album'), # Tìm kiếm album# Tạo album
     path('album/all/', GetAllAlbumsView.as_view(), name='get-all-albums'),  # Lấy danh sách tất cả album
+    path('album/active/', GetAllAlbumsActiveView.as_view(), name='get-all-albums-active'),  # Lấy danh sách tất cả album có trạng thái là 1
     path('album/<str:ma_album>/', UpdateAlbumView.as_view(), name='update-album'), # Cập nhật album
     path('album/<str:ma_album>/detail/', GetAlbumDetailView.as_view(), name='album-detail'), # Chi tiết album
     path('album/<str:ma_album>/add-songs/', AddSongsToAlbumView.as_view(), name='add-songs-to-album'), # Thêm bài hát vào album
