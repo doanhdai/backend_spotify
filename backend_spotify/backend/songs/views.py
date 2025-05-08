@@ -59,6 +59,54 @@ class UpdateSongView(generics.UpdateAPIView):
         logger.error(f"Serializer errors: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class ApproveAlbumView(generics.UpdateAPIView):
+    queryset = Album.objects.all()
+    serializer_class = SongSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'ma_album'
+
+    def update(self, request, *args, **kwargs):
+        logger.info(f"Request data: {request.data}")
+        instance = self.get_object()
+
+        if instance.trang_thai == 2:
+            return Response({"detail": "Album đã được kiểm duyệt."}, status=status.HTTP_400_BAD_REQUEST)
+
+        instance.trang_thai = 2
+        instance.save()
+
+        serializer = self.get_serializer(instance)
+        logger.info(f"Album {instance.ma_album} approved with status 2")
+        return Response({
+            "detail": "Album đã được kiểm duyệt thành công.",
+            "album": serializer.data
+        }, status=status.HTTP_200_OK)
+
+
+class ApproveSongView(generics.UpdateAPIView):
+    queryset = Song.objects.all()
+    serializer_class = SongSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
+
+    def update(self, request, *args, **kwargs):
+        logger.info(f"Request data: {request.data}")
+        instance = self.get_object()
+
+        if instance.trang_thai == 2:
+            return Response({"detail": "Bài hát đã được kiểm duyệt."}, status=status.HTTP_400_BAD_REQUEST)
+
+        instance.trang_thai = 2
+        instance.save()
+
+        serializer = self.get_serializer(instance)
+        logger.info(f"Bài hát {instance.id} approved with status 2")
+        return Response({
+            "detail": "Bài hát đã được kiểm duyệt thành công.",
+            "song": serializer.data
+        }, status=status.HTTP_200_OK)
+
 class PlaySongView(generics.RetrieveAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
@@ -507,7 +555,7 @@ class GetArtistAlbumsView(generics.ListAPIView):
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
-        return Album.objects.filter(ma_user_id=user_id, trang_thai=1)
+        return Album.objects.filter(ma_user_id=user_id)
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()

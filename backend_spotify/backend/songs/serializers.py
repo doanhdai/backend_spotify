@@ -62,6 +62,7 @@ class SongSerializer(serializers.ModelSerializer):
         return instance
 
 
+
 class AlbumSerializer(serializers.ModelSerializer):
     ma_user = RegisterSerializer(read_only=True)
     hinh_anh = serializers.SerializerMethodField()
